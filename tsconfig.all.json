@@ -11,28 +11,7 @@
   ],
   "references": [
     {
-      "path": "packages/compiler"
-    },
-    {
-      "path": "packages/infra-adapters"
-    },
-    {
-      "path": "packages/schema"
-    },
-    {
-      "path": "packages/core"
-    },
-    {
       "path": "packages/prelude"
-    },
-    {
-      "path": "packages/infra"
-    },
-    {
-      "path": "packages/vue"
-    },
-    {
-      "path": "packages/react"
     },
   ]
 }

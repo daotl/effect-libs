@@ -6,6 +6,5 @@ module.exports = {
   rules: {
     ...base.rules,
     'codegen/codegen': ['error', { presets: require('@effect-app/eslint-codegen-model') }],
-    "@typescript-eslint/no-empty-interface": "off"
   }
 }

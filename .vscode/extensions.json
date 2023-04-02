@@ -1,8 +1,6 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "editorconfig.editorconfig",
-    "Vue.volar",
-    "Vue.vscode-typescript-vue-plugin"
+    "editorconfig.editorconfig"
   ]
 }
