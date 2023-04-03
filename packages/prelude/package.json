@@ -5,9 +5,10 @@
   "type": "module",
   "dependencies": {
     "@effect-app/core": "^0.38.1",
+    "@effect-app/infra-adapters": "^0.32.4",
+    "@effect-app/prelude": "^0.33.4",
     "@effect/data": "^0.7.4",
     "@effect/io": "^0.15.2",
-    "@effect-app/prelude": "^0.33.4",
     "@fp-ts/optic": "^0.6.0",
     "date-fns": "^2.29.3",
     "lodash": "^4.17.21",
@@ -15,6 +16,7 @@
     "path-parser": "^6.1.0",
     "query-string": "^8.1.0",
     "ts-pattern": "^4.2.2",
+    "typed-case": "^1.0.2",
     "uuid": "^9.0.0",
     "validator": "^13.9.0"
   },
@@ -39,6 +41,16 @@
     }
   },
   "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./_cjs/index.cjs"
+      }
+    },
     "./_global": {
       "import": {
         "types": "./dist/_global.d.ts",
@@ -49,14 +61,24 @@
         "default": "./_cjs/_global.cjs"
       }
     },
-    "./test/index": {
+    "./_global.ext": {
       "import": {
-        "types": "./dist/test/index.d.ts",
-        "default": "./dist/test/index.js"
+        "types": "./dist/_global.ext.d.ts",
+        "default": "./dist/_global.ext.js"
       },
       "require": {
-        "types": "./dist/test/index.d.ts",
-        "default": "./_cjs/test/index.cjs"
+        "types": "./dist/_global.ext.d.ts",
+        "default": "./_cjs/_global.ext.cjs"
+      }
+    },
+    "./basicRuntime": {
+      "import": {
+        "types": "./dist/basicRuntime.d.ts",
+        "default": "./dist/basicRuntime.js"
+      },
+      "require": {
+        "types": "./dist/basicRuntime.d.ts",
+        "default": "./_cjs/basicRuntime.cjs"
       }
     }
   },

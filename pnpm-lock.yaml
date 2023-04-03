@@ -145,6 +145,7 @@ importers:
       '@babel/cli': ^7.21.0
       '@effect-app/compiler': ^0.19.0
       '@effect-app/core': ^0.38.1
+      '@effect-app/infra-adapters': ^0.32.4
       '@effect-app/prelude': ^0.33.4
       '@effect/data': ^0.7.4
       '@effect/io': ^0.15.2
@@ -162,12 +163,14 @@ importers:
       query-string: ^8.1.0
       ts-node: ^10.9.1
       ts-pattern: ^4.2.2
+      typed-case: ^1.0.2
       typescript: https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz
       uuid: ^9.0.0
       validator: ^13.9.0
       vitest: ^0.29.8
     dependencies:
       '@effect-app/core': 0.38.1
+      '@effect-app/infra-adapters': 0.32.4
       '@effect-app/prelude': 0.33.4
       '@effect/data': 0.7.4
       '@effect/io': 0.15.3
@@ -178,6 +181,7 @@ importers:
       path-parser: 6.1.0
       query-string: 8.1.0
       ts-pattern: 4.2.2
+      typed-case: 1.0.2
       uuid: 9.0.0
       validator: 13.9.0
     devDependencies:
@@ -6936,6 +6940,11 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
+  /type-fest/3.7.2:
+    resolution: {integrity: sha512-f9BHrLjRJ4MYkfOsnC/53PNDzZJcVo14MqLp2+hXE39p5bgwqohxR5hDZztwxlbxmIVuvC2EFAKrAkokq23PLA==}
+    engines: {node: '>=14.16'}
+    dev: false
+
   /typed-array-length/1.0.4:
     resolution: {integrity: sha512-KjZypGq+I/H7HI5HlOoGHkWUUGq+Q0TPhQurLbyrVrvnKTBgzLhIJ7j6J/XTQOi0d1RjyZ0wdas8bKs2p0x3Ng==}
     dependencies:
@@ -6943,6 +6952,13 @@ packages:
       for-each: 0.3.3
       is-typed-array: 1.1.10
     dev: true
+
+  /typed-case/1.0.2:
+    resolution: {integrity: sha512-xwwPU1ZPsuPXg3xLUXqNeSRhD/OrBw64O97SwWG9wdsfAXHQfdQ3iyAxbXFVDCWhQltDcS0vEf0JX+rMMBE61g==}
+    engines: {node: ^14.13.1 || >=16.0.0}
+    dependencies:
+      type-fest: 3.7.2
+    dev: false
 
   /typedarray-to-buffer/3.1.5:
     resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
