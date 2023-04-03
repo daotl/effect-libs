@@ -48,6 +48,16 @@
         "types": "./dist/_global.d.ts",
         "default": "./_cjs/_global.cjs"
       }
+    },
+    "./test/index": {
+      "import": {
+        "types": "./dist/test/index.d.ts",
+        "default": "./dist/test/index.js"
+      },
+      "require": {
+        "types": "./dist/test/index.d.ts",
+        "default": "./_cjs/test/index.cjs"
+      }
     }
   },
   "scripts": {
