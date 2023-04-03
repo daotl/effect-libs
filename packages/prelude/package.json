@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -17,6 +17,7 @@
     "nanoid": "^4.0.2",
     "path-parser": "^6.1.0",
     "query-string": "^8.1.0",
+    "remeda": "^1.11.0",
     "ts-pattern": "^4.2.2",
     "typed-case": "^1.0.2",
     "uuid": "^9.0.0",
@@ -71,6 +72,16 @@
       "require": {
         "types": "./dist/_global.ext.d.ts",
         "default": "./_cjs/_global.ext.cjs"
+      }
+    },
+    "./_global/remeda": {
+      "import": {
+        "types": "./dist/_global/remeda.d.ts",
+        "default": "./dist/_global/remeda.js"
+      },
+      "require": {
+        "types": "./dist/_global/remeda.d.ts",
+        "default": "./_cjs/_global/remeda.cjs"
       }
     },
     "./basicRuntime": {

@@ -163,6 +163,7 @@ importers:
       nanoid: ^4.0.2
       path-parser: ^6.1.0
       query-string: ^8.1.0
+      remeda: ^1.11.0
       ts-node: ^10.9.1
       ts-pattern: ^4.2.2
       typed-case: ^1.0.2
@@ -184,6 +185,7 @@ importers:
       nanoid: 4.0.2
       path-parser: 6.1.0
       query-string: 8.1.0
+      remeda: 1.11.0
       ts-pattern: 4.2.2
       typed-case: 1.0.2
       uuid: 9.0.0
@@ -6046,6 +6048,10 @@ packages:
     dependencies:
       rc: 1.2.8
     dev: true
+
+  /remeda/1.11.0:
+    resolution: {integrity: sha512-9eYmE5zbmy5d8R260QAk72ZmZoHH7lmLlQrR9ILi9i+vLpBwvve9+fsytvNGzWRfagml7o5DCx8541DC+++y+w==}
+    dev: false
 
   /remote-git-tags/3.0.0:
     resolution: {integrity: sha512-C9hAO4eoEsX+OXA4rla66pXZQ+TLQ8T9dttgQj18yuKlPMTVkIkdYXvlMC55IuUsIkV6DpmQYi10JKFLaU+l7w==}
