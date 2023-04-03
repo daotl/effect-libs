@@ -5,6 +5,5 @@ module.exports = {
   ...base,
   rules: {
     ...base.rules,
-    "@typescript-eslint/no-empty-interface": "off"
   }
 }
