@@ -155,6 +155,8 @@ importers:
       '@types/uuid': ^9.0.1
       '@types/validator': ^13.7.14
       date-fns: ^2.29.3
+      dotenv: ^16.0.3
+      dotenv-expand: ^10.0.0
       faker: ^5.5.3
       fast-check: ^3.8.0
       lodash: ^4.17.21
@@ -176,6 +178,8 @@ importers:
       '@effect/io': 0.15.3
       '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
       date-fns: 2.29.3_g5hqt5bhnjezqo5vnkpprfkba4
+      dotenv: 16.0.3
+      dotenv-expand: 10.0.0
       lodash: 4.17.21
       nanoid: 4.0.2
       path-parser: 6.1.0
@@ -3032,6 +3036,16 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
+
+  /dotenv-expand/10.0.0:
+    resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}

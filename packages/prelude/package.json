@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.33.4",
+  "version": "0.0.1",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -11,6 +11,8 @@
     "@effect/io": "^0.15.2",
     "@fp-ts/optic": "^0.6.0",
     "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.2",
     "path-parser": "^6.1.0",
@@ -79,6 +81,16 @@
       "require": {
         "types": "./dist/basicRuntime.d.ts",
         "default": "./_cjs/basicRuntime.cjs"
+      }
+    },
+    "./config": {
+      "import": {
+        "types": "./dist/config.d.ts",
+        "default": "./dist/config.js"
+      },
+      "require": {
+        "types": "./dist/config.d.ts",
+        "default": "./_cjs/config.cjs"
       }
     }
   },
