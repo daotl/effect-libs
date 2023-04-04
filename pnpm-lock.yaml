@@ -1,7 +1,8 @@
 lockfileVersion: 5.4
 
 overrides:
-  '@effect/io': ^0.15.2
+  '@effect/data': ^0.10.2
+  '@effect/io': ^0.17.0
   '@types/node': ~18.11.12
   date-fns: ^2.29.3
   http-proxy: npm:http-proxy-node16@1.0.0
@@ -32,7 +33,7 @@ importers:
   .:
     specifiers:
       '@babel/cli': ^7.21.0
-      '@babel/core': ^7.21.3
+      '@babel/core': ^7.21.4
       '@babel/plugin-proposal-export-namespace-from': ^7.18.9
       '@babel/plugin-transform-modules-commonjs': ^7.21.2
       '@changesets/cli': ^2.26.1
@@ -45,8 +46,8 @@ importers:
       '@effect-app/pnpm-singleton': workspace:*
       '@effect-app/prelude': ^0.33.4
       '@effect-app/schema': ^0.30.2
-      '@effect/data': ^0.7.4
-      '@effect/io': ^0.15.2
+      '@effect/data': ^0.10.2
+      '@effect/io': ^0.17.0
       '@effect/language-service': ^0.0.19
       '@tsconfig/strictest': ^2.0.0
       '@tsplus/installer': 0.0.171
@@ -68,7 +69,7 @@ importers:
       madge: ^6.0.0
       module-alias: ^2.2.2
       nodemon: ^2.0.22
-      npm-check-updates: ^16.9.0
+      npm-check-updates: ^16.10.0
       rome: ^12.0.0
       ts-node: ^10.9.1
       ts-transform-paths: ^3.0.0
@@ -84,8 +85,8 @@ importers:
       '@effect-app/infra-adapters': 0.32.4
       '@effect-app/prelude': 0.33.4
       '@effect-app/schema': 0.30.2
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
     devDependencies:
       '@babel/cli': 7.21.0_@babel+core@7.21.4
       '@babel/core': 7.21.4
@@ -147,8 +148,8 @@ importers:
       '@effect-app/core': ^0.38.1
       '@effect-app/infra-adapters': ^0.32.4
       '@effect-app/prelude': ^0.33.4
-      '@effect/data': ^0.7.4
-      '@effect/io': ^0.15.2
+      '@effect/data': ^0.10.2
+      '@effect/io': ^0.17.0
       '@fp-ts/optic': ^0.6.0
       '@types/faker': 5.5.9
       '@types/node': ~18.11.12
@@ -175,8 +176,8 @@ importers:
       '@effect-app/core': 0.38.1
       '@effect-app/infra-adapters': 0.32.4
       '@effect-app/prelude': 0.33.4
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
       '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
       date-fns: 2.29.3_g5hqt5bhnjezqo5vnkpprfkba4
       dotenv: 16.0.3
@@ -896,8 +897,8 @@ packages:
   /@effect-app/core/0.38.1:
     resolution: {integrity: sha512-spCIwIzADQDdPXW6jbH5sQb/HiQPhQBWT35R9sJDV/vVraFM2GoYhnU45yFZaYZkVTQXcv5qNoqNJKE7GOjZmg==}
     dependencies:
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
       '@effect/stream': 0.14.0
       '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
       cross-fetch: 3.1.5
@@ -916,8 +917,8 @@ packages:
       '@effect-app/core': 0.38.1
       '@effect-app/prelude': 0.33.4
       '@effect-app/schema': 0.30.2
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
       '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
       query-string: 8.1.0
     transitivePeerDependencies:
@@ -933,8 +934,8 @@ packages:
       '@effect-app/infra-adapters': 0.32.4
       '@effect-app/prelude': 0.33.4
       '@effect-app/schema': 0.30.2
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
       '@sendgrid/helpers': 7.7.0
       '@sendgrid/mail': 7.7.0
       change-case: 4.1.2
@@ -957,8 +958,8 @@ packages:
     dependencies:
       '@effect-app/core': 0.38.1
       '@effect-app/schema': 0.30.2
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
       '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
       date-fns: 2.29.3_g5hqt5bhnjezqo5vnkpprfkba4
       lodash: 4.17.21
@@ -976,8 +977,8 @@ packages:
     resolution: {integrity: sha512-I/yiwliJQHLP4FmDeMPMKvmOitqH70QZqTSE/J5QB8MW4zIjA8XsS9tm+AFC6O/U5bN22iuxT9fgEKj7X0j/Gg==}
     dependencies:
       '@effect-app/core': 0.38.1
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
       '@fp-ts/optic': 0.6.0_w2q3sj6fgtrlizsuwcsff4miva
       cross-fetch: 3.1.5
       lodash: 4.17.21
@@ -988,18 +989,14 @@ packages:
       - encoding
     dev: false
 
-  /@effect/data/0.5.1:
-    resolution: {integrity: sha512-ywgRui90ugXsSDggthqHFWA4unsD0XBsKoW63mXWFnya7piEDWRhqa9oXIXqwzA6m1WOY1L+OQXxovw+OJpKgQ==}
+  /@effect/data/0.10.3:
+    resolution: {integrity: sha512-D3T43FOiCDeYYQCfjR4ra1apgL78GS4T85wMMZ4A2UZ3SmKWeM0CP66jnysUoRW4f9Q6xnk4BfbU8eyUQo8oZw==}
     dev: false
 
-  /@effect/data/0.7.4:
-    resolution: {integrity: sha512-vHDyTq66H5JIFMysp11KawygR7ikc2do5FdRdvruLN4H6hFW7u404Bl/UVOu4MiKugHvV1MUaV2fy/dzOlwY7w==}
-    dev: false
-
-  /@effect/io/0.15.3:
-    resolution: {integrity: sha512-45CP387UW9eqtNRP7bALwqaAc4D7toGx1HWvFlmZtvIcVLLGzuZ9GcUpRgy1lp6isb4gzGRov9kwi5J2ELRP7Q==}
+  /@effect/io/0.17.0:
+    resolution: {integrity: sha512-dJX3jaRksA3BXt3pmvjyBVvWsRJ7UVuw69BglWsDATn+7wPK+jTQSpZvtPehUknGm3aow095KsxCC+ruQ/7NnQ==}
     dependencies:
-      '@effect/data': 0.7.4
+      '@effect/data': 0.10.3
     dev: false
 
   /@effect/language-service/0.0.19_izp2ue34jjv4swyrhg2ux4ha3e:
@@ -1013,8 +1010,8 @@ packages:
   /@effect/stream/0.14.0:
     resolution: {integrity: sha512-wr6HhIN1q3L8QEj/+5ocVGoS615vzmGIQRPCI05mW6OOYNv9ORyF/NyM91NZ67C07KixC1SnP6M8HXCBBJ0QJw==}
     dependencies:
-      '@effect/data': 0.7.4
-      '@effect/io': 0.15.3
+      '@effect/data': 0.10.3
+      '@effect/io': 0.17.0
     dev: false
 
   /@esbuild/android-arm/0.17.15:
@@ -1265,7 +1262,7 @@ packages:
   /@fp-ts/optic/0.6.0_w2q3sj6fgtrlizsuwcsff4miva:
     resolution: {integrity: sha512-7Yqpr3hWwcZtw/hH9ibzpirZf6hPvnMvr4G3Y2pcXhM/nie1knOzDXdruqljN4QVptLMZl4tfAHaeIAZ54P0eg==}
     dependencies:
-      '@effect/data': 0.5.1
+      '@effect/data': 0.10.3
     dev: false
     patched: true
 
