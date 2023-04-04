@@ -167,6 +167,7 @@ importers:
       remeda: ^1.11.0
       ts-node: ^10.9.1
       ts-pattern: ^4.2.2
+      type-fest: ^3.7.2
       typed-case: ^1.0.2
       typescript: https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz
       uuid: ^9.0.0
@@ -188,6 +189,7 @@ importers:
       query-string: 8.1.0
       remeda: 1.11.0
       ts-pattern: 4.2.2
+      type-fest: 3.7.2
       typed-case: 1.0.2
       uuid: 9.0.0
       validator: 13.9.0

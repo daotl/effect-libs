@@ -20,7 +20,7 @@
       "correctness": {
         "recommended": true,
         "noUndeclaredVariables": "off",
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "off"
       },
       "performance": {
         "recommended": true
