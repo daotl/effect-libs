@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    rome:
+      glob: '*'
+      run: echo {staged_files} | tr ' ' '\n' | grep \\.[cm]\\?[jt]s$ | tr '\n' ' ' | xargs -i sh -c 'echo npx rome format --write {} && npx rome check --apply {}' && git add {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --no -- commitlint --edit $1
