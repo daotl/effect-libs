@@ -1,0 +1,127 @@
+{
+  "name": "@daotl-effect/trpc",
+  "version": "0.0.7",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@daotl/web-common": "^0.0.6",
+    "@daotl-effect/prelude": "workspace:*",
+    "@effect-app/core": "^0.39.1",
+    "@effect-app/infra-adapters": "^0.33.1",
+    "@effect-app/prelude": "^0.34.1",
+    "@effect/data": "^0.10.2",
+    "@effect/io": "^0.17.0",
+    "@fp-ts/optic": "^0.6.0",
+    "@trpc/server": "daotl/trpc#8e6efd7fd2b4e4475d7d919d1c7308bdf38f0668",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
+    "lodash": "^4.17.21",
+    "nanoid": "^4.0.2",
+    "path-parser": "^6.1.0",
+    "query-string": "^8.1.0",
+    "remeda": "^1.11.0",
+    "ts-pattern": "^4.2.2",
+    "type-fest": "^3.7.2",
+    "typed-case": "^1.0.2",
+    "uuid": "^9.0.0",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@effect-app/compiler": "^0.19.0",
+    "@types/faker": "5.5.9",
+    "@types/node": "~18.15.11",
+    "@types/uuid": "^9.0.1",
+    "@types/validator": "^13.7.14",
+    "faker": "^5.5.3",
+    "fast-check": "^3.8.0",
+    "ts-node": "^10.9.1",
+    "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz",
+    "vitest": "^0.29.8"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./_cjs/index.cjs"
+      }
+    },
+    "./_global": {
+      "import": {
+        "types": "./dist/_global.d.ts",
+        "default": "./dist/_global.js"
+      },
+      "require": {
+        "types": "./dist/_global.d.ts",
+        "default": "./_cjs/_global.cjs"
+      }
+    },
+    "./effect": {
+      "import": {
+        "types": "./dist/effect.d.ts",
+        "default": "./dist/effect.js"
+      },
+      "require": {
+        "types": "./dist/effect.d.ts",
+        "default": "./_cjs/effect.cjs"
+      }
+    },
+    "./effectify": {
+      "import": {
+        "types": "./dist/effectify.d.ts",
+        "default": "./dist/effectify.js"
+      },
+      "require": {
+        "types": "./dist/effectify.d.ts",
+        "default": "./_cjs/effectify.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "watch": "pnpm build:tsc -w",
+    "build:tsc": "pnpm clean-dist && node ../../scripts/package.js && NODE_OPTIONS=--max-old-space-size=6144 tsc --build",
+    "build": "pnpm build:tsc && pnpm build2:cjs",
+    "build2:cjs": "rm -rf _cjs && babel dist --config-file ../../.babel.cjs.json --out-dir _cjs --out-file-extension .cjs --source-maps",
+    "watch2": "pnpm clean-dist && NODE_OPTIONS=--max-old-space-size=6144 tsc -w",
+    "clean": "rm -rf dist && rm -rf _cjs",
+    "clean-dist": "sh ../../scripts/clean-dist.sh",
+    "circular": "pnpm circular:src && pnpm circular:dist",
+    "circular:src": "madge --circular --ts-config ./tsconfig.json --extensions ts ./_src",
+    "circular:dist": "madge --circular --extensions js ./dist",
+    "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
+    "lint": "rome format . && rome check .",
+    "lint:fix": "rome format --write . && rome check --apply .",
+    "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint ./_src",
+    "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx .",
+    "autofix": "pnpm lint --fix",
+    "test": "vitest",
+    "test:run": "pnpm run test run --passWithNoTests",
+    "testsuite": "pnpm lint && pnpm circular && pnpm run test:run",
+    "ncu": "ncu",
+    "pub": "pnpm build && pnpm pub:pruned",
+    "pub:pruned": "pnpm prepublish && npm publish --access public",
+    "prepublish": "cp -f ./tsconfig.json ./tsconfig.json.bak && node ../../scripts/mergeTsConfig.cjs ./tsconfig.json",
+    "postpublish": "mv -f ./tsconfig.json.bak ./tsconfig.json && rm -f tsplus.config.json"
+  },
+  "gitHead": "bd8e27eea3eff97db8739d577d67e7336c078d28",
+  "sideEffects": [
+    "./dist/faker.js",
+    "./faker",
+    "./_src/faker",
+    "./dist/faker",
+    "./dist/src/faker.js",
+    "./dist/faker.js"
+  ]
+}

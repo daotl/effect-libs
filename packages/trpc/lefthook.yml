@@ -1,0 +1,6 @@
+pre-commit:
+  parallel: true
+  commands:
+    packages-trpc-rome:
+      root: packages/trpc/
+      run: npx zx ../../scripts/rome-staged.js {staged_files}

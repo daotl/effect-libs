@@ -2,8 +2,8 @@
   "$schema": "./node_modules/rome/configuration_schema.json",
   "files": {
     "ignore": [
-      "./packages",
-      "**/dist",
+      "./_cjs",
+      "./dist",
       "**/*.json"
     ]
   },
@@ -19,8 +19,8 @@
       },
       "correctness": {
         "recommended": true,
-        "noUndeclaredVariables": "error",
-        "noUnusedVariables": "error"
+        "noUndeclaredVariables": "off",
+        "noUnusedVariables": "off"
       },
       "performance": {
         "recommended": true
@@ -48,10 +48,6 @@
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "asNeeded"
-    },
-    "globals": [
-      "$",
-      "argv"
-    ]
+    }
   }
 }

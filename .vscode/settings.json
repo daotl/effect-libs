@@ -24,7 +24,7 @@
     "editor.defaultFormatter": "Vue.volar"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "rome.rome"
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"

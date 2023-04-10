@@ -6,5 +6,11 @@
       "**/dist",
       "**/*.json"
     ]
+  },
+  "javascript": {
+    "globals": [
+      "$",
+      "argv"
+    ]
   }
 }

@@ -1,0 +1,6 @@
+pre-commit:
+  parallel: true
+  commands:
+    packages-prelude-rome:
+      root: packages/prelude/
+      run: npx zx ../../scripts/rome-staged.js {staged_files}
