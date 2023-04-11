@@ -9,7 +9,7 @@ import * as Level from '@effect/io/Logger/Level'
 import * as Scope from '@effect/io/Scope'
 import { toConstantCase } from 'typed-case'
 
-const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
+export const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
   Effect.gen(function* ($) {
     const scope = yield* $(Scope.make())
     const env = yield* $(layer.buildWithScope(scope))
