@@ -1,5 +1,5 @@
-const fs = require('fs')
-const cp = require('child_process')
+import fs from 'node:fs'
+import cp from 'node:child_process'
 
 const r = cp.execSync('sh ../../scripts/extract.sh', { encoding: 'utf-8' })
 const s = r
