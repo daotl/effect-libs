@@ -118,7 +118,7 @@ import type {
   // literal-to-primitive
   LiteralToPrimitive,
   // literal-to-primitive-deep
-  // LiteralToPrimitiveDeep,
+  LiteralToPrimitiveDeep,
   // numeric
   PositiveInfinity,
   NegativeInfinity,
@@ -156,6 +156,18 @@ import type {
   IsNumericLiteral,
   IsBooleanLiteral,
   IsSymbolLiteral,
+  // is-any
+  IsAny,
+  // if-any
+  IfAny,
+  // is-never
+  IsNever,
+  // if-never
+  IfNever,
+  // is-unknown
+  IsUnknown,
+  // if-unknown
+  IfUnknown,
   // Template literal types
   // camel-case
   CamelCase,

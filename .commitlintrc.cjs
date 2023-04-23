@@ -7,7 +7,9 @@ const pkgs = (ctx) =>
     const prefixStripped = pkgs
       .filter((p) => p.startsWith('@daotl-effect/'))
       .map((p) => p.replace('@daotl-effect/', ''))
-    return pkgs.concat(prefixStripped).concat(['root', 'docker-compose', 'k8s'])
+    return pkgs
+      .concat(prefixStripped)
+      .concat(['all', 'root', 'docker-compose', 'k8s'])
   })
 
 module.exports = {
