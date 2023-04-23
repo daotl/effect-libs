@@ -11,6 +11,7 @@ import type {
 } from '@trpc/server/core/internals/utils'
 import type { Parser } from '@trpc/server/core/parser'
 
+import type { Err } from '@daotl/web-common'
 import { toTrpcError } from '@daotl/web-common/trpc'
 import { runIfEffect } from '@daotl-effect/prelude'
 
@@ -93,28 +94,28 @@ type EffectProcedureBuilderExceptInput<
   /**
    * Query procedure
    */
-  query<$Output>(
+  query<$Output, E extends Err | trpc.TRPCError = never>(
     resolver: (
       opts: ResolveOptions<TParams>,
-    ) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R>,
+    ) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R, E>,
   ): trpc.BuildProcedure<'query', TParams, $Output>
 
   /**
    * Mutation procedure
    */
-  mutation<$Output>(
+  mutation<$Output, E extends Err | trpc.TRPCError = never>(
     resolver: (
       opts: ResolveOptions<TParams>,
-    ) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R>,
+    ) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R, E>,
   ): trpc.BuildProcedure<'mutation', TParams, $Output>
 
   /**
    * Mutation procedure
    */
-  subscription<$Output>(
+  subscription<$Output, E extends Err | trpc.TRPCError = never>(
     resolver: (
       opts: ResolveOptions<TParams>,
-    ) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R>,
+    ) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R, E>,
   ): trpc.BuildProcedure<'subscription', TParams, $Output>
 }
 
@@ -152,16 +153,21 @@ export const effectifyBuilder =
 
 export type EffectResolver<
   $Output,
-  R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+  R = never,
+  E extends Err | trpc.TRPCError = never,
 > = (
   opts: ResolveOptions<TParams>,
-) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R>
+) => MaybeEffect<FallbackValue<TParams['_output_in'], $Output>, R, E>
 
 const runEffectResolver =
   <R = never>(r: Runtime<R>) =>
-  <TParams extends trpc.ProcedureParams, $Output>(
-    resolver: EffectResolver<$Output, R, TParams>,
+  <
+    $Output,
+    TParams extends trpc.ProcedureParams,
+    E extends Err | trpc.TRPCError = never,
+  >(
+    resolver: EffectResolver<$Output, TParams, R, E>,
   ) =>
     async function (
       opts: ResolveOptions<TParams>,
