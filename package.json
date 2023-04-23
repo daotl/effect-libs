@@ -4,12 +4,12 @@
   "type": "module",
   "pnpm": {
     "patchedDependencies": {
-      "@typescript-eslint/scope-manager@5.57.1": "patches/@typescript-eslint__scope-manager@5.57.1.patch",
+      "@typescript-eslint/scope-manager@5.59.0": "patches/@typescript-eslint__scope-manager@5.59.0.patch",
       "eslint-plugin-codegen@0.17.0": "patches/eslint-plugin-codegen@0.17.0.patch",
-      "typescript@5.0.0-tsplus.20230224": "patches/typescript@5.0.0-tsplus.20230224.patch",
+      "typescript@5.1.0-tsplus.20230421": "patches/typescript@5.1.0-tsplus.20230421.patch",
       "@effect/language-service@0.0.19": "patches/@effect__language-service@0.0.19.patch",
       "date-fns@2.29.3": "patches/date-fns@2.29.3.patch",
-      "@fp-ts/optic@0.6.0": "patches/@fp-ts__optic@0.6.0.patch"
+      "@fp-ts/optic@0.7.0": "patches/@fp-ts__optic@0.7.0.patch"
     }
   },
   "scripts": {
@@ -47,20 +47,20 @@
     "nnm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && pnpm i"
   },
   "resolutions": {
-    "@effect/data": "^0.11.5",
+    "@effect/data": "^0.12.2",
     "@trpc/server": "daotl/trpc#8e6efd7fd2b4e4475d7d919d1c7308bdf38f0668",
     "@types/node": "~18.11.12",
     "date-fns": "^2.29.3",
     "http-proxy": "npm:http-proxy-node16@1.0.0",
-    "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz"
+    "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.173/compiler/typescript.tgz"
   },
   "dependencies": {
-    "@effect-app/core": "^0.40.0",
-    "@effect-app/infra": "^0.47.0",
-    "@effect-app/infra-adapters": "^0.34.0",
-    "@effect-app/prelude": "^0.35.0",
+    "@effect-app/core": "^0.47.1",
+    "@effect-app/infra": "^0.55.0",
+    "@effect-app/infra-adapters": "^0.40.13",
+    "@effect-app/prelude": "^0.45.0",
     "@effect-app/schema": "^0.32.0",
-    "@effect/data": "^0.11.5",
+    "@effect/data": "^0.12.2",
     "@effect/io": "^0.19.2"
   },
   "devDependencies": {
@@ -76,20 +76,20 @@
     "@effect-app/compiler": "^0.20.0",
     "@effect-app/pnpm-singleton": "workspace:*",
     "@effect/language-service": "^0.0.19",
-    "@tsconfig/strictest": "^2.0.0",
-    "@tsplus/installer": "0.0.171",
-    "@types/lodash": "^4.14.192",
-    "@types/node": "~18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
-    "@typescript-eslint/parser": "^5.57.1",
-    "@typescript-eslint/scope-manager": "^5.57.1",
+    "@tsconfig/strictest": "^2.0.1",
+    "@tsplus/installer": "0.0.173",
+    "@types/lodash": "^4.14.194",
+    "@types/node": "~18.15.13",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@typescript-eslint/scope-manager": "^5.59.0",
     "babel-plugin-replace-import-extension": "^1.1.3",
     "commitlint-config-pnpm-workspace": "^0.2.2",
     "commitlint-plugin-scope-enhanced": "^0.1.0",
     "concurrently": "^8.0.1",
     "cross-env": "^7.0.3",
-    "enhanced-resolve": "^5.12.0",
-    "eslint": "^8.37.0",
+    "enhanced-resolve": "^5.13.0",
+    "eslint": "^8.39.0",
     "eslint-plugin-codegen": "^0.17.0",
     "eslint-watch": "^8.0.0",
     "history": "^5.3.0",
@@ -98,7 +98,7 @@
     "minimatch": "^8.0.3",
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.22",
-    "npm-check-updates": "^16.10.7",
+    "npm-check-updates": "^16.10.9",
     "rome": "^12.0.0",
     "ts-node": "^10.9.1",
     "ts-transform-paths": "^3.0.0",
@@ -107,8 +107,8 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.171/compiler/typescript.tgz",
     "typescript-transform-paths": "^3.4.6",
-    "vite": "^4.2.1",
-    "vitest": "^0.29.8",
+    "vite": "^4.3.1",
+    "vitest": "^0.30.1",
     "zx": "^7.2.1"
   }
 }
