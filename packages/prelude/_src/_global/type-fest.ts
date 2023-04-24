@@ -114,7 +114,8 @@ import type {
   // jsonifiable
   Jsonifiable,
   // schema
-  Schema,
+  // Renamed to avoid conflict with @effect/schema
+  Schema as TFSchema,
   // literal-to-primitive
   LiteralToPrimitive,
   // literal-to-primitive-deep

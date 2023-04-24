@@ -5,6 +5,12 @@ import './_global.ext.js'
 /**
  * @tsplus global
  */
+// Override `Schema` from `@effect-app/prelude/_global`
+import { Schema } from '@daotl-effect/prelude/_global/schema'
+
+/**
+ * @tsplus global
+ */
 import { none, some } from '@effect/data/Option'
 
 import './_global/type-fest.js'

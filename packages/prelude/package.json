@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -9,29 +9,16 @@
     "@effect-app/prelude": "^0.45.0",
     "@effect/data": "^0.12.2",
     "@effect/io": "^0.25.2",
-    "@fp-ts/optic": "^0.7.0",
+    "@effect/schema": "^0.16.0",
     "date-fns": "^2.29.3",
-    "dotenv": "^16.0.3",
-    "dotenv-expand": "^10.0.0",
-    "lodash": "^4.17.21",
-    "nanoid": "^4.0.2",
-    "path-parser": "^6.1.0",
-    "query-string": "^8.1.0",
     "remeda": "^1.13.0",
-    "ts-pattern": "^4.2.2",
     "type-fest": "^3.8.0",
-    "typed-case": "^1.0.2",
-    "uuid": "^9.0.0",
-    "validator": "^13.9.0"
+    "typed-case": "^1.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@effect-app/compiler": "^0.19.0",
-    "@types/faker": "5.5.9",
     "@types/node": "~18.16.0",
-    "@types/uuid": "^9.0.1",
-    "@types/validator": "^13.7.15",
-    "faker": "^5.5.3",
     "fast-check": "^3.8.1",
     "ts-node": "^10.9.1",
     "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz",
@@ -85,6 +72,16 @@
         "default": "./_cjs/_global/remeda.cjs"
       }
     },
+    "./_global/schema": {
+      "import": {
+        "types": "./dist/_global/schema.d.ts",
+        "default": "./dist/_global/schema.js"
+      },
+      "require": {
+        "types": "./dist/_global/schema.d.ts",
+        "default": "./_cjs/_global/schema.cjs"
+      }
+    },
     "./_global/type-fest": {
       "import": {
         "types": "./dist/_global/type-fest.d.ts",
@@ -123,6 +120,16 @@
       "require": {
         "types": "./dist/runtime.d.ts",
         "default": "./_cjs/runtime.cjs"
+      }
+    },
+    "./schema": {
+      "import": {
+        "types": "./dist/schema.d.ts",
+        "default": "./dist/schema.js"
+      },
+      "require": {
+        "types": "./dist/schema.d.ts",
+        "default": "./_cjs/schema.cjs"
       }
     }
   },
