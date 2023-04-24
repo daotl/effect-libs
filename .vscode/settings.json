@@ -27,13 +27,10 @@
     "editor.defaultFormatter": "rome.rome"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "rome.rome"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "rome.rome"
   },
   "editor.codeActionsOnSave": [
     "source.addMissingImports"
