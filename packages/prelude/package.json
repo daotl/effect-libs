@@ -121,16 +121,6 @@
         "types": "./dist/runtime.d.ts",
         "default": "./_cjs/runtime.cjs"
       }
-    },
-    "./schema": {
-      "import": {
-        "types": "./dist/schema.d.ts",
-        "default": "./dist/schema.js"
-      },
-      "require": {
-        "types": "./dist/schema.d.ts",
-        "default": "./_cjs/schema.cjs"
-      }
     }
   },
   "scripts": {
