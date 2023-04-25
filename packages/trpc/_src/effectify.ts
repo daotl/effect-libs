@@ -102,7 +102,7 @@ type EffectProcedureBuilderBase<
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = Except<
   ProcedureBuilder<TParams>,
-  'input' | 'query' | 'mutation' | 'subscription'
+  'input' | 'output' | 'query' | 'mutation' | 'subscription'
 > & {
   /**
    * Query procedure
