@@ -48,7 +48,7 @@
   },
   "resolutions": {
     "@effect/data": "^0.12.2",
-    "@trpc/server": "daotl/trpc#8e6efd7fd2b4e4475d7d919d1c7308bdf38f0668",
+    "@trpc/server": "daotl/trpc#f2daf966314d44134a3316d25977c5189bd3e257",
     "@types/node": "~18.11.12",
     "date-fns": "^2.29.3",
     "http-proxy": "npm:http-proxy-node16@1.0.0",
