@@ -60,12 +60,12 @@ export function effectify<R = never>(r: Runtime<R>) {
 }
 
 // Only for type inference
-const _effectifyBuilderExceptInput = <R = never>() =>
+const _effectifyBuilderBase = <R = never>() =>
   undefined as unknown as <
     TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
   >(
     pb: trpc.ProcedureBuilder<TParams>,
-  ) => EffectProcedureBuilderExceptInput<R, TParams>
+  ) => EffectProcedureBuilderBase<R, TParams>
 
 // To suppress TS error:
 // The inferred type of '_effectifyInputFn' cannot be named without a reference to '../node_modules/@trpc/server/dist/core/parser.js'. This is likely not portable. A type annotation is necessary.ts(2742)
@@ -77,14 +77,27 @@ const _effectifyInputFn = <
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 >(
   fn: ProcedureBuilder<TParams>['input'],
-) => flow(fn, _effectifyBuilderExceptInput<R>())
+) => flow(fn, _effectifyBuilderBase<R>())
 
 type EffectInputFn<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = ReturnType<typeof _effectifyInputFn<R, TParams>>
 
-type EffectProcedureBuilderExceptInput<
+// Only for type inference
+const _effectifyOutputFn = <
+  R = never,
+  TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+>(
+  fn: ProcedureBuilder<TParams>['output'],
+) => flow(fn, _effectifyBuilderBase<R>())
+
+type EffectOutputFn<
+  R = never,
+  TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+> = ReturnType<typeof _effectifyOutputFn<R, TParams>>
+
+type EffectProcedureBuilderBase<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = Except<
@@ -122,11 +135,16 @@ type EffectProcedureBuilderExceptInput<
 export type EffectProcedureBuilder<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
-> = EffectProcedureBuilderExceptInput<R, TParams> & {
+> = EffectProcedureBuilderBase<R, TParams> & {
   /**
    * Add an input parser to the procedure.
    */
   input: EffectInputFn<R, TParams>
+
+  /**
+   * Add an output parser to the procedure.
+   */
+  output: EffectOutputFn<R, TParams>
 }
 
 export const effectifyBuilder =
@@ -135,13 +153,19 @@ export const effectifyBuilder =
     pb: trpc.ProcedureBuilder<TParams>,
   ): EffectProcedureBuilder<R, TParams> => {
     const _runEffectResolver = runEffectResolver(r)
+    const _effectifyBuilder = effectifyBuilder(r)
     return {
       ...pb,
 
       input: flow(
         pb.input,
-        effectifyBuilder(r),
+        _effectifyBuilder,
       ) as unknown as EffectProcedureBuilder<R, TParams>['input'],
+
+      output: flow(
+        pb.output,
+        _effectifyBuilder,
+      ) as unknown as EffectProcedureBuilder<R, TParams>['output'],
 
       query: flow(_runEffectResolver, pb.query),
 
