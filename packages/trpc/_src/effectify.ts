@@ -67,6 +67,14 @@ const _effectifyBuilderBase = <R = never>() =>
     pb: trpc.ProcedureBuilder<TParams>,
   ) => EffectProcedureBuilderBase<R, TParams>
 
+// Only for type inference
+const _effectifyBuilderBase_output = <R = never>() =>
+  undefined as unknown as <
+    TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+  >(
+    pb: trpc.ProcedureBuilder<TParams>,
+  ) => EffectProcedureBuilderBase_output<R, TParams>
+
 // To suppress TS error:
 // The inferred type of '_effectifyInputFn' cannot be named without a reference to '../node_modules/@trpc/server/dist/core/parser.js'. This is likely not portable. A type annotation is necessary.ts(2742)
 export type _Parser = Parser
@@ -77,7 +85,7 @@ const _effectifyInputFn = <
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 >(
   fn: ProcedureBuilder<TParams>['input'],
-) => flow(fn, _effectifyBuilderBase<R>())
+) => flow(fn, _effectifyBuilderBase_output<R>())
 
 type EffectInputFn<
   R = never,
@@ -132,19 +140,24 @@ type EffectProcedureBuilderBase<
   ): trpc.BuildProcedure<'subscription', TParams, $Output>
 }
 
-export type EffectProcedureBuilder<
+export type EffectProcedureBuilderBase_output<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = EffectProcedureBuilderBase<R, TParams> & {
   /**
-   * Add an input parser to the procedure.
-   */
-  input: EffectInputFn<R, TParams>
-
-  /**
    * Add an output parser to the procedure.
    */
   output: EffectOutputFn<R, TParams>
+}
+
+export type EffectProcedureBuilder<
+  R = never,
+  TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+> = EffectProcedureBuilderBase_output<R, TParams> & {
+  /**
+   * Add an input parser to the procedure.
+   */
+  input: EffectInputFn<R, TParams>
 }
 
 export const effectifyBuilder =
