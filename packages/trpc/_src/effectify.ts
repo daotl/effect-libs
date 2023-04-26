@@ -1,5 +1,8 @@
 import * as trpc from '@trpc/server'
-import type { ProcedureBuilder } from '@trpc/server/internals'
+import type {
+  ProcedureBuilder,
+  unsetMarker as _unsetMarker,
+} from '@trpc/server/internals'
 import type {
   CreateRootConfigTypes,
   RootConfigTypes,
@@ -14,6 +17,11 @@ import type { Parser } from '@trpc/server/core/parser'
 import type { Err } from '@daotl/web-common'
 import { toTrpcError } from '@daotl/web-common/trpc'
 import { runIfEffect } from '@daotl-effect/prelude'
+
+// Fix: `trpc.unsetMarker` type became `any` in generated `effectify.d.ts`
+declare module '@trpc/server' {
+  const unsetMarker: typeof _unsetMarker
+}
 
 // From: https://github.com/trpc/trpc/blob/37119d0a779815419913127c862a6e123287426c/packages/server/src/core/initTRPC.ts#L28-L38
 type PartialRootConfigTypes = Partial<RootConfigTypes>
@@ -34,9 +42,10 @@ export type EffectTRPC<
   > = Partial<RuntimeConfig<CreateRootConfigTypesFromPartial<TParams>>>,
   R = never,
 > = Except<trpc.TRPC<TParams, TOptions>, 'procedure'> & {
-  procedure: trpc.TRPC<TParams, TOptions>['procedure'] extends ProcedureBuilder<
-    infer TParams
-  >
+  procedure: trpc.TRPC<
+    TParams,
+    TOptions
+  >['procedure'] extends trpc.ProcedureBuilder<infer TParams>
     ? EffectProcedureBuilder<R, TParams>
     : never
 }
