@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.5",
-    "@babel/core": "^7.21.5",
+    "@babel/core": "^7.21.8",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@babel/plugin-transform-modules-commonjs": "^7.21.5",
     "@changesets/cli": "^2.26.1",
@@ -86,20 +86,20 @@
     "history": "^5.3.0",
     "json5": "^2.2.3",
     "madge": "^6.0.0",
-    "minimatch": "^8.0.4",
+    "minimatch": "^9.0.0",
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.22",
     "npm-check-updates": "^16.10.9",
     "rome": "^12.0.0",
     "ts-node": "^10.9.1",
     "ts-transform-paths": "^3.0.0",
-    "tsc-alias": "^1.8.5",
+    "tsc-alias": "^1.8.6",
     "tsc-watch": "^6.0.4",
     "tsconfig-paths": "^4.2.0",
     "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz",
     "typescript-transform-paths": "^3.4.6",
     "vite": "^4.3.4",
-    "vitest": "^0.30.1",
-    "zx": "^7.2.1"
+    "vitest": "^0.31.0",
+    "zx": "^7.2.2"
   }
 }

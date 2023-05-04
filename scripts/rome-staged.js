@@ -1,6 +1,6 @@
 #!/usr/bin/env zx
 import 'zx/globals'
-import minimatch from 'minimatch'
+import { minimatch } from 'minimatch'
 import cfg from '../rome.json' assert { type: 'json' }
 
 // Append stars

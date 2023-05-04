@@ -33,7 +33,7 @@ importers:
   .:
     specifiers:
       '@babel/cli': ^7.21.5
-      '@babel/core': ^7.21.5
+      '@babel/core': ^7.21.8
       '@babel/plugin-proposal-export-namespace-from': ^7.18.9
       '@babel/plugin-transform-modules-commonjs': ^7.21.5
       '@changesets/cli': ^2.26.1
@@ -63,21 +63,21 @@ importers:
       history: ^5.3.0
       json5: ^2.2.3
       madge: ^6.0.0
-      minimatch: ^8.0.4
+      minimatch: ^9.0.0
       module-alias: ^2.2.2
       nodemon: ^2.0.22
       npm-check-updates: ^16.10.9
       rome: ^12.0.0
       ts-node: ^10.9.1
       ts-transform-paths: ^3.0.0
-      tsc-alias: ^1.8.5
+      tsc-alias: ^1.8.6
       tsc-watch: ^6.0.4
       tsconfig-paths: ^4.2.0
       typescript: https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz
       typescript-transform-paths: ^3.4.6
       vite: ^4.3.4
-      vitest: ^0.30.1
-      zx: ^7.2.1
+      vitest: ^0.31.0
+      zx: ^7.2.2
     devDependencies:
       '@babel/cli': 7.21.5_@babel+core@7.21.8
       '@babel/core': 7.21.8
@@ -110,21 +110,21 @@ importers:
       history: 5.3.0
       json5: 2.2.3
       madge: 6.0.0
-      minimatch: 8.0.4
+      minimatch: 9.0.0
       module-alias: 2.2.2
       nodemon: 2.0.22
       npm-check-updates: 16.10.9
       rome: 12.0.0
       ts-node: 10.9.1_ef7sanq7pohvapdhnzfiku3lci
       ts-transform-paths: 3.0.0
-      tsc-alias: 1.8.5
+      tsc-alias: 1.8.6
       tsc-watch: 6.0.4_bygw4jzhenuk4ppa53hzcdup64
       tsconfig-paths: 4.2.0
       typescript: '@cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz_4fdmoog7xa6cp22kpahy7cule4'
       typescript-transform-paths: 3.4.6_bygw4jzhenuk4ppa53hzcdup64
       vite: 4.3.4_@types+node@18.11.19
-      vitest: 0.30.1
-      zx: 7.2.1
+      vitest: 0.31.0
+      zx: 7.2.2
 
   packages/pnpm-singleton:
     specifiers:
@@ -147,26 +147,26 @@ importers:
       '@effect-app/prelude': ^0.52.0
       '@effect/data': ^0.12.2
       '@effect/io': ^0.25.8
-      '@effect/schema': ^0.16.0
+      '@effect/schema': ^0.17.3
       '@types/node': ~18.11.12
       date-fns: ^2.29.3
       fast-check: ^3.8.1
-      remeda: ^1.13.0
+      remeda: ^1.14.0
       ts-node: ^10.9.1
-      type-fest: ^3.8.0
+      type-fest: ^3.9.0
       typed-case: ^1.0.2
       typescript: https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz
-      vitest: ^0.30.1
+      vitest: ^0.31.0
     dependencies:
       '@effect-app/core': 0.52.0
       '@effect-app/infra-adapters': 0.45.0
       '@effect-app/prelude': 0.52.0
       '@effect/data': 0.12.2
       '@effect/io': 0.25.8
-      '@effect/schema': 0.16.0
+      '@effect/schema': 0.17.3
       date-fns: 2.29.3_g5hqt5bhnjezqo5vnkpprfkba4
-      remeda: 1.13.0
-      type-fest: 3.8.0
+      remeda: 1.14.0
+      type-fest: 3.9.0
       typed-case: 1.0.2
     devDependencies:
       '@babel/cli': 7.21.5
@@ -175,7 +175,7 @@ importers:
       fast-check: 3.8.1
       ts-node: 10.9.1_ef7sanq7pohvapdhnzfiku3lci
       typescript: '@cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz_4fdmoog7xa6cp22kpahy7cule4'
-      vitest: 0.30.1
+      vitest: 0.31.0
 
   packages/trpc:
     specifiers:
@@ -190,28 +190,28 @@ importers:
       '@effect/io': ^0.25.8
       '@fp-ts/optic': ^0.7.0
       '@trpc/server': daotl/trpc#f2daf966314d44134a3316d25977c5189bd3e257
-      '@types/faker': 5.5.9
+      '@types/faker': 6.6.9
       '@types/node': ~18.11.12
       '@types/uuid': ^9.0.1
       '@types/validator': ^13.7.15
       date-fns: ^2.29.3
       dotenv: ^16.0.3
       dotenv-expand: ^10.0.0
-      faker: ^5.5.3
+      faker: ^6.6.6
       fast-check: ^3.8.1
       lodash: ^4.17.21
       nanoid: ^4.0.2
       path-parser: ^6.1.0
       query-string: ^8.1.0
-      remeda: ^1.13.0
+      remeda: ^1.14.0
       ts-node: ^10.9.1
       ts-pattern: ^4.2.2
-      type-fest: ^3.8.0
+      type-fest: ^3.9.0
       typed-case: ^1.0.2
       typescript: https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz
       uuid: ^9.0.0
       validator: ^13.9.0
-      vitest: ^0.30.1
+      vitest: ^0.31.0
     dependencies:
       '@daotl-effect/prelude': link:../prelude
       '@daotl/web-common': 0.0.6
@@ -229,24 +229,24 @@ importers:
       nanoid: 4.0.2
       path-parser: 6.1.0
       query-string: 8.1.0
-      remeda: 1.13.0
+      remeda: 1.14.0
       ts-pattern: 4.2.2
-      type-fest: 3.8.0
+      type-fest: 3.9.0
       typed-case: 1.0.2
       uuid: 9.0.0
       validator: 13.9.0
     devDependencies:
       '@babel/cli': 7.21.5
       '@effect-app/compiler': 0.26.0_@types+node@18.11.19
-      '@types/faker': 5.5.9
+      '@types/faker': 6.6.9
       '@types/node': 18.11.19
       '@types/uuid': 9.0.1
       '@types/validator': 13.7.15
-      faker: 5.5.3
+      faker: 6.6.6
       fast-check: 3.8.1
       ts-node: 10.9.1_ef7sanq7pohvapdhnzfiku3lci
       typescript: '@cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz_4fdmoog7xa6cp22kpahy7cule4'
-      vitest: 0.30.1
+      vitest: 0.31.0
 
 packages:
 
@@ -963,7 +963,7 @@ packages:
   /@daotl/web-common/0.0.6:
     resolution: {integrity: sha512-wYi0nATZXJuE+M/YmfyO5C3kx2+N4Tqq/ltWwvTua5NxA8nMehXm8AJWZRaOVghbuintTMOTd6E6NfbY59v0Qw==}
     dependencies:
-      remeda: 1.13.0
+      remeda: 1.14.0
       ts-custom-error: 3.3.1
       typed-case: 1.0.2
     optionalDependencies:
@@ -1085,8 +1085,8 @@ packages:
     dev: true
     patched: true
 
-  /@effect/schema/0.16.0:
-    resolution: {integrity: sha512-KYf77SQRD6Z2KJ30XMc47KHbPGTYCQwjXNuGlELl/WjzJYJuvKSQBMTRUUuhrjSi+ROTm5sUwwfskLfXeO0GVA==}
+  /@effect/schema/0.17.3:
+    resolution: {integrity: sha512-IYimFeJQ+chz3C2I+sgm7uRW7rWGOqAGxxipViyL/wA7FUznysNlGmS1m0ABlk1kXbep3ZfvgxBEQtK3wY4dCw==}
     dependencies:
       '@effect/data': 0.12.2
       '@effect/io': 0.25.8
@@ -1722,8 +1722,11 @@ packages:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
-  /@types/faker/5.5.9:
-    resolution: {integrity: sha512-uCx6mP3UY5SIO14XlspxsGjgaemrxpssJI0Ol+GfhxtcKpv9pgRZYsS4eeKeHVLje6Qtc8lGszuBI461+gVZBA==}
+  /@types/faker/6.6.9:
+    resolution: {integrity: sha512-Y9YYm5L//8ooiiknO++4Gr539zzdI0j3aXnOBjo1Vk+kTvffY10GuE2wn78AFPECwZ5MYGTjiDVw1naLLdDimw==}
+    deprecated: This is a stub types definition. faker provides its own type definitions, so you do not need this installed.
+    dependencies:
+      faker: 6.6.6
     dev: true
 
   /@types/fs-extra/11.0.1:
@@ -1813,8 +1816,8 @@ packages:
     resolution: {integrity: sha512-yeinDVQunb03AEP8luErFcyf/7Lf7AzKCD0NXfgVoGCCQDNpZET8Jgq74oBgqKld3hafLbfzt/3inUdQvaFeXQ==}
     dev: true
 
-  /@types/which/2.0.2:
-    resolution: {integrity: sha512-113D3mDkZDjo+EeUEHCFy0qniNc1ZpecGiAU7WSo7YDoSzolZIQKpYFHrPpjkB2nuyahcKfrmLXeQlh7gqJYdw==}
+  /@types/which/3.0.0:
+    resolution: {integrity: sha512-ASCxdbsrwNfSMXALlC3Decif9rwDMu+80KGp5zI2RLRotfMsTv7fHL8W8VDp24wymzDyIFudhUeSCugrgRFfHQ==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -2034,10 +2037,27 @@ packages:
       chai: 4.3.7
     dev: true
 
+  /@vitest/expect/0.31.0:
+    resolution: {integrity: sha512-Jlm8ZTyp6vMY9iz9Ny9a0BHnCG4fqBa8neCF6Pk/c/6vkUk49Ls6UBlgGAU82QnzzoaUs9E/mUhq/eq9uMOv/g==}
+    dependencies:
+      '@vitest/spy': 0.31.0
+      '@vitest/utils': 0.31.0
+      chai: 4.3.7
+    dev: true
+
   /@vitest/runner/0.30.1:
     resolution: {integrity: sha512-W62kT/8i0TF1UBCNMRtRMOBWJKRnNyv9RrjIgdUryEe0wNpGZvvwPDLuzYdxvgSckzjp54DSpv1xUbv4BQ0qVA==}
     dependencies:
       '@vitest/utils': 0.30.1
+      concordance: 5.0.4
+      p-limit: 4.0.0
+      pathe: 1.1.0
+    dev: true
+
+  /@vitest/runner/0.31.0:
+    resolution: {integrity: sha512-H1OE+Ly7JFeBwnpHTrKyCNm/oZgr+16N4qIlzzqSG/YRQDATBYmJb/KUn3GrZaiQQyL7GwpNHVZxSQd6juLCgw==}
+    dependencies:
+      '@vitest/utils': 0.31.0
       concordance: 5.0.4
       p-limit: 4.0.0
       pathe: 1.1.0
@@ -2051,14 +2071,36 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
+  /@vitest/snapshot/0.31.0:
+    resolution: {integrity: sha512-5dTXhbHnyUMTMOujZPB0wjFjQ6q5x9c8TvAsSPUNKjp1tVU7i9pbqcKPqntyu2oXtmVxKbuHCqrOd+Ft60r4tg==}
+    dependencies:
+      magic-string: 0.30.0
+      pathe: 1.1.0
+      pretty-format: 27.5.1
+    dev: true
+
   /@vitest/spy/0.30.1:
     resolution: {integrity: sha512-YfJeIf37GvTZe04ZKxzJfnNNuNSmTEGnla2OdL60C8od16f3zOfv9q9K0nNii0NfjDJRt/CVN/POuY5/zTS+BA==}
     dependencies:
       tinyspy: 2.1.0
     dev: true
 
+  /@vitest/spy/0.31.0:
+    resolution: {integrity: sha512-IzCEQ85RN26GqjQNkYahgVLLkULOxOm5H/t364LG0JYb3Apg0PsYCHLBYGA006+SVRMWhQvHlBBCyuByAMFmkg==}
+    dependencies:
+      tinyspy: 2.1.0
+    dev: true
+
   /@vitest/utils/0.30.1:
     resolution: {integrity: sha512-/c8Xv2zUVc+rnNt84QF0Y0zkfxnaGhp87K2dYJMLtLOIckPzuxLVzAtFCicGFdB4NeBHNzTRr1tNn7rCtQcWFA==}
+    dependencies:
+      concordance: 5.0.4
+      loupe: 2.3.6
+      pretty-format: 27.5.1
+    dev: true
+
+  /@vitest/utils/0.31.0:
+    resolution: {integrity: sha512-kahaRyLX7GS1urekRXN2752X4gIgOGVX4Wo8eDUGUkTWlGpXzf5ZS6N9RUUS+Re3XEE8nVGqNyxkSxF5HXlGhQ==}
     dependencies:
       concordance: 5.0.4
       loupe: 2.3.6
@@ -3612,8 +3654,8 @@ packages:
       tmp: 0.0.33
     dev: true
 
-  /faker/5.5.3:
-    resolution: {integrity: sha512-wLTv2a28wjUyWkbnX7u/ABZBkUkIF2fCd73V6P2oFqEGEktDfzWx4UxrSqtPRw0xPRAcjeAOIiJWqZm3pP4u3g==}
+  /faker/6.6.6:
+    resolution: {integrity: sha512-9tCqYEDHI5RYFQigXFwF1hnCwcWCOJl/hmll0lr5D2Ljjb0o4wphb69wikeJDz5qCEzXCoPvG6ss5SDP6IfOdg==}
     dev: true
 
   /fast-check/3.8.1:
@@ -3852,6 +3894,11 @@ packages:
 
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+    dev: true
+
+  /fx/27.0.0:
+    resolution: {integrity: sha512-am6jTZW1vTfdc42QH63qqtN5QoNb7JiD+DH40SokzVKSofKCcqSAq1V6ASCR/d3R2YyLFD68h6nWaSVt/BZqDA==}
+    hasBin: true
     dev: true
 
   /gauge/4.0.4:
@@ -5147,6 +5194,13 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /minimatch/9.0.0:
+    resolution: {integrity: sha512-0jJj8AvgKqWN05mrwuqi8QYKx1WmYSUoKSxu5Qhs9prezTz10sxAHGNZe9J9cqIJzta8DWsleh2KaVaLl6Ru2w==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      brace-expansion: 2.0.1
+    dev: true
+
   /minimist-options/4.1.0:
     resolution: {integrity: sha512-Q4r8ghd80yhO/0j1O3B2BjweX3fiHg9cdOwjJd2J76Q135c+NDxGCqdYKQ1SKBuFfgWbAUzBfvYjPUEeNgqN1A==}
     engines: {node: '>= 6'}
@@ -5357,8 +5411,8 @@ packages:
       whatwg-url: 5.0.0
     dev: false
 
-  /node-fetch/3.2.10:
-    resolution: {integrity: sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==}
+  /node-fetch/3.3.1:
+    resolution: {integrity: sha512-cRVc/kyto/7E5shrWca1Wsea4y6tL9iYJE5FBCius3JQfb/4P4I295PfhgbJQBLTx6lATE4z+wK0rPM4VS2uow==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       data-uri-to-buffer: 4.0.1
@@ -6256,8 +6310,8 @@ packages:
       rc: 1.2.8
     dev: true
 
-  /remeda/1.13.0:
-    resolution: {integrity: sha512-I52eAEHuDIjOJwORAHObKJUxa9AIlS06LrmsQxvQz6uCQPm65X5X+f91It8K3Pg9ciUwHd0Zq4fUkf38WrQXsQ==}
+  /remeda/1.14.0:
+    resolution: {integrity: sha512-AFPpCRtlYAcSzW4cI8sOw+x+BtbvX6tIwL3lhRxUO9YuPXRe06N1woIMPq/O1cNNy5n4a0TwbIHIciqnswkaQg==}
     dev: false
 
   /remote-git-tags/3.0.0:
@@ -6954,6 +7008,11 @@ packages:
     engines: {node: '>=14.0.0'}
     dev: true
 
+  /tinypool/0.5.0:
+    resolution: {integrity: sha512-paHQtnrlS1QZYKF/GnLoOM/DN9fqaGOFbCbxzAhwniySnzl9Ebk8w73/dd34DAhe/obUbPAOldTyYXQZxnPBPQ==}
+    engines: {node: '>=14.0.0'}
+    dev: true
+
   /tinyspy/2.1.0:
     resolution: {integrity: sha512-7eORpyqImoOvkQJCSkL0d0mB4NHHIFAy4b1u8PHdDa7SjGS2njzl6/lyGoZLm+eyYEtlUmFGE0rFj66SWxZgQQ==}
     engines: {node: '>=14.0.0'}
@@ -7048,8 +7107,8 @@ packages:
     resolution: {integrity: sha512-6zaET4Gz6/65Zia2jzQkh2v4WJA1NK3IvxXP0GlFkfWL9rwnInIMzQbjDunJb+m22L9S9I4XZVgW6xC+fZ2n6g==}
     dev: true
 
-  /tsc-alias/1.8.5:
-    resolution: {integrity: sha512-Y3ka0olwSRdbHPyX5kXhYY2aoBKuT53DFdeY+PpQUR4hg5M/b8eIRmC8dL4FBdd0wT366iWc6iDUUGe6QwI7mg==}
+  /tsc-alias/1.8.6:
+    resolution: {integrity: sha512-vq+i6VpE83IeMsSJVcFN03ZBofADhr8/gIJXjxpbnTRfN/MFXy0+SBaKG2o7p95QqXBGkeG98HYz3IkOOveFbg==}
     hasBin: true
     dependencies:
       chokidar: 3.5.3
@@ -7188,8 +7247,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /type-fest/3.8.0:
-    resolution: {integrity: sha512-FVNSzGQz9Th+/9R6Lvv7WIAkstylfHN2/JYxkyhhmKFYh9At2DST8t6L6Lref9eYO8PXFTfG9Sg1Agg0K3vq3Q==}
+  /type-fest/3.9.0:
+    resolution: {integrity: sha512-hR8JP2e8UiH7SME5JZjsobBlEiatFoxpzCP+R3ZeCo7kAaG1jXQE5X/buLzogM6GJu8le9Y4OcfNuIQX0rZskA==}
     engines: {node: '>=14.16'}
     dev: false
 
@@ -7205,7 +7264,7 @@ packages:
     resolution: {integrity: sha512-xwwPU1ZPsuPXg3xLUXqNeSRhD/OrBw64O97SwWG9wdsfAXHQfdQ3iyAxbXFVDCWhQltDcS0vEf0JX+rMMBE61g==}
     engines: {node: ^14.13.1 || >=16.0.0}
     dependencies:
-      type-fest: 3.8.0
+      type-fest: 3.9.0
     dev: false
 
   /typedarray-to-buffer/3.1.5:
@@ -7384,6 +7443,27 @@ packages:
       - terser
     dev: true
 
+  /vite-node/0.31.0_@types+node@18.11.19:
+    resolution: {integrity: sha512-8x1x1LNuPvE2vIvkSB7c1mApX5oqlgsxzHQesYF7l5n1gKrEmrClIiZuOFbFDQcjLsmcWSwwmrWrcGWm9Fxc/g==}
+    engines: {node: '>=v14.18.0'}
+    hasBin: true
+    dependencies:
+      cac: 6.7.14
+      debug: 4.3.4
+      mlly: 1.2.0
+      pathe: 1.1.0
+      picocolors: 1.0.0
+      vite: 4.3.4_@types+node@18.11.19
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
+
   /vite/4.3.1_@types+node@18.11.19:
     resolution: {integrity: sha512-EPmfPLAI79Z/RofuMvkIS0Yr091T2ReUoXQqc5ppBX/sjFRhHKiPPF/R46cTdoci/XgeQpB23diiJxq5w30vdg==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -7506,6 +7586,71 @@ packages:
       tinypool: 0.4.0
       vite: 4.3.1_@types+node@18.11.19
       vite-node: 0.30.1_@types+node@18.11.19
+      why-is-node-running: 2.2.2
+    transitivePeerDependencies:
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
+
+  /vitest/0.31.0:
+    resolution: {integrity: sha512-JwWJS9p3GU9GxkG7eBSmr4Q4x4bvVBSswaCFf1PBNHiPx00obfhHRJfgHcnI0ffn+NMlIh9QGvG75FlaIBdKGA==}
+    engines: {node: '>=v14.18.0'}
+    hasBin: true
+    peerDependencies:
+      '@edge-runtime/vm': '*'
+      '@vitest/browser': '*'
+      '@vitest/ui': '*'
+      happy-dom: '*'
+      jsdom: '*'
+      playwright: '*'
+      safaridriver: '*'
+      webdriverio: '*'
+    peerDependenciesMeta:
+      '@edge-runtime/vm':
+        optional: true
+      '@vitest/browser':
+        optional: true
+      '@vitest/ui':
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+      playwright:
+        optional: true
+      safaridriver:
+        optional: true
+      webdriverio:
+        optional: true
+    dependencies:
+      '@types/chai': 4.3.4
+      '@types/chai-subset': 1.3.3
+      '@types/node': 18.11.19
+      '@vitest/expect': 0.31.0
+      '@vitest/runner': 0.31.0
+      '@vitest/snapshot': 0.31.0
+      '@vitest/spy': 0.31.0
+      '@vitest/utils': 0.31.0
+      acorn: 8.8.2
+      acorn-walk: 8.2.0
+      cac: 6.7.14
+      chai: 4.3.7
+      concordance: 5.0.4
+      debug: 4.3.4
+      local-pkg: 0.4.3
+      magic-string: 0.30.0
+      pathe: 1.1.0
+      picocolors: 1.0.0
+      std-env: 3.3.2
+      strip-literal: 1.0.1
+      tinybench: 2.4.0
+      tinypool: 0.5.0
+      vite: 4.3.4_@types+node@18.11.19
+      vite-node: 0.31.0_@types+node@18.11.19
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
@@ -7703,8 +7848,8 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
 
-  /yaml/2.2.1:
-    resolution: {integrity: sha512-e0WHiYql7+9wr4cWMx3TVQrNwejKaEe7/rHNmQmqRjazfOP5W8PB6Jpebb5o6fIapbz9o9+2ipcaTM2ZwDI6lw==}
+  /yaml/2.2.2:
+    resolution: {integrity: sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==}
     engines: {node: '>= 14'}
     dev: true
 
@@ -7776,8 +7921,8 @@ packages:
     engines: {node: '>=0.2.0'}
     dev: true
 
-  /zx/7.2.1:
-    resolution: {integrity: sha512-TgKwppaMLMNAXHhlhbBh7rMoOSx3/9qqnkv8frmhVlSomEuWkDijh/BCmYntkoS7ZQyemApAUyEi24jIrrS+hA==}
+  /zx/7.2.2:
+    resolution: {integrity: sha512-50Gjicd6ijTt7Zcz5fNX+rHrmE0uVqC+X6lYKhf2Cu8wIxDpNIzXwTmzchNdW+JY3LFsRcU43B1lHE4HBMmKgQ==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     dependencies:
@@ -7785,16 +7930,17 @@ packages:
       '@types/minimist': 1.2.2
       '@types/node': 18.11.19
       '@types/ps-tree': 1.1.2
-      '@types/which': 2.0.2
+      '@types/which': 3.0.0
       chalk: 5.2.0
       fs-extra: 11.1.1
+      fx: 27.0.0
       globby: 13.1.4
       minimist: 1.2.8
-      node-fetch: 3.2.10
+      node-fetch: 3.3.1
       ps-tree: 1.2.0
       webpod: 0.0.2
       which: 3.0.0
-      yaml: 2.2.1
+      yaml: 2.2.2
     dev: true
 
   '@cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz_4fdmoog7xa6cp22kpahy7cule4':
