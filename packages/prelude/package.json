@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -41,6 +41,16 @@
       "require": {
         "types": "./dist/index.d.ts",
         "default": "./_cjs/index.cjs"
+      }
+    },
+    "./_ext/schema": {
+      "import": {
+        "types": "./dist/_ext/schema.d.ts",
+        "default": "./dist/_ext/schema.js"
+      },
+      "require": {
+        "types": "./dist/_ext/schema.d.ts",
+        "default": "./_cjs/_ext/schema.cjs"
       }
     },
     "./_global": {
@@ -123,16 +133,6 @@
         "default": "./_cjs/config.cjs"
       }
     },
-    "./match": {
-      "import": {
-        "types": "./dist/match.d.ts",
-        "default": "./dist/match.js"
-      },
-      "require": {
-        "types": "./dist/match.d.ts",
-        "default": "./_cjs/match.cjs"
-      }
-    },
     "./runtime": {
       "import": {
         "types": "./dist/runtime.d.ts",
@@ -141,16 +141,6 @@
       "require": {
         "types": "./dist/runtime.d.ts",
         "default": "./_cjs/runtime.cjs"
-      }
-    },
-    "./schema": {
-      "import": {
-        "types": "./dist/schema.d.ts",
-        "default": "./dist/schema.js"
-      },
-      "require": {
-        "types": "./dist/schema.d.ts",
-        "default": "./_cjs/schema.cjs"
       }
     }
   },
