@@ -9,6 +9,7 @@
     "@effect-app/prelude": "^0.52.0",
     "@effect/data": "^0.12.2",
     "@effect/io": "^0.25.8",
+    "@effect/match": "^0.18.4",
     "@effect/schema": "^0.17.3",
     "date-fns": "^2.30.0",
     "remeda": "^1.14.0",
@@ -62,6 +63,16 @@
         "default": "./_cjs/_global.ext.cjs"
       }
     },
+    "./_global/match": {
+      "import": {
+        "types": "./dist/_global/match.d.ts",
+        "default": "./dist/_global/match.js"
+      },
+      "require": {
+        "types": "./dist/_global/match.d.ts",
+        "default": "./_cjs/_global/match.cjs"
+      }
+    },
     "./_global/remeda": {
       "import": {
         "types": "./dist/_global/remeda.d.ts",
@@ -112,6 +123,16 @@
         "default": "./_cjs/config.cjs"
       }
     },
+    "./match": {
+      "import": {
+        "types": "./dist/match.d.ts",
+        "default": "./dist/match.js"
+      },
+      "require": {
+        "types": "./dist/match.d.ts",
+        "default": "./_cjs/match.cjs"
+      }
+    },
     "./runtime": {
       "import": {
         "types": "./dist/runtime.d.ts",
@@ -120,6 +141,16 @@
       "require": {
         "types": "./dist/runtime.d.ts",
         "default": "./_cjs/runtime.cjs"
+      }
+    },
+    "./schema": {
+      "import": {
+        "types": "./dist/schema.d.ts",
+        "default": "./dist/schema.js"
+      },
+      "require": {
+        "types": "./dist/schema.d.ts",
+        "default": "./_cjs/schema.cjs"
       }
     }
   },

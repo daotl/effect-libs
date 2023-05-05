@@ -147,6 +147,7 @@ importers:
       '@effect-app/prelude': ^0.52.0
       '@effect/data': ^0.12.2
       '@effect/io': ^0.25.8
+      '@effect/match': ^0.18.4
       '@effect/schema': ^0.17.3
       '@types/node': ~18.11.12
       date-fns: ^2.29.3
@@ -163,6 +164,7 @@ importers:
       '@effect-app/prelude': 0.52.0
       '@effect/data': 0.12.2
       '@effect/io': 0.25.8
+      '@effect/match': 0.18.4
       '@effect/schema': 0.17.3
       date-fns: 2.29.3_g5hqt5bhnjezqo5vnkpprfkba4
       remeda: 1.14.0
@@ -1084,6 +1086,13 @@ packages:
       '@fp-ts/data': 0.0.41
     dev: true
     patched: true
+
+  /@effect/match/0.18.4:
+    resolution: {integrity: sha512-2/q/ImFr5XS+4mdCm/ppWtOhgHF3WKR+cLClg6C2udn5EFe8SwfalwGwBENUZtHkEpPb0okL/aoSM0mx0H0hZQ==}
+    dependencies:
+      '@effect/data': 0.12.2
+      '@effect/schema': 0.17.3
+    dev: false
 
   /@effect/schema/0.17.3:
     resolution: {integrity: sha512-IYimFeJQ+chz3C2I+sgm7uRW7rWGOqAGxxipViyL/wA7FUznysNlGmS1m0ABlk1kXbep3ZfvgxBEQtK3wY4dCw==}

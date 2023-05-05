@@ -11,6 +11,11 @@ import { Schema } from '@daotl-effect/prelude/_global/schema'
 /**
  * @tsplus global
  */
+import { Match } from '@daotl-effect/prelude/_global/match'
+
+/**
+ * @tsplus global
+ */
 import { none, some } from '@effect/data/Option'
 
 import './_global/type-fest.js'
