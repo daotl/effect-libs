@@ -182,7 +182,7 @@ importers:
   packages/trpc:
     specifiers:
       '@babel/cli': ^7.21.5
-      '@daotl-effect/prelude': workspace:*
+      '@daotl-effect/prelude': ^0.0.12
       '@daotl/web-common': ^0.0.6
       '@effect-app/compiler': ^0.26.0
       '@effect-app/core': ^0.52.0

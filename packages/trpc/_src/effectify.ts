@@ -48,7 +48,7 @@ export type EffectTRPC<
     TParams,
     TOptions
   >['procedure'] extends trpc.ProcedureBuilder<infer TParams>
-    ? EffectProcedureBuilder_use<R, TParams>
+    ? EffectProcedureBuilder<R, TParams>
     : never
 }
 
@@ -126,6 +126,11 @@ type EffectProcedureBuilderBase<
   /**
    * Add a middleware to the procedure.
    */
+  use<$Params extends trpc.ProcedureParams>(
+    fn:
+      | trpc.MiddlewareBuilder<TParams, $Params>
+      | trpc.MiddlewareFunction<TParams, $Params>,
+  ): EffectCreateProcedureReturnInput<TParams, $Params>
 
   /**
    * Query procedure
@@ -165,17 +170,6 @@ export type EffectProcedureBuilderBase_output<
   output: EffectOutputFn<R, TParams>
 }
 
-export type EffectProcedureBuilder_use<
-  R = never,
-  TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
-> = EffectProcedureBuilder<R, TParams> & {
-  use<$Params extends trpc.ProcedureParams>(
-    fn:
-      | trpc.MiddlewareBuilder<TParams, $Params>
-      | trpc.MiddlewareFunction<TParams, $Params>,
-  ): EffectCreateProcedureReturnInput<TParams, $Params>
-}
-
 export type EffectProcedureBuilder<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
@@ -189,8 +183,7 @@ export type EffectProcedureBuilder<
 export type EffectCreateProcedureReturnInput<
   TPrev extends trpc.ProcedureParams,
   TNext extends trpc.ProcedureParams,
-  // trpc.ProcedureBuilder
-> = EffectProcedureBuilderBase<{
+> = EffectProcedureBuilder<{
   _config: TPrev['_config']
   _meta: TPrev['_meta']
   _ctx_out: Overwrite<TPrev['_ctx_out'], TNext['_ctx_out']>
@@ -200,20 +193,115 @@ export type EffectCreateProcedureReturnInput<
   _output_out: FallbackValue<TNext['_output_out'], TPrev['_output_out']>
 }>
 
+// type TPrev = {
+//   _config: trpc.RootConfig<{
+//     ctx: {}
+//     meta: object
+//     errorShape: trpc.DefaultErrorShape
+//     transformer: any
+//   }>
+//   _ctx_out: {}
+//   _input_in: typeof trpc.unsetMarker
+//   _input_out: typeof trpc.unsetMarker
+//   _output_in: typeof trpc.unsetMarker
+//   _output_out: typeof trpc.unsetMarker
+//   _meta: object
+// }
+// type TNext = {
+//   _config: trpc.RootConfig<{
+//     ctx: {}
+//     meta: object
+//     errorShape: trpc.DefaultErrorShape
+//     transformer: any
+//   }>
+//   _ctx_out: {}
+//   _input_in: unknown
+//   _input_out: unknown
+//   _output_in: unknown
+//   _output_out: unknown
+//   _meta: object
+// }
+// type Computed = {
+//   _config: TPrev['_config']
+//   _meta: TPrev['_meta']
+//   _ctx_out: trpc.Overwrite<TPrev['_ctx_out'], TNext['_ctx_out']>
+//   _input_in: FallbackValue<TNext['_input_in'], TPrev['_input_in']>
+//   _input_out: FallbackValue<TNext['_input_out'], TPrev['_input_out']>
+//   _output_in: FallbackValue<TNext['_output_in'], TPrev['_output_in']>
+//   _output_out: FallbackValue<TNext['_output_out'], TPrev['_output_out']>
+// }
+// type Infer = EffectCreateProcedureReturnInput<
+//   {
+//     _config: trpc.RootConfig<{
+//       ctx: {}
+//       meta: object
+//       errorShape: trpc.DefaultErrorShape
+//       transformer: any
+//     }>
+//     _ctx_out: {}
+//     _input_in: typeof trpc.unsetMarker
+//     _input_out: typeof trpc.unsetMarker
+//     _output_in: typeof trpc.unsetMarker
+//     _output_out: typeof trpc.unsetMarker
+//     _meta: object
+//   },
+//   {
+//     _config: trpc.RootConfig<{
+//       ctx: {}
+//       meta: object
+//       errorShape: trpc.DefaultErrorShape
+//       transformer: any
+//     }>
+//     _ctx_out: {}
+//     _input_in: unknown
+//     _input_out: unknown
+//     _output_in: unknown
+//     _output_out: unknown
+//     _meta: object
+//   }
+// >
+/* extends EffectProcedureBuilder<{
+_config: infer
+_config
+_meta: infer
+_meta
+_ctx_out: infer
+_ctx_out
+_input_in: infer
+_input_in
+_input_out: infer
+_input_out
+_output_in: infer
+_output_in
+_output_out: infer
+_output_out
+}>
+  ?
+{
+  _config: _config
+  _meta: _meta
+  _ctx_out: _ctx_out
+  _input_in: _input_in
+  _input_out: _input_out
+  _output_in: _output_in
+  _output_out: _output_out
+}
+: never*/
+
 export const effectifyBuilder =
   <R = never>(r: Runtime<R>) =>
   <TParams extends trpc.ProcedureParams>(
     pb: trpc.ProcedureBuilder<TParams>,
-  ): EffectProcedureBuilder_use<R, TParams> => {
+  ): EffectProcedureBuilder<R, TParams> => {
     const _runEffectResolver = runEffectResolver(r)
     const _effectifyBuilder = effectifyBuilder(r)
     return {
       ...pb,
 
-      use: flow(
-        pb.use,
-        _effectifyBuilder,
-      ) as unknown as EffectProcedureBuilder_use<R, TParams>['use'],
+      use: flow(pb.use, _effectifyBuilder) as unknown as EffectProcedureBuilder<
+        R,
+        TParams
+      >['use'],
 
       input: flow(
         pb.input,
