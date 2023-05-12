@@ -11,12 +11,14 @@ import type {
 import type {
   ResolveOptions,
   DefaultValue as FallbackValue,
+  Overwrite,
 } from '@trpc/server/core/internals/utils'
 import type { Parser } from '@trpc/server/core/parser'
 
 import type { Err } from '@daotl/web-common'
 import { toTrpcError } from '@daotl/web-common/trpc'
 import { runIfEffect } from '@daotl-effect/prelude'
+// import type { EffectProcedureBuilder } from './index.js'
 
 // Fix: `trpc.unsetMarker` type became `any` in generated `effectify.d.ts`
 declare module '@trpc/server' {
@@ -46,7 +48,7 @@ export type EffectTRPC<
     TParams,
     TOptions
   >['procedure'] extends trpc.ProcedureBuilder<infer TParams>
-    ? EffectProcedureBuilder<R, TParams>
+    ? EffectProcedureBuilder_use<R, TParams>
     : never
 }
 
@@ -119,8 +121,12 @@ type EffectProcedureBuilderBase<
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = Except<
   ProcedureBuilder<TParams>,
-  'input' | 'output' | 'query' | 'mutation' | 'subscription'
+  'input' | 'output' | 'query' | 'mutation' | 'subscription' | 'use'
 > & {
+  /**
+   * Add a middleware to the procedure.
+   */
+
   /**
    * Query procedure
    */
@@ -159,6 +165,17 @@ export type EffectProcedureBuilderBase_output<
   output: EffectOutputFn<R, TParams>
 }
 
+export type EffectProcedureBuilder_use<
+  R = never,
+  TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+> = EffectProcedureBuilder<R, TParams> & {
+  use<$Params extends trpc.ProcedureParams>(
+    fn:
+      | trpc.MiddlewareBuilder<TParams, $Params>
+      | trpc.MiddlewareFunction<TParams, $Params>,
+  ): EffectCreateProcedureReturnInput<TParams, $Params>
+}
+
 export type EffectProcedureBuilder<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
@@ -168,16 +185,35 @@ export type EffectProcedureBuilder<
    */
   input: EffectInputFn<R, TParams>
 }
+// trpc.CreateProcedureReturnInput<TParams, $Params> extends ProcedureBuilder<TParams> ? EffectProcedureParams<TParams> : never
+export type EffectCreateProcedureReturnInput<
+  TPrev extends trpc.ProcedureParams,
+  TNext extends trpc.ProcedureParams,
+  // trpc.ProcedureBuilder
+> = EffectProcedureBuilderBase<{
+  _config: TPrev['_config']
+  _meta: TPrev['_meta']
+  _ctx_out: Overwrite<TPrev['_ctx_out'], TNext['_ctx_out']>
+  _input_in: FallbackValue<TNext['_input_in'], TPrev['_input_in']>
+  _input_out: FallbackValue<TNext['_input_out'], TPrev['_input_out']>
+  _output_in: FallbackValue<TNext['_output_in'], TPrev['_output_in']>
+  _output_out: FallbackValue<TNext['_output_out'], TPrev['_output_out']>
+}>
 
 export const effectifyBuilder =
   <R = never>(r: Runtime<R>) =>
   <TParams extends trpc.ProcedureParams>(
     pb: trpc.ProcedureBuilder<TParams>,
-  ): EffectProcedureBuilder<R, TParams> => {
+  ): EffectProcedureBuilder_use<R, TParams> => {
     const _runEffectResolver = runEffectResolver(r)
     const _effectifyBuilder = effectifyBuilder(r)
     return {
       ...pb,
+
+      use: flow(
+        pb.use,
+        _effectifyBuilder,
+      ) as unknown as EffectProcedureBuilder_use<R, TParams>['use'],
 
       input: flow(
         pb.input,
