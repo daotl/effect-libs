@@ -18,7 +18,7 @@ import type {
   unsetMarker as _unsetMarker,
 } from '@trpc/server/internals'
 
-import type { Err } from '@daotl/web-common'
+import type { Err } from '@daotl/web-common/error'
 import { toTrpcError } from '@daotl/web-common/trpc'
 import { runIfEffect } from '@daotl-effect/prelude'
 

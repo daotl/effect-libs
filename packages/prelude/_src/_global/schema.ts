@@ -65,6 +65,7 @@ export namespace Schema {
 export const Schema = {
   ...S,
   /* Custom utils */
+  getPropertySignatures: Ext.getPropertySignatures,
   nullish: Ext.nullish,
   nullableProperties: Ext.nullableProperties,
   optionalProperties: Ext.optionalProperties,

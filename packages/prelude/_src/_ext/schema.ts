@@ -1,4 +1,5 @@
 import * as S from '@effect/schema/Schema'
+import * as AST from '@effect/schema/AST'
 
 /**
  * @tsplus type effect/schema/Schema
@@ -70,6 +71,23 @@ export type NullishProperties<
   [K in keyof A]: K extends Key ? Nullish<I[K], A[K]> : A[K]
 }>
 
+// From: https://github.com/Effect-TS/schema/releases/tag/v0.18.0
+// rome-ignore lint/suspicious/noExplicitAny: ignore
+export const getPropertySignatures = <I extends { [K in keyof A]: any }, A>(
+  schema: S.Schema<I, A>,
+): { [K in keyof A]: S.Schema<I[K], A[K]> } => {
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  const out: Record<PropertyKey, S.Schema<any>> = {}
+  const propertySignatures = AST.getPropertySignatures(schema.ast)
+  for (let i = 0; i < propertySignatures.length; i++) {
+    const propertySignature = propertySignatures[i]
+    // rome-ignore lint/style/noNonNullAssertion: ignore
+    out[propertySignature!.name] = S.make(propertySignature!.type)
+  }
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  return out as any
+}
+
 /**
  * @tsplus static effect/schema/Schema nullish
  */
@@ -90,7 +108,7 @@ export const nullableProperties = <
   keys?: Key[],
 ) =>
   S.struct(
-    R.mapValues(S.getPropertySignatures(schema), (v, k) =>
+    R.mapValues(getPropertySignatures(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.nullable(v) : v,
     ),
   ) as NullableProperties<I, A, Key>
@@ -110,7 +128,7 @@ export const optionalProperties = <
   keys?: Key[],
 ) =>
   S.struct(
-    R.mapValues(S.getPropertySignatures(schema), (v, k) =>
+    R.mapValues(getPropertySignatures(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.optional(v) : v,
     ),
   ) as OptionalProperties<I, A, Key>
@@ -130,7 +148,7 @@ export const nullishProperties = <
   keys?: Key[],
 ) =>
   S.struct(
-    R.mapValues(S.getPropertySignatures(schema), (v, k) =>
+    R.mapValues(getPropertySignatures(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? nullish(v) : v,
     ),
   ) as NullishProperties<I, A, Key>

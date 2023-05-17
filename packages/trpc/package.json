@@ -1,11 +1,11 @@
 {
   "name": "@daotl-effect/trpc",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "@daotl-effect/prelude": "workspace:*",
-    "@daotl/web-common": "^0.0.6",
+    "@daotl/web-common": "^0.0.10",
     "@effect-app/core": "^0.53.1",
     "@effect-app/infra-adapters": "^0.46.3",
     "@effect-app/prelude": "^0.54.0",
@@ -21,8 +21,7 @@
     "path-parser": "^6.1.0",
     "query-string": "^8.1.0",
     "remeda": "^1.14.0",
-    "ts-pattern": "^4.2.2",
-    "type-fest": "^3.9.0",
+    "type-fest": "^3.10.0",
     "typed-case": "^1.0.2",
     "uuid": "^9.0.0",
     "validator": "^13.9.0"
@@ -33,7 +32,6 @@
     "@types/faker": "6.6.9",
     "@types/node": "~20.1.4",
     "@types/uuid": "^9.0.1",
-    "@types/validator": "^13.7.15",
     "faker": "^6.6.6",
     "fast-check": "^3.8.1",
     "ts-node": "^10.9.1",
