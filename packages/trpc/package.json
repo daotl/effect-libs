@@ -12,7 +12,7 @@
     "@effect/data": "^0.12.2",
     "@effect/io": "^0.25.8",
     "@fp-ts/optic": "^0.7.0",
-    "@trpc/server": "daotl/trpc#f2daf966314d44134a3316d25977c5189bd3e257",
+    "@trpc/server": "daotl/trpc#f40bc9dc6bc14827802f46cc377cf4fa164ccb05",
     "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",

@@ -1,18 +1,22 @@
 import * as trpc from '@trpc/server'
 import type {
-  ProcedureBuilder,
-  unsetMarker as _unsetMarker,
-} from '@trpc/server/internals'
+  CreateRootConfigTypesFromPartial,
+  PartialRootConfigTypes,
+} from '@trpc/server/core/initTRPC'
 import type {
-  CreateRootConfigTypes,
   RootConfigTypes,
   RuntimeConfig,
 } from '@trpc/server/core/internals/config'
+import type { CreateProcedureReturnInput } from '@trpc/server/core/internals/procedureBuilder'
 import type {
   ResolveOptions,
   DefaultValue as FallbackValue,
 } from '@trpc/server/core/internals/utils'
 import type { Parser } from '@trpc/server/core/parser'
+import type {
+  ProcedureBuilder,
+  unsetMarker as _unsetMarker,
+} from '@trpc/server/internals'
 
 import type { Err } from '@daotl/web-common'
 import { toTrpcError } from '@daotl/web-common/trpc'
@@ -22,18 +26,6 @@ import { runIfEffect } from '@daotl-effect/prelude'
 declare module '@trpc/server' {
   const unsetMarker: typeof _unsetMarker
 }
-
-// From: https://github.com/trpc/trpc/blob/37119d0a779815419913127c862a6e123287426c/packages/server/src/core/initTRPC.ts#L28-L38
-type PartialRootConfigTypes = Partial<RootConfigTypes>
-type CreateRootConfigTypesFromPartial<TTypes extends PartialRootConfigTypes> =
-  CreateRootConfigTypes<{
-    ctx: TTypes['ctx'] extends RootConfigTypes['ctx'] ? TTypes['ctx'] : object
-    meta: TTypes['meta'] extends RootConfigTypes['meta']
-      ? TTypes['meta']
-      : object
-    errorShape: TTypes['errorShape']
-    transformer: trpc.DataTransformerOptions
-  }>
 
 export type EffectTRPC<
   TParams extends PartialRootConfigTypes = object,
@@ -49,6 +41,11 @@ export type EffectTRPC<
     ? EffectProcedureBuilder<R, TParams>
     : never
 }
+
+// To suppress TS error:
+// error TS2742: The inferred type of 'effectify' cannot be named without a reference to '../node_modules/@trpc/server/dist/core/internals/config.js'. This is likely not portable. A type annotation is necessary.
+// CreateRootConfigTypes,
+export type _RootConfigTypes = RootConfigTypes
 
 export function effectify<R = never>(r: Runtime<R>) {
   return <
@@ -119,7 +116,7 @@ type EffectProcedureBuilderBase<
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = Except<
   ProcedureBuilder<TParams>,
-  'input' | 'output' | 'query' | 'mutation' | 'subscription'
+  'use' | 'input' | 'output' | 'query' | 'mutation' | 'subscription'
 > & {
   /**
    * Query procedure
@@ -159,7 +156,7 @@ export type EffectProcedureBuilderBase_output<
   output: EffectOutputFn<R, TParams>
 }
 
-export type EffectProcedureBuilder<
+export type EffectProcedureBuilderBase_output_input<
   R = never,
   TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
 > = EffectProcedureBuilderBase_output<R, TParams> & {
@@ -167,6 +164,30 @@ export type EffectProcedureBuilder<
    * Add an input parser to the procedure.
    */
   input: EffectInputFn<R, TParams>
+}
+
+export type EffectCreateProcedureReturnInput<
+  TPrev extends trpc.ProcedureParams,
+  TNext extends trpc.ProcedureParams,
+  R = never,
+> = CreateProcedureReturnInput<TPrev, TNext> extends ProcedureBuilder<
+  infer TParams
+>
+  ? EffectProcedureBuilder<R, TParams>
+  : never
+
+export type EffectProcedureBuilder<
+  R = never,
+  TParams extends trpc.ProcedureParams = trpc.ProcedureParams,
+> = EffectProcedureBuilderBase_output_input<R, TParams> & {
+  /**
+   * Add a middleware to the procedure.
+   */
+  use<$Params extends trpc.ProcedureParams>(
+    fn:
+      | trpc.MiddlewareBuilder<TParams, $Params>
+      | trpc.MiddlewareFunction<TParams, $Params>,
+  ): EffectCreateProcedureReturnInput<TParams, $Params, R>
 }
 
 export const effectifyBuilder =
@@ -178,6 +199,11 @@ export const effectifyBuilder =
     const _effectifyBuilder = effectifyBuilder(r)
     return {
       ...pb,
+
+      use: flow(pb.use, _effectifyBuilder) as unknown as EffectProcedureBuilder<
+        R,
+        TParams
+      >['use'],
 
       input: flow(
         pb.input,
