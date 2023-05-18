@@ -1,5 +1,6 @@
 extends:
   - packages/prelude/lefthook.yml
+  - packages/fastify/lefthook.yml
   - packages/trpc/lefthook.yml
 
 pre-commit:

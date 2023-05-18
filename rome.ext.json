@@ -2,6 +2,7 @@
   "$schema": "./node_modules/rome/configuration_schema.json",
   "files": {
     "ignore": [
+      "./scripts/rome-staged.js",
       "./packages",
       "**/dist",
       "**/*.json"

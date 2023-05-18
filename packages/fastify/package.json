@@ -1,0 +1,102 @@
+{
+  "name": "@daotl-effect/fastify",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@daotl-effect/prelude": "workspace:*",
+    "@daotl/web-common": "^0.0.10",
+    "@effect/data": "^0.12.2",
+    "@effect/io": "^0.25.10",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
+    "fastify": "^4.17.0",
+    "lodash": "^4.17.21",
+    "remeda": "^1.14.0",
+    "type-fest": "^3.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@effect-app/compiler": "^0.26.0",
+    "@types/node": "~20.1.4",
+    "ts-node": "^10.9.1",
+    "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.176/compiler/typescript.tgz",
+    "vitest": "^0.31.0"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./_cjs/index.cjs"
+      }
+    },
+    "./_global": {
+      "import": {
+        "types": "./dist/_global.d.ts",
+        "default": "./dist/_global.js"
+      },
+      "require": {
+        "types": "./dist/_global.d.ts",
+        "default": "./_cjs/_global.cjs"
+      }
+    },
+    "./effectify": {
+      "import": {
+        "types": "./dist/effectify.d.ts",
+        "default": "./dist/effectify.js"
+      },
+      "require": {
+        "types": "./dist/effectify.d.ts",
+        "default": "./_cjs/effectify.cjs"
+      }
+    },
+    "./types": {
+      "import": {
+        "types": "./dist/types.d.ts",
+        "default": "./dist/types.js"
+      },
+      "require": {
+        "types": "./dist/types.d.ts",
+        "default": "./_cjs/types.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "watch": "pnpm build:tsc -w",
+    "build:tsc": "pnpm clean-dist && node ../../scripts/package.js && NODE_OPTIONS=--max-old-space-size=6144 tsc --build",
+    "build": "pnpm build:tsc && pnpm build2:cjs",
+    "build2:cjs": "rm -rf _cjs && babel dist --config-file ../../.babel.cjs.json --out-dir _cjs --out-file-extension .cjs --source-maps",
+    "watch2": "pnpm clean-dist && NODE_OPTIONS=--max-old-space-size=6144 tsc -w",
+    "clean": "rm -rf dist && rm -rf _cjs",
+    "clean-dist": "sh ../../scripts/clean-dist.sh",
+    "circular": "pnpm circular:src && pnpm circular:dist",
+    "circular:src": "madge --circular --ts-config ./tsconfig.json --extensions ts ./_src",
+    "circular:dist": "madge --circular --extensions js ./dist",
+    "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
+    "lint": "rome format . && rome check .",
+    "lint:fix": "rome format --write . && rome check --apply .",
+    "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint ./_src",
+    "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx .",
+    "autofix": "pnpm lint --fix",
+    "test": "vitest",
+    "test:run": "pnpm run test run --passWithNoTests",
+    "testsuite": "pnpm lint && pnpm circular && pnpm run test:run",
+    "ncu": "ncu",
+    "pub": "pnpm build && pnpm pub:pruned",
+    "pub:pruned": "pnpm prepublish && npm publish --access public",
+    "prepublish": "cp -f ./tsconfig.json ./tsconfig.json.bak && node ../../scripts/mergeTsConfig.cjs ./tsconfig.json",
+    "postpublish": "mv -f ./tsconfig.json.bak ./tsconfig.json && rm -f tsplus.config.json"
+  },
+  "gitHead": "bd8e27eea3eff97db8739d577d67e7336c078d28"
+}

@@ -13,7 +13,7 @@ const reExtension = /.+\.[cm]?[jt]s$/
 const filtered = argv._.map((path) =>
   path.startsWith('./') ? path : `./${path}`,
 )
-  .filter((path) => !ignored.some((ignored) => minimatch(path, ignored)))
+  .filter((path) => !ignored.some((ignored) => minimatch(path, ignored, { dot: true })))
   .filter((path) => reExtension.test(path))
 
 if (filtered.length) {
