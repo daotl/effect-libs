@@ -23,15 +23,15 @@ export namespace Schema {
   export type Any = Ext.Any
 
   export type Struct<
-    Fields extends Record<
-      PropertyKey,
-      // rome-ignore lint/suspicious/noExplicitAny: ignore
-      | S.Schema<any, any>
-      | S.Schema<never, never>
-      // rome-ignore lint/suspicious/noExplicitAny: ignore
-      | S.PropertySignature<any, boolean, any, boolean>
-      | S.PropertySignature<never, boolean, never, boolean>
-    >,
+    Fields extends Ext.StructArgs /*Record<
+    PropertyKey,
+    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    | S.Schema<any, any>
+    | S.Schema<never, never>
+    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    | S.PropertySignature<any, boolean, any, boolean>
+    | S.PropertySignature<never, boolean, never, boolean>
+  >,*/,
   > = Ext.Struct<Fields>
 
   export type Nullable<From, To = From> = Ext.Nullable<From, To>

@@ -5,9 +5,14 @@ import * as AST from '@effect/schema/AST'
  * @tsplus type effect/schema/Schema
  */
 // rome-ignore lint/suspicious/noExplicitAny: ignore
-export type Any = Schema<any>
+export type Any = S.Schema<any>
 
-export type StructArgs = Parameters<typeof S.struct>[0]
+export type StructArgs = Record<
+  string,
+  // any
+  // rome-ignore lint/suspicious/noExplicitAny: ignorex
+  Any | S.PropertySignature<any, boolean, any, boolean>
+>
 
 /**
  * @tsplus type effect/schema/Schema
@@ -39,7 +44,8 @@ export type Nullish<From, To = From> = Optional<Nullable<From, To>>
 export type NullableProperties<
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  A extends StructArgs,
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
   [K in keyof A]: K extends Key ? Nullable<I[K], A[K]> : A[K]
@@ -52,7 +58,8 @@ export type NullableProperties<
 export type OptionalProperties<
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  A extends StructArgs,
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
   [K in keyof A]: K extends Key ? Optional<I[K], A[K]> : A[K]
@@ -65,7 +72,7 @@ export type OptionalProperties<
 export type NullishProperties<
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  A extends StructArgs,
+  A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
   [K in keyof A]: K extends Key ? Nullish<I[K], A[K]> : A[K]
@@ -78,7 +85,7 @@ export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
 ): { [K in keyof A]: S.Schema<I[K], A[K]> } => {
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   const out: Record<PropertyKey, S.Schema<any>> = {}
-  const propertySignatures = AST.getPropertySchemas(schema.ast)
+  const propertySignatures = AST.getPropertySignatures(schema.ast)
   for (let i = 0; i < propertySignatures.length; i++) {
     const propertySignature = propertySignatures[i]
     // rome-ignore lint/style/noNonNullAssertion: ignore
@@ -101,7 +108,8 @@ export const nullish = flow(S.nullable, S.optional)
 export const nullableProperties = <
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  A extends StructArgs,
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  A extends Record<string, any>,
   Key extends keyof A = keyof A,
 >(
   schema: S.Schema<I, A>,
@@ -121,7 +129,8 @@ export const nullableProperties = <
 export const optionalProperties = <
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  A extends StructArgs,
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  A extends Record<string, any>,
   Key extends keyof A = keyof A,
 >(
   schema: S.Schema<I, A>,
@@ -141,7 +150,8 @@ export const optionalProperties = <
 export const nullishProperties = <
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  A extends StructArgs,
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  A extends Record<string, any>,
   Key extends keyof A = keyof A,
 >(
   schema: S.Schema<I, A>,
