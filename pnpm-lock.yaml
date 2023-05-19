@@ -176,9 +176,6 @@ importers:
       '@effect-app/core':
         specifier: ^0.53.1
         version: 0.53.1
-      '@effect-app/infra-adapters':
-        specifier: ^0.46.3
-        version: 0.46.3
       '@effect-app/prelude':
         specifier: ^0.54.0
         version: 0.54.0
@@ -188,12 +185,6 @@ importers:
       '@effect/io':
         specifier: ^0.25.10
         version: 0.25.10
-      '@fp-ts/optic':
-        specifier: ^0.7.0
-        version: 0.7.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva)
-      date-fns:
-        specifier: ^2.29.3
-        version: 2.29.3(patch_hash=g5hqt5bhnjezqo5vnkpprfkba4)
       dotenv:
         specifier: ^16.0.3
         version: 16.0.3
@@ -206,30 +197,12 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      nanoid:
-        specifier: ^4.0.2
-        version: 4.0.2
-      path-parser:
-        specifier: ^6.1.0
-        version: 6.1.0
-      query-string:
-        specifier: ^8.1.0
-        version: 8.1.0
       remeda:
         specifier: ^1.14.0
         version: 1.14.0
       type-fest:
         specifier: ^3.10.0
         version: 3.10.0(typescript@5.1.0-tsplus.20230423)
-      typed-case:
-        specifier: ^1.0.2
-        version: 1.0.2(typescript@5.1.0-tsplus.20230423)
-      uuid:
-        specifier: ^9.0.0
-        version: 9.0.0
-      validator:
-        specifier: ^13.9.0
-        version: 13.9.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.21.5
@@ -237,21 +210,9 @@ importers:
       '@effect-app/compiler':
         specifier: ^0.26.0
         version: 0.26.0(@types/node@20.1.4)
-      '@types/faker':
-        specifier: 6.6.9
-        version: 6.6.9
       '@types/node':
         specifier: ~20.1.4
         version: 20.1.4
-      '@types/uuid':
-        specifier: ^9.0.1
-        version: 9.0.1
-      faker:
-        specifier: ^6.6.6
-        version: 6.6.6
-      fast-check:
-        specifier: ^3.8.1
-        version: 3.8.1
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@20.1.4)(typescript@5.1.0-tsplus.20230423)
@@ -346,9 +307,6 @@ importers:
       '@effect-app/core':
         specifier: ^0.53.1
         version: 0.53.1
-      '@effect-app/infra-adapters':
-        specifier: ^0.46.3
-        version: 0.46.3
       '@effect-app/prelude':
         specifier: ^0.54.0
         version: 0.54.0
@@ -358,9 +316,6 @@ importers:
       '@effect/io':
         specifier: ^0.25.10
         version: 0.25.10
-      '@fp-ts/optic':
-        specifier: ^0.7.0
-        version: 0.7.0(patch_hash=w2q3sj6fgtrlizsuwcsff4miva)
       '@trpc/server':
         specifier: daotl/trpc#f40bc9dc6bc14827802f46cc377cf4fa164ccb05
         version: github.com/daotl/trpc/f40bc9dc6bc14827802f46cc377cf4fa164ccb05
@@ -373,18 +328,6 @@ importers:
       dotenv-expand:
         specifier: ^10.0.0
         version: 10.0.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      nanoid:
-        specifier: ^4.0.2
-        version: 4.0.2
-      path-parser:
-        specifier: ^6.1.0
-        version: 6.1.0
-      query-string:
-        specifier: ^8.1.0
-        version: 8.1.0
       remeda:
         specifier: ^1.14.0
         version: 1.14.0
@@ -394,12 +337,6 @@ importers:
       typed-case:
         specifier: ^1.0.2
         version: 1.0.2(typescript@5.1.0-tsplus.20230423)
-      uuid:
-        specifier: ^9.0.0
-        version: 9.0.0
-      validator:
-        specifier: ^13.9.0
-        version: 13.9.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.21.5
@@ -407,18 +344,9 @@ importers:
       '@effect-app/compiler':
         specifier: ^0.26.0
         version: 0.26.0(@types/node@20.1.4)
-      '@types/faker':
-        specifier: 6.6.9
-        version: 6.6.9
       '@types/node':
         specifier: ~20.1.4
         version: 20.1.4
-      '@types/uuid':
-        specifier: ^9.0.1
-        version: 9.0.1
-      faker:
-        specifier: ^6.6.6
-        version: 6.6.6
       fast-check:
         specifier: ^3.8.1
         version: 3.8.1
@@ -1938,13 +1866,6 @@ packages:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
-  /@types/faker@6.6.9:
-    resolution: {integrity: sha512-Y9YYm5L//8ooiiknO++4Gr539zzdI0j3aXnOBjo1Vk+kTvffY10GuE2wn78AFPECwZ5MYGTjiDVw1naLLdDimw==}
-    deprecated: This is a stub types definition. faker provides its own type definitions, so you do not need this installed.
-    dependencies:
-      faker: 6.6.6
-    dev: true
-
   /@types/fs-extra@11.0.1:
     resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
@@ -2022,10 +1943,6 @@ packages:
 
   /@types/stack-utils@2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
-    dev: true
-
-  /@types/uuid@9.0.1:
-    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
     dev: true
 
   /@types/which@3.0.0:
@@ -3851,10 +3768,6 @@ packages:
       chardet: 0.7.0
       iconv-lite: 0.4.24
       tmp: 0.0.33
-    dev: true
-
-  /faker@6.6.6:
-    resolution: {integrity: sha512-9tCqYEDHI5RYFQigXFwF1hnCwcWCOJl/hmll0lr5D2Ljjb0o4wphb69wikeJDz5qCEzXCoPvG6ss5SDP6IfOdg==}
     dev: true
 
   /fast-check@3.8.1:

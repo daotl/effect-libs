@@ -163,7 +163,7 @@ export function effectify<
       BaseContextConfig, TypeProvider, BaseSchemaCompiler, RawServer, RawRequest, RawReply, Logger, BaseRouteGeneric, FastifyInstance
     >(fastify, liveFastifyAppConfig)
 
-  type Fastify = ReturnType<typeof _effectify<FastifyInstance>>
+  // type Fastify = ReturnType<typeof _effectify<FastifyInstance>>
 
   // rome-ignore format: compact
   type FastifyRequest<
@@ -466,28 +466,32 @@ export function effectify<
       )) as _EffectFastifyRegister
 
   type EffectFastifyPlugin<
+    // Using the non-exported type `Fastify` will become `any`, must be passed with generic
+    Fastify,
     R = never,
     Options extends Fa.FastifyPluginOptions = Record<never, never>,
-  > = (Fastify: Fastify, opts: Options) => Effect<Fastify | R, never, void>
+  > = (fa: Fastify, opts: Options) => Effect<FastifyApp | R, never, void>
 
-  const register =
-    <R = never, Options extends Fa.FastifyPluginOptions = Record<never, never>>(
-      plugin: EffectFastifyPlugin<R, Options>,
-    ) =>
-    (
+  function register<
+    // Using the non-exported type `Fastify` will become `any`, must be passed with generic
+    Fastify,
+    R = never,
+    Options extends Fa.FastifyPluginOptions = Record<never, never>,
+  >(this: Fastify, plugin: EffectFastifyPlugin<Fastify, R, Options>) {
+    return (
       opts?: FastifyRegisterOptions<FastifyInstance, Options>,
     ): Effect<FastifyApp | R, never, void> =>
       accessFastify.flatMap((fastify) =>
         Effect.async<FastifyApp, never, void>(async (cb) => {
           await fastify.register((instance, _opts, done) => {
-            const Fastify = _effectify(
+            const fa = _effectify(
               instance as unknown as FastifyInstance,
               _liveFastifyAppConfig,
             )
 
-            const tPlugin = plugin(Fastify, _opts)
+            const tPlugin = plugin(fa as unknown as Fastify, _opts)
               // TODO: This is a bit hacky way to just provide the child FastifyApp
-              .provideServiceEffect(Fastify.tagFastifyApp, Fastify.tFastifyApp)
+              .provideServiceEffect(fa.tagFastifyApp, fa.tFastifyApp)
               .scoped.tap(() => {
                 done()
                 return Effect.unit
@@ -497,6 +501,7 @@ export function effectify<
           }, opts as Fa.FastifyRegisterOptions<Options>)
         }),
       )
+  }
 
   const runFasitfyHandler = <
     R = never,
