@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/fastify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -61,16 +61,6 @@
       "require": {
         "types": "./dist/effectify.d.ts",
         "default": "./_cjs/effectify.cjs"
-      }
-    },
-    "./fastify": {
-      "import": {
-        "types": "./dist/fastify.d.ts",
-        "default": "./dist/fastify.js"
-      },
-      "require": {
-        "types": "./dist/fastify.d.ts",
-        "default": "./_cjs/fastify.cjs"
       }
     },
     "./types": {

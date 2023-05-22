@@ -83,22 +83,30 @@ export type FastifyRegisterOptions<FastifyInstance, Options> =
   | (Fa.RegisterOptions & Options)
   | ((instance: FastifyInstance) => Fa.RegisterOptions & Options)
 
+type RegisterPluginPartialFn<
+  FastifyInstance,
+  FastifyApp,
+  R = never,
+  Options extends Fa.FastifyPluginOptions = Record<never, never>,
+> = (
+  opts?: FastifyRegisterOptions<FastifyInstance, Options>,
+) => Effect<FastifyApp | R, never, void>
+
 /**
  * FastifyRegister
  *
  * Function for adding a plugin to fastify. The options are inferred from the passed in FastifyPlugin parameter.
  */
+// For native plugins
 export interface EffectFastifyRegister<FastifyInstance, FastifyApp> {
   <Options extends Fa.FastifyPluginOptions>(
     plugin: FastifyPluginCallback<FastifyInstance, Options>,
-  ): (
-    opts?: FastifyRegisterOptions<FastifyInstance, Options>,
-  ) => Effect<FastifyApp, never, void>
+  ): RegisterPluginPartialFn<FastifyInstance, FastifyApp, never, Options>
+
   <Options extends Fa.FastifyPluginOptions>(
     plugin: FastifyPluginAsync<FastifyInstance, Options>,
-  ): (
-    opts?: FastifyRegisterOptions<FastifyInstance, Options>,
-  ) => Effect<FastifyApp, never, void>
+  ): RegisterPluginPartialFn<FastifyInstance, FastifyApp, never, Options>
+
   <Options extends Fa.FastifyPluginOptions>(
     plugin:
       | FastifyPluginCallback<FastifyInstance, Options>
@@ -109,9 +117,7 @@ export interface EffectFastifyRegister<FastifyInstance, FastifyApp> {
       | Promise<{
           default: FastifyPluginAsync<FastifyInstance, Options>
         }>,
-  ): (
-    opts?: FastifyRegisterOptions<FastifyInstance, Options>,
-  ) => Effect<FastifyApp, never, void>
+  ): RegisterPluginPartialFn<FastifyInstance, FastifyApp, never, Options>
 }
 
 export interface EffectRouteShorthandMethod<
@@ -419,10 +425,6 @@ export function effectify<
 
   const accessFastify = tagFastifyApp.map((_) => _.fastify)
 
-  const withFastify = <R, E, A>(
-    self: (_: FastifyInstance) => Effect<R, E, A>,
-  ) => tagFastifyApp.flatMap((_) => self(_.fastify))
-
   const listen = (tagFastifyAppConfig & accessFastify).flatMap(
     ([{ host, port }, fastify]) =>
       Effect.async<never, never, FastifyInstance>((cb) => {
@@ -455,7 +457,7 @@ export function effectify<
           }>,
     ) =>
     (opts?: FastifyRegisterOptions<FastifyInstance, Options>) =>
-      withFastify((fastify) =>
+      accessFastify.flatMap((fastify) =>
         Effect.promise(async () => {
           await fastify.register(
             // rome-ignore format: compact
@@ -522,7 +524,7 @@ export function effectify<
     opts: EffectRouteOptions<R, RouteGeneric, ContextConfig, SchemaCompiler>,
   ) =>
     runFasitfyHandler(opts.handler).flatMap((handler) =>
-      withFastify((fastify) =>
+      accessFastify.flatMap((fastify) =>
         Effect(() => {
           // rome-ignore format: compact
           fastify.route({ ...opts, handler } as RouteOptions<RouteGeneric, ContextConfig, SchemaCompiler>)
@@ -584,7 +586,7 @@ export function effectify<
           ]
 
       return runFasitfyHandler(handler).flatMap((handler) =>
-        withFastify((fastify) =>
+        accessFastify.flatMap((fastify) =>
           Effect(() => {
             opts
               ? fastify[method](path, opts, handler)
@@ -600,7 +602,6 @@ export function effectify<
     liveFastifyApp,
     createLiveFastify,
     accessFastify,
-    withFastify,
     listen,
     registerNative,
     register,
