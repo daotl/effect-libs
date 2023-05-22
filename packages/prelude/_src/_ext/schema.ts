@@ -62,7 +62,7 @@ export type OptionalProperties<
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
-  [K in keyof A]: K extends Key ? Optional<I[K], A[K]> : A[K]
+  [K in keyof A]-?: K extends Key ? Optional<I[K], A[K]> : S.Schema<A[K]>
 }>
 
 // Make properties of the specified keys or all keys nullish
@@ -78,18 +78,48 @@ export type NullishProperties<
   [K in keyof A]: K extends Key ? Nullish<I[K], A[K]> : A[K]
 }>
 
-// From: https://github.com/Effect-TS/schema/releases/tag/v0.18.0
+const isSchema = (
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+  schema: S.Schema<any> | S.PropertySignature<any, true, any, true>,
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+): schema is S.Schema<any> => {
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const s = schema as S.Schema<any>
+  return (
+    typeof s.To === 'function' &&
+    typeof s.From === 'function' &&
+    Reflect.has(schema, 'ast')
+  )
+}
+
+// Modified from: https://github.com/Effect-TS/schema/releases/tag/v0.18.0
 // rome-ignore lint/suspicious/noExplicitAny: ignore
 export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
   schema: S.Schema<I, A>,
-): { [K in keyof A]: S.Schema<I[K], A[K]> } => {
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
-  const out: Record<PropertyKey, S.Schema<any>> = {}
+): {
+  [K in keyof A]-?: undefined extends A[K]
+    ? S.PropertySignature<
+        Exclude<I[K], undefined>,
+        true,
+        Exclude<A[K], undefined>,
+        true
+      >
+    : S.Schema<I[K], A[K]>
+} => {
+  const out: Record<
+    PropertyKey,
+    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    S.Schema<any> | S.PropertySignature<any, true, any, true>
+  > = {}
+
   const propertySignatures = AST.getPropertySignatures(schema.ast)
   for (let i = 0; i < propertySignatures.length; i++) {
-    const propertySignature = propertySignatures[i]
     // rome-ignore lint/style/noNonNullAssertion: ignore
-    out[propertySignature!.name] = S.make(propertySignature!.type)
+    const propertySignature = propertySignatures[i]!
+    const s = S.make(propertySignature.type)
+    out[propertySignature.name] = propertySignature?.isOptional
+      ? S.optional(s)
+      : s
   }
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   return out as any
@@ -117,7 +147,9 @@ export const nullableProperties = <
 ) =>
   S.struct(
     R.mapValues(getPropertySchemas(schema), (v, k) =>
-      !keys || (keys as (keyof A)[]).includes(k) ? S.nullable(v) : v,
+      (!keys || (keys as (keyof A)[]).includes(k)) && isSchema(v)
+        ? S.nullable(v)
+        : v,
     ),
   ) as NullableProperties<I, A, Key>
 
@@ -138,7 +170,9 @@ export const optionalProperties = <
 ) =>
   S.struct(
     R.mapValues(getPropertySchemas(schema), (v, k) =>
-      !keys || (keys as (keyof A)[]).includes(k) ? S.optional(v) : v,
+      (!keys || (keys as (keyof A)[]).includes(k)) && isSchema(v)
+        ? S.optional(v)
+        : v,
     ),
   ) as OptionalProperties<I, A, Key>
 
@@ -159,6 +193,8 @@ export const nullishProperties = <
 ) =>
   S.struct(
     R.mapValues(getPropertySchemas(schema), (v, k) =>
-      !keys || (keys as (keyof A)[]).includes(k) ? nullish(v) : v,
+      (!keys || (keys as (keyof A)[]).includes(k)) && isSchema(v)
+        ? nullish(v)
+        : v,
     ),
   ) as NullishProperties<I, A, Key>
