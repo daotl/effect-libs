@@ -11,7 +11,12 @@
   "javascript": {
     "globals": [
       "$",
-      "argv"
+      "argv",
+      "Cause",
+      "Context",
+      "Effect",
+      "Layer",
+      "Tag"
     ]
   }
 }
