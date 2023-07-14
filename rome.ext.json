@@ -4,7 +4,6 @@
     "ignore": [
       "./scripts/rome-staged.js",
       "./packages",
-      "**/dist",
       "**/*.json"
     ]
   },

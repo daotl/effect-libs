@@ -2,8 +2,6 @@
   "$schema": "./node_modules/rome/configuration_schema.json",
   "files": {
     "ignore": [
-      "./_cjs",
-      "./dist",
       "**/*.json"
     ]
   },
@@ -14,5 +12,8 @@
         "noUnusedVariables": "off"
       }
     }
+  },
+  "vcs": {
+    "root": "../.."
   }
 }

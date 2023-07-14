@@ -1,4 +1,4 @@
-// https://github.com/sindresorhus/type-fest/blob/5374588a88ee643893784f66367bc26b8e6509ec/index.d.ts
+//https://github.com/sindresorhus/type-fest/blob/c43d48e45418dab47e69cd597710dcaad842e884/index.d.ts
 
 /**
  * @tsplus global
@@ -54,6 +54,8 @@ import type {
   // partial-deep
   PartialDeep,
   PartialDeepOptions,
+  // required-deep
+  RequiredDeep,
   // partial-on-undefined-deep
   PartialOnUndefinedDeep,
   PartialOnUndefinedDeepOptions,
@@ -70,6 +72,8 @@ import type {
   InvariantOf,
   // set-optional
   SetOptional,
+  // set-readonly
+  SetReadonly,
   // set-required
   SetRequired,
   // set-non-nullable
@@ -139,12 +143,22 @@ import type {
   ReadonlyTuple,
   // optional-keys-of
   OptionalKeysOf,
+  // override-properties
+  OverrideProperties,
   // has-optional-keys
   HasOptionalKeys,
   // required-keys-of
   RequiredKeysOf,
   // has-required-keys
   HasRequiredKeys,
+  // readonly-keys-of
+  ReadonlyKeysOf,
+  // has-readonly-keys
+  HasReadonlyKeys,
+  // writable-keys-of
+  WritableKeysOf,
+  // has-writable-keys
+  HasWritableKeys,
   // spread
   Spread,
   // tuple-to-union

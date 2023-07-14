@@ -72,6 +72,7 @@ export type OptionalProperties<
 export type NullishProperties<
   // rome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
+  // rome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{

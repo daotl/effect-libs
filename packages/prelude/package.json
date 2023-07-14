@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.0.14",
+  "version": "0.0.18",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -12,18 +12,17 @@
     "@effect/match": "^0.26.0",
     "@effect/schema": "^0.20.3",
     "date-fns": "^2.30.0",
-    "remeda": "^1.14.0",
-    "type-fest": "^3.10.0",
+    "remeda": "^1.24.0",
+    "type-fest": "^3.13.0",
     "typed-case": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.5",
+    "@babel/cli": "^7.22.9",
     "@effect-app/compiler": "^0.27.0",
     "@types/node": "~20.3.1",
-    "fast-check": "^3.10.0",
     "ts-node": "^10.9.1",
     "typescript": "https://cdn.jsdelivr.net/npm/@tsplus/installer@0.0.177/compiler/typescript.tgz",
-    "vitest": "^0.32.2"
+    "vitest": "^0.33.0"
   },
   "typesVersions": {
     "*": {
