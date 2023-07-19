@@ -31,11 +31,26 @@ export type Nullable<From, To = From> = ReturnType<typeof S.nullable<From, To>>
  */
 export type Optional<From, To = From> = ReturnType<typeof S.optional<From, To>>
 
-// Nullish<From, To> = Optional<Nullable<From, To>>
+/**
+ * @tsplus type effect/schema/Schema
+ */
+export type OptionalOrUndefined<From, To = From> = Optional<
+  From | undefined,
+  To | undefined
+>
+
 /**
  * @tsplus type effect/schema/Schema
  */
 export type Nullish<From, To = From> = Optional<Nullable<From, To>>
+
+/**
+ * @tsplus type effect/schema/Schema
+ */
+export type NullishOrUndefined<From, To = From> = Nullish<
+  From | undefined,
+  To | undefined
+>
 
 // Make properties of the specified keys or all keys nullable
 /**
@@ -97,9 +112,20 @@ export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
 }
 
 /**
+ * @tsplus static effect/schema/Schema optionalOrUndefined
+ */
+export const optionalOrUndefined = (s: Any) =>
+  S.optional(S.union(s, S.undefined))
+
+/**
  * @tsplus static effect/schema/Schema nullish
  */
 export const nullish = flow(S.nullable, S.optional)
+
+/**
+ * @tsplus static effect/schema/Schema nullishOrUndefined
+ */
+export const nullishOrUndefined = (s: Any) => nullish(S.union(s, S.undefined))
 
 // Make properties of the specified keys or all keys nullable
 // Ref: https://github.com/Effect-TS/schema/blob/9cdb0ea2227ac6efcad68587268c9ef80423c309/src/S.ts#L705
