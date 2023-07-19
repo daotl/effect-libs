@@ -148,13 +148,19 @@ export function effectify<
   RawReply extends Fa.RawReplyDefaultExpression<RawServer> = Fa.RawReplyDefaultExpression<RawServer>,
   Logger extends Fa.FastifyBaseLogger = Fa.FastifyBaseLogger,
   BaseRouteGeneric extends Fa.RouteGenericInterface = Fa.RouteGenericInterface,
-  // rome-ignore format: compact
-  FastifyInstance extends Fa.FastifyInstance<RawServer, RawRequest, RawReply, Logger, TypeProvider> = Fa.FastifyInstance<RawServer, RawRequest, RawReply, Logger, TypeProvider>,
 >(
-  fastify: FastifyInstance,
+  fastify: Fa.FastifyInstance<
+    RawServer,
+    RawRequest,
+    RawReply,
+    Logger,
+    TypeProvider
+  >,
   // Used to pass liveFastifyAppConfig to effectified Fastify sub instances which will be passed to plugins
   liveFastifyAppConfig?: Layer<never, never, FastifyAppConfig>,
 ) {
+  type FastifyInstance = typeof fastify
+
   let _liveFastifyAppConfig = liveFastifyAppConfig
 
   const _effectify = <
@@ -165,9 +171,7 @@ export function effectify<
     liveFastifyAppConfig?: Layer<never, never, FastifyAppConfig>,
   ) =>
     // rome-ignore format: compact
-    effectify<
-      BaseContextConfig, TypeProvider, BaseSchemaCompiler, RawServer, RawRequest, RawReply, Logger, BaseRouteGeneric, FastifyInstance
-    >(fastify, liveFastifyAppConfig)
+    effectify<BaseContextConfig, TypeProvider, BaseSchemaCompiler, RawServer, RawRequest, RawReply, Logger, BaseRouteGeneric>(fastify, liveFastifyAppConfig)
 
   // type Fastify = ReturnType<typeof _effectify<FastifyInstance>>
 
@@ -596,6 +600,24 @@ export function effectify<
       )
     }
 
+  const onRequestHookHandler = <
+    RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
+    ContextConfig extends BaseContextConfig = BaseContextConfig,
+    SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
+  >() =>
+    _type<
+      Fa.onRequestHookHandler<
+        RawServer,
+        RawRequest,
+        RawReply,
+        RouteGeneric,
+        ContextConfig,
+        SchemaCompiler,
+        TypeProvider,
+        Logger
+      >
+    >()
+
   return {
     tFastifyApp,
     tagFastifyApp,
@@ -709,23 +731,13 @@ export function effectify<
       >() =>
         _type<_EffectRouteShorthandMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>>(),
 
-      onRequestHookHandler: <
-        RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
-        ContextConfig extends BaseContextConfig = BaseContextConfig,
-        SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
-      >() =>
-        _type<
-          Fa.onRequestHookHandler<
-            RawServer,
-            RawRequest,
-            RawReply,
-            RouteGeneric,
-            ContextConfig,
-            SchemaCompiler,
-            TypeProvider,
-            Logger
-          >
-        >(),
+      onRequestHookHandler: onRequestHookHandler,
+
+      OnRequestHookHandler: onRequestHookHandler<
+        BaseRouteGeneric,
+        BaseContextConfig,
+        BaseSchemaCompiler
+      >(),
     },
   }
 }
