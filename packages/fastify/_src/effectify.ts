@@ -708,6 +708,24 @@ export function effectify<
         SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
       >() =>
         _type<_EffectRouteShorthandMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>>(),
+
+      onRequestHookHandler: <
+        RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
+        ContextConfig extends BaseContextConfig = BaseContextConfig,
+        SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
+      >() =>
+        _type<
+          Fa.onRequestHookHandler<
+            RawServer,
+            RawRequest,
+            RawReply,
+            RouteGeneric,
+            ContextConfig,
+            SchemaCompiler,
+            TypeProvider,
+            Logger
+          >
+        >(),
     },
   }
 }
