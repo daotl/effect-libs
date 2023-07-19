@@ -3,6 +3,9 @@
   "version": "0.0.4",
   "license": "MIT",
   "type": "module",
+  "peerDependencies": {
+    "fastify": "^4.20.0"
+  },
   "dependencies": {
     "@daotl-effect/prelude": "workspace:*",
     "@daotl/web-common": "^0.0.11",
@@ -12,7 +15,7 @@
     "@effect/io": "^0.26.1",
     "dotenv": "^16.3.1",
     "dotenv-expand": "^10.0.0",
-    "fastify": "^4.19.2",
+    "fastify": "^4.20.0",
     "lodash": "^4.17.21",
     "remeda": "^1.24.0",
     "type-fest": "^3.13.0"
