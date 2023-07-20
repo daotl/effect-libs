@@ -143,10 +143,10 @@ export function effectify<
   BaseContextConfig = Fa.ContextConfigDefault,
   TypeProvider extends Fa.FastifyTypeProvider = Fa.FastifyTypeProviderDefault,
   BaseSchemaCompiler extends Fa.FastifySchema = Fa.FastifySchema,
+  Logger extends Fa.FastifyBaseLogger = Fa.FastifyBaseLogger,
   RawServer extends Fa.RawServerBase = Fa.RawServerDefault,
   RawRequest extends Fa.RawRequestDefaultExpression<RawServer> = Fa.RawRequestDefaultExpression<RawServer>,
   RawReply extends Fa.RawReplyDefaultExpression<RawServer> = Fa.RawReplyDefaultExpression<RawServer>,
-  Logger extends Fa.FastifyBaseLogger = Fa.FastifyBaseLogger,
   BaseRouteGeneric extends Fa.RouteGenericInterface = Fa.RouteGenericInterface,
 >(
   fastify: Fa.FastifyInstance<
@@ -171,7 +171,7 @@ export function effectify<
     liveFastifyAppConfig?: Layer<never, never, FastifyAppConfig>,
   ) =>
     // rome-ignore format: compact
-    effectify<BaseContextConfig, TypeProvider, BaseSchemaCompiler, RawServer, RawRequest, RawReply, Logger, BaseRouteGeneric>(fastify, liveFastifyAppConfig)
+    effectify<BaseContextConfig, TypeProvider, BaseSchemaCompiler, Logger, RawServer, RawRequest, RawReply, BaseRouteGeneric>(fastify, liveFastifyAppConfig)
 
   // type Fastify = ReturnType<typeof _effectify<FastifyInstance>>
 
@@ -642,6 +642,15 @@ export function effectify<
     _types: {
       // This will cause: Type alias 'Fastify' circularly references itself.
       // Fastify: _type<Fastify>(),
+
+      BaseContextConfig: _type<BaseContextConfig>(),
+      TypeProvider: _type<TypeProvider>(),
+      BaseSchemaCompiler: _type<BaseSchemaCompiler>(),
+      RawServer: _type<RawServer>(),
+      RawRequest: _type<RawRequest>(),
+      RawReply: _type<RawReply>(),
+      Logger: _type<Logger>(),
+      BaseRouteGeneric: _type<BaseRouteGeneric>(),
 
       FastifyRequest: <
         RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
