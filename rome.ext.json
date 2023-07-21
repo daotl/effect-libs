@@ -7,15 +7,14 @@
       "**/*.json"
     ]
   },
-  "javascript": {
-    "globals": [
-      "$",
-      "argv",
-      "Cause",
-      "Context",
-      "Effect",
-      "Layer",
-      "Tag"
-    ]
+  "linter": {
+    "rules": {
+      "correctness": {
+        "noUndeclaredVariables": "off"
+      },
+      "suspicious": {
+        "noEmptyInterface": "off"
+      }
+    }
   }
 }

@@ -120,7 +120,7 @@ export const optionalOrUndefined = (s: Any) =>
 /**
  * @tsplus static effect/schema/Schema nullish
  */
-export const nullish = flow(S.nullable, S.optional)
+export const nullish = R.createPipe(S.nullable, S.optional)
 
 /**
  * @tsplus static effect/schema/Schema nullishOrUndefined

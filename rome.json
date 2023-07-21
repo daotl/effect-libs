@@ -4,7 +4,6 @@
     "ignore": [
       "./scripts/rome-staged.js",
       "./packages",
-      "**/dist",
       "**/*.json"
     ]
   },
@@ -20,7 +19,7 @@
       },
       "correctness": {
         "recommended": true,
-        "noUndeclaredVariables": "error",
+        "noUndeclaredVariables": "off",
         "noUnusedVariables": "error"
       },
       "performance": {
@@ -37,7 +36,8 @@
         "useShorthandArrayType": "error"
       },
       "suspicious": {
-        "recommended": true
+        "recommended": true,
+        "noEmptyInterface": "off"
       }
     }
   },
@@ -49,16 +49,7 @@
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "asNeeded"
-    },
-    "globals": [
-      "$",
-      "argv",
-      "Cause",
-      "Context",
-      "Effect",
-      "Layer",
-      "Tag"
-    ]
+    }
   },
   "vcs": {
     "enabled": true,
