@@ -16,7 +16,7 @@ import { Match } from '@daotl-effect/prelude/_global/match'
 /**
  * @tsplus global
  */
-import { none, some } from '@effect/data/Option'
+import { none, some } from 'effect/Option'
 
 import './_global/type-fest.js'
 

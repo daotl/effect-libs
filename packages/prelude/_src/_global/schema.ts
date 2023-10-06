@@ -4,20 +4,6 @@ import * as Ext from '../_ext/schema.js'
 export type Schema<From, To = From> = S.Schema<From, To>
 
 export namespace Schema {
-  export type From<
-    S extends {
-      // rome-ignore lint/suspicious/noExplicitAny: ignore
-      readonly From: (..._: any) => any
-    },
-  > = S.From<S>
-
-  export type To<
-    S extends {
-      // rome-ignore lint/suspicious/noExplicitAny: ignore
-      readonly To: (..._: any) => any
-    },
-  > = S.To<S>
-
   /* Custom types */
 
   export type Any = Ext.Any

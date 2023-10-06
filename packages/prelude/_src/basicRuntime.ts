@@ -1,20 +1,22 @@
-// From: https://github.com/effect-ts-app/boilerplate/blob/3a31f077b1dd748eb1d7c4cfcf6deb542bf61dfc/_project/messages/_src/basicRuntime.ts
+// From: https://github.com/effect-ts-app/boilerplate/blob/b0aab9557730e9734abc69ae1f1c943f334689a4/_project/messages/_src/basicRuntime.ts
 
 import { defaultTeardown } from '@effect-app/infra-adapters/runMain'
-import * as ConfigProvider from '@effect/io/Config/Provider'
-import * as Effect from '@effect/io/Effect'
-import * as Fiber from '@effect/io/Fiber'
-import * as Logger from '@effect/io/Logger'
-import * as Level from '@effect/io/Logger/Level'
-import * as Scope from '@effect/io/Scope'
+import * as ConfigProvider from 'effect/ConfigProvider'
+import * as Effect from 'effect/Effect'
+import * as Fiber from 'effect/Fiber'
+import * as Logger from 'effect/Logger'
+import * as LogLevel from 'effect/LogLevel'
+import * as Scope from 'effect/Scope'
 import { toConstantCase } from 'typed-case'
+import type { Layer } from 'effect/Layer'
+import { pipe, Exit, Runtime } from 'effect'
 
 export const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
   Effect.gen(function* ($) {
     const scope = yield* $(Scope.make())
     const env = yield* $(layer.buildWithScope(scope))
     const runtime = yield* $(
-      pipe(Effect.runtime<A>(), Effect.scoped, Effect.provideContext(env)),
+      pipe(Effect.runtime<A>(), Effect.scoped, Effect.provide(env)),
     )
 
     return {
@@ -23,7 +25,7 @@ export const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
     }
   })
 
-const provider = ConfigProvider.contramapPath(
+const provider = ConfigProvider.mapInputPath(
   ConfigProvider.fromEnv({
     pathDelim: '_', // i'd prefer "__"
     seqDelim: ',',
@@ -33,7 +35,7 @@ const provider = ConfigProvider.contramapPath(
 
 export const basicRuntime = Runtime.defaultRuntime.runSync(
   makeBasicRuntime(
-    Logger.minimumLogLevel(Level.Debug) >
+    Logger.minimumLogLevel(LogLevel.Debug) >
       Logger.logFmt >
       Effect.setConfigProvider(provider),
   ),
@@ -80,7 +82,7 @@ export function runMain<E, A>(eff: Effect.Effect<never, E, A>) {
                 return
               } else {
                 yield* $(
-                  Effect.logErrorCauseMessage('Main process Error', exit.cause),
+                  Effect.logError(exit.cause, 'Main process Error'),
                 )
                 defaultTeardown(1, context.id(), onExit)
                 return
