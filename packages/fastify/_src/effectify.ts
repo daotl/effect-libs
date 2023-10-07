@@ -131,9 +131,9 @@ export interface EffectRouteShorthandMethod<
     opts: RouteShorthandOptions,
     handler: EffectRouteHandlerMethod,
   ): Effect<R, never, void>
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   (path: string, handler: EffectRouteHandlerMethod): Effect<R, never, void>
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   (path: string, opts: EffectRouteShorthandOptionsWithHandler): Effect<R, never, void>
 }
 
@@ -164,32 +164,32 @@ export function effectify<
   let _liveFastifyAppConfig = liveFastifyAppConfig
 
   const _effectify = <
-    // rome-ignore format: compact
+    // biome-ignore format: compact
     FastifyInstance extends Fa.FastifyInstance<RawServer, RawRequest, RawReply, Logger, TypeProvider>,
   >(
     fastify: FastifyInstance,
     liveFastifyAppConfig?: Layer<never, never, FastifyAppConfig>,
   ) =>
-    // rome-ignore format: compact
+    // biome-ignore format: compact
     effectify<BaseContextConfig, TypeProvider, BaseSchemaCompiler, Logger, RawServer, RawRequest, RawReply, BaseRouteGeneric>(fastify, liveFastifyAppConfig)
 
   // type Fastify = ReturnType<typeof _effectify<FastifyInstance>>
 
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   type FastifyRequest<
     RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
     ContextConfig extends BaseContextConfig = BaseContextConfig,
     SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
   > = Fa.FastifyRequest<RouteGeneric, RawServer, RawRequest, SchemaCompiler, TypeProvider, ContextConfig, Logger>
 
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   type FastifyReply<
     RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
     ContextConfig extends BaseContextConfig = BaseContextConfig,
     SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
   > = Fa.FastifyReply<RawServer, RawRequest, RawReply, RouteGeneric, ContextConfig, SchemaCompiler, TypeProvider>
 
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   type RouteHandlerMethod<
     RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
     ContextConfig extends BaseContextConfig = BaseContextConfig,
@@ -217,7 +217,7 @@ export function effectify<
       : unknown
   >
 
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   type RouteOptions<
     RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
     ContextConfig extends BaseContextConfig = BaseContextConfig,
@@ -233,18 +233,18 @@ export function effectify<
     RouteOptions<RouteGeneric, ContextConfig, SchemaCompiler>,
     'handler'
   > & {
-    // rome-ignore format: compact
+    // biome-ignore format: compact
     handler: EffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>
   }
 
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   type RouteShorthandOptions<
     RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
     ContextConfig extends BaseContextConfig = BaseContextConfig,
     SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
   > = Fa.RouteShorthandOptions<RawServer, RawRequest, RawReply, RouteGeneric, ContextConfig, SchemaCompiler, TypeProvider, Logger>
 
-  // rome-ignore format: compact
+  // biome-ignore format: compact
   type RouteShorthandOptionsWithHandler<
     RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
     ContextConfig extends BaseContextConfig = BaseContextConfig,
@@ -257,7 +257,7 @@ export function effectify<
     ContextConfig extends BaseContextConfig = BaseContextConfig,
     SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
   > = Except<RouteShorthandOptionsWithHandler, 'handler'> & {
-    // rome-ignore format: compact
+    // biome-ignore format: compact
     handler: EffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>
   }
 
@@ -304,7 +304,7 @@ export function effectify<
       ContextConfig extends BaseContextConfig = BaseContextConfig,
       SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
     >(
-      // rome-ignore format: compact
+      // biome-ignore format: compact
       handler: EffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>,
     ) =>
       Effect.runtime<R>().map(
@@ -457,7 +457,7 @@ export function effectify<
       accessFastify.flatMap((fastify) =>
         Effect.promise(async () => {
           await fastify.register(
-            // rome-ignore format: compact
+            // biome-ignore format: compact
             plugin as unknown as (Fa.FastifyPluginCallback<Options, RawServer, TypeProvider, Logger> | Fa.FastifyPluginAsync<Options, RawServer, TypeProvider, Logger> | Promise<{ default: Fa.FastifyPluginCallback<Options, RawServer, TypeProvider, Logger> }> | Promise<{ default: Fa.FastifyPluginAsync<Options, RawServer, TypeProvider, Logger> }>),
             opts as Fa.FastifyRegisterOptions<Options>,
           )
@@ -509,7 +509,7 @@ export function effectify<
     ContextConfig extends BaseContextConfig = BaseContextConfig,
     SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
   >(
-    // rome-ignore format: compact
+    // biome-ignore format: compact
     handler: EffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>,
   ) => tagFastifyApp.flatMap((_) => _.runtime(handler))
 
@@ -524,7 +524,7 @@ export function effectify<
     runFasitfyHandler(opts.handler).flatMap((handler) =>
       accessFastify.flatMap((fastify) =>
         Effect(() => {
-          // rome-ignore format: compact
+          // biome-ignore format: compact
           fastify.route({ ...opts, handler } as RouteOptions<RouteGeneric, ContextConfig, SchemaCompiler>)
         }),
       ),
@@ -538,7 +538,7 @@ export function effectify<
   > = EffectRouteShorthandMethod<
     RouteShorthandOptions<RouteGeneric, ContextConfig, SchemaCompiler>,
     EffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>,
-    // rome-ignore format: compact
+    // biome-ignore format: compact
     EffectRouteShorthandOptionsWithHandler<R, RouteGeneric, ContextConfig, SchemaCompiler>,
     FastifyApp | R
   >
@@ -550,7 +550,7 @@ export function effectify<
     SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
   >(
     _: unknown,
-  ): // rome-ignore format: compact
+  ): // biome-ignore format: compact
   _ is EffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler> {
     return _ instanceof Function
   }
@@ -563,21 +563,21 @@ export function effectify<
       SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
     >(
       method: Method,
-    ): // rome-ignore format: compact
+    ): // biome-ignore format: compact
     _EffectRouteShorthandMethod<R, RouteGeneric, ContextConfig, SchemaCompiler> =>
     (path: string, ...args: unknown[]) => {
-      // rome-ignore format: compact
+      // biome-ignore format: compact
       const [handler, opts] = isEffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>(args[0])
         ? [args[0], undefined]
         : isEffectRouteHandlerMethod<R, RouteGeneric, ContextConfig, SchemaCompiler>(args[1])
         ? [
             args[1],
-            // rome-ignore format: compact
+            // biome-ignore format: compact
             args[0] as RouteShorthandOptions<RouteGeneric, ContextConfig, SchemaCompiler>,
           ]
         : [
             (
-              // rome-ignore format: compact
+              // biome-ignore format: compact
               args[0] as EffectRouteShorthandOptionsWithHandler<R, RouteGeneric, ContextConfig, SchemaCompiler>
             ).handler,
             undefined,
@@ -668,7 +668,7 @@ export function effectify<
           RouteHandlerMethod<RouteGeneric, ContextConfig, SchemaCompiler>
         >(),
 
-      // rome-ignore format: compact
+      // biome-ignore format: compact
       EffectRouteHandlerMethod: <
         R = never,
         RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
@@ -701,14 +701,14 @@ export function effectify<
           RouteShorthandOptions<RouteGeneric, ContextConfig, SchemaCompiler>
         >(),
 
-      // rome-ignore format: compact
+      // biome-ignore format: compact
       RouteShorthandOptionsWithHandler: <
         RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
         ContextConfig extends BaseContextConfig = BaseContextConfig,
         SchemaCompiler extends BaseSchemaCompiler = BaseSchemaCompiler,
       >() => _type<RouteShorthandOptionsWithHandler<RouteGeneric, ContextConfig, SchemaCompiler>>(),
 
-      // rome-ignore format: compact
+      // biome-ignore format: compact
       EffectRouteShorthandOptionsWithHandler: <
         R = never,
         RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,
@@ -725,7 +725,7 @@ export function effectify<
         Options extends Fa.FastifyPluginOptions = Record<never, never>,
       >() => _type<EffectFastifyPlugin<R, Options>>(),
 
-      // rome-ignore format: compact
+      // biome-ignore format: compact
       EffectRouteShorthandMethod: <
         R = never,
         RouteGeneric extends BaseRouteGeneric = BaseRouteGeneric,

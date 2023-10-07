@@ -1,6 +1,6 @@
 pre-commit:
   parallel: true
   commands:
-    packages-fastify-rome:
+    packages-fastify-biome:
       root: packages/fastify/
-      run: npx zx ../../scripts/rome-staged.js {staged_files}
+      run: npx zx ../../scripts/biome-staged.js {staged_files}

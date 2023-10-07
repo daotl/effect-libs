@@ -1,6 +1,6 @@
 pre-commit:
   parallel: true
   commands:
-    packages-prelude-rome:
+    packages-prelude-biome:
       root: packages/prelude/
-      run: npx zx ../../scripts/rome-staged.js {staged_files}
+      run: npx zx ../../scripts/biome-staged.js {staged_files}

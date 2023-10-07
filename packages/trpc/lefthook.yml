@@ -1,6 +1,6 @@
 pre-commit:
   parallel: true
   commands:
-    packages-trpc-rome:
+    packages-trpc-biome:
       root: packages/trpc/
-      run: npx zx ../../scripts/rome-staged.js {staged_files}
+      run: npx zx ../../scripts/biome-staged.js {staged_files}

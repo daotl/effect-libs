@@ -4,13 +4,13 @@ import * as AST from '@effect/schema/AST'
 /**
  * @tsplus type effect/schema/Schema
  */
-// rome-ignore lint/suspicious/noExplicitAny: ignore
+// biome-ignore lint/suspicious/noExplicitAny: ignore
 export type Any = S.Schema<any>
 
 export type StructArgs = Record<
   string,
   // any
-  // rome-ignore lint/suspicious/noExplicitAny: ignorex
+  // biome-ignore lint/suspicious/noExplicitAny: ignorex
   Any | S.PropertySignature<any, boolean, any, boolean>
 >
 
@@ -57,9 +57,9 @@ export type NullishOrUndefined<From, To = From> = Nullish<
  * @tsplus type effect/schema/Schema
  */
 export type NullableProperties<
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
@@ -71,9 +71,9 @@ export type NullableProperties<
  * @tsplus type effect/schema/Schema
  */
 export type OptionalProperties<
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
@@ -85,9 +85,9 @@ export type OptionalProperties<
  * @tsplus type effect/schema/Schema
  */
 export type NullishProperties<
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 > = Struct<{
@@ -95,19 +95,19 @@ export type NullishProperties<
 }>
 
 // From: https://github.com/Effect-TS/schema/releases/tag/v0.18.0
-// rome-ignore lint/suspicious/noExplicitAny: ignore
+// biome-ignore lint/suspicious/noExplicitAny: ignore
 export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
   schema: S.Schema<I, A>,
 ): { [K in keyof A]: S.Schema<I[K], A[K]> } => {
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   const out: Record<PropertyKey, S.Schema<any>> = {}
   const propertySignatures = AST.getPropertySignatures(schema.ast)
   for (let i = 0; i < propertySignatures.length; i++) {
     const propertySignature = propertySignatures[i]
-    // rome-ignore lint/style/noNonNullAssertion: ignore
+    // biome-ignore lint/style/noNonNullAssertion: ignore
     out[propertySignature!.name] = S.make(propertySignature!.type)
   }
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   return out as any
 }
 
@@ -133,9 +133,9 @@ export const nullishOrUndefined = (s: Any) => nullish(S.union(s, S.undefined))
  * @tsplus static effect/schema/Schema nullableProperties
  */
 export const nullableProperties = <
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 >(
@@ -154,9 +154,9 @@ export const nullableProperties = <
  * @tsplus static effect/schema/Schema optionalProperties
  */
 export const optionalProperties = <
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 >(
@@ -175,9 +175,9 @@ export const optionalProperties = <
  * @tsplus static effect/schema/Schema nullishProperties
  */
 export const nullishProperties = <
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   I extends { [K in keyof A]: any },
-  // rome-ignore lint/suspicious/noExplicitAny: ignore
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
   Key extends keyof A = keyof A,
 >(

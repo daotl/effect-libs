@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.0.19",
+  "version": "0.0.20-alpha.4",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -155,8 +155,8 @@
     "circular:src": "madge --circular --ts-config ./tsconfig.json --extensions ts ./_src",
     "circular:dist": "madge --circular --extensions js ./dist",
     "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
-    "lint": "rome format . && rome check .",
-    "lint:fix": "rome format --write . && rome check --apply .",
+    "lint": "biome format . && biome check .",
+    "lint:fix": "biome format --write . && biome check --apply .",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint ./_src",
     "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx .",
     "autofix": "pnpm lint --fix",

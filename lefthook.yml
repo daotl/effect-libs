@@ -6,9 +6,9 @@ extends:
 pre-commit:
   parallel: true
   commands:
-    root-rome:
-      glob: '*'
-      run: npx zx ./scripts/rome-staged.js {staged_files}
+    root-biome:
+      glob: "*"
+      run: npx zx ./scripts/biome-staged.js {staged_files}
 
 commit-msg:
   commands:

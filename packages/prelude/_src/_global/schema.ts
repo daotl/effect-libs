@@ -11,10 +11,10 @@ export namespace Schema {
   export type Struct<
     Fields extends Ext.StructArgs /*Record<
     PropertyKey,
-    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    // biome-ignore lint/suspicious/noExplicitAny: ignore
     | S.Schema<any, any>
     | S.Schema<never, never>
-    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    // biome-ignore lint/suspicious/noExplicitAny: ignore
     | S.PropertySignature<any, boolean, any, boolean>
     | S.PropertySignature<never, boolean, never, boolean>
   >,*/,
@@ -27,21 +27,21 @@ export namespace Schema {
   export type Nullish<From, To = From> = Ext.Nullish<From, To>
 
   export type NullableProperties<
-    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    // biome-ignore lint/suspicious/noExplicitAny: ignore
     I extends { [K in keyof A]: any },
     A extends Ext.StructArgs,
     Key extends keyof A = keyof A,
   > = Ext.NullableProperties<I, A, Key>
 
   export type OptionalProperties<
-    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    // biome-ignore lint/suspicious/noExplicitAny: ignore
     I extends { [K in keyof A]: any },
     A extends Ext.StructArgs,
     Key extends keyof A = keyof A,
   > = Ext.OptionalProperties<I, A, Key>
 
   export type NullishProperties<
-    // rome-ignore lint/suspicious/noExplicitAny: ignore
+    // biome-ignore lint/suspicious/noExplicitAny: ignore
     I extends { [K in keyof A]: any },
     A extends Ext.StructArgs,
     Key extends keyof A = keyof A,

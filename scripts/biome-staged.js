@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 import 'zx/globals'
 import { minimatch } from 'minimatch'
-import cfg from '../rome.json' assert { type: 'json' }
+import cfg from '../biome.json' assert { type: 'json' }
 
 // Append stars
 const ignored = cfg.files.ignore.concat(
@@ -17,5 +17,5 @@ const filtered = argv._.map((path) =>
   .filter((path) => reExtension.test(path))
 
 if (filtered.length) {
-  await $`ROME_TARGETS="${filtered}" && npx rome format --write $ROME_TARGETS && npx rome check --apply $ROME_TARGETS && git add $ROME_TARGETS`
+  await $`BIOME_TARGETS="${filtered}" && npx biome format --write $BIOME_TARGETS && npx biome check --apply $BIOME_TARGETS && git add $BIOME_TARGETS`
 }

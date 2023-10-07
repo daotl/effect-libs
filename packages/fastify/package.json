@@ -1,6 +1,6 @@
 {
   "name": "@daotl-effect/fastify",
-  "version": "0.0.8",
+  "version": "0.0.9-alpha.3",
   "license": "MIT",
   "type": "module",
   "peerDependencies": {
@@ -88,8 +88,8 @@
     "circular:src": "madge --circular --ts-config ./tsconfig.json --extensions ts ./_src",
     "circular:dist": "madge --circular --extensions js ./dist",
     "compile": "NODE_OPTIONS=--max-old-space-size=6144 tsc --noEmit",
-    "lint": "rome format . && rome check .",
-    "lint:fix": "rome format --write . && rome check --apply .",
+    "lint": "biome format . && biome check .",
+    "lint:fix": "biome format --write . && biome check --apply .",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 ESLINT_TS=1 eslint ./_src",
     "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx .",
     "autofix": "pnpm lint --fix",

@@ -1,7 +1,10 @@
 {
-  "$schema": "./node_modules/rome/configuration_schema.json",
+  "$schema": "./node_modules/biome/configuration_schema.json",
   "files": {
     "ignore": [
+      "./scripts/biome-staged.js",
+      "./packages",
+      "**/dist",
       "**/*.json"
     ]
   },
@@ -17,8 +20,8 @@
       },
       "correctness": {
         "recommended": true,
-        "noUndeclaredVariables": "off",
-        "noUnusedVariables": "off"
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error"
       },
       "performance": {
         "recommended": true
@@ -46,12 +49,20 @@
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "asNeeded"
-    }
+    },
+    "globals": [
+      "$",
+      "argv",
+      "Cause",
+      "Context",
+      "Effect",
+      "Layer",
+      "Tag"
+    ]
   },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile": true,
-    "root": "../.."
+    "useIgnoreFile": true
   }
 }
