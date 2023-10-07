@@ -26,6 +26,10 @@ import type {
   // empty-object
   EmptyObject,
   IsEmptyObject,
+  // non-empty-object
+  NonEmptyObject,
+  // unknown-record
+  UnknownRecord,
   // except
   Except,
   // tagged-union
@@ -47,6 +51,8 @@ import type {
   RequireExactlyOne,
   // require-all-or-none
   RequireAllOrNone,
+  // require-one-or-none
+  RequireOneOrNone,
   // omit-index-signature
   OmitIndexSignature,
   // pick-index-signature
@@ -68,6 +74,8 @@ import type {
   // opaque
   Opaque,
   UnwrapOpaque,
+  Tagged,
+  UnwrapTagged,
   // invariant-of
   InvariantOf,
   // set-optional

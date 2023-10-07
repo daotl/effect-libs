@@ -1,27 +1,27 @@
 {
   "name": "@daotl-effect/prelude",
-  "version": "0.0.20-alpha.4",
+  "version": "0.0.20",
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "@effect-app/core": "^0.58.4",
     "@effect-app/infra-adapters": "^0.51.4",
     "@effect-app/prelude": "^0.60.4",
-    "@effect/match": "^0.38.0",
-    "@effect/schema": "^0.40.2",
+    "@effect/match": "^0.39.0",
+    "@effect/schema": "^0.42.0",
     "@fp-ts/optic": "^0.10.0",
     "date-fns": "^2.30.0",
-    "effect": "^2.0.0-next.44",
-    "remeda": "^1.24.0",
-    "type-fest": "^3.13.0",
+    "effect": "^2.0.0-next.47",
+    "remeda": "^1.27.0",
+    "type-fest": "^4.4.0",
     "typed-case": "^1.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
     "@effect-app/compiler": "^0.28.0",
-    "@types/node": "~20.7.1",
+    "@types/node": "~20.8.3",
     "ts-node": "^10.9.1",
-    "typescript": "npm:@effect-app/typescript@5.3.0-tsplus.20230915",
+    "typescript": "npm:@effect-app/typescript@5.3.0-tsplus.202310052",
     "vitest": "^0.34.6"
   },
   "typesVersions": {
