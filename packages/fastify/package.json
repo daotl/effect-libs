@@ -1,30 +1,30 @@
 {
   "name": "@daotl-effect/fastify",
-  "version": "0.0.9-alpha.3",
+  "version": "0.0.9-alpha.4",
   "license": "MIT",
   "type": "module",
   "peerDependencies": {
-    "fastify": "^4.20.0"
+    "fastify": "^4.23.2"
   },
   "dependencies": {
     "@daotl-effect/prelude": "workspace:*",
     "@daotl/web-common": "^0.0.11",
     "@effect-app/core": "^0.58.4",
     "@effect-app/prelude": "^0.60.4",
-    "effect": "^2.0.0-next.44",
     "dotenv": "^16.3.1",
     "dotenv-expand": "^10.0.0",
-    "fastify": "^4.20.0",
+    "effect": "^2.0.0-next.47",
+    "fastify": "^4.23.2",
     "lodash": "^4.17.21",
-    "remeda": "^1.24.0",
-    "type-fest": "^3.13.0"
+    "remeda": "^1.27.0",
+    "type-fest": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
+    "@babel/cli": "^7.23.0",
     "@effect-app/compiler": "^0.28.0",
-    "@types/node": "~20.7.1",
+    "@types/node": "~20.8.3",
     "ts-node": "^10.9.1",
-    "typescript": "npm:@effect-app/typescript@5.3.0-tsplus.20230915",
+    "typescript": "npm:@effect-app/typescript@5.3.0-tsplus.202310052",
     "vitest": "^0.34.6"
   },
   "typesVersions": {
