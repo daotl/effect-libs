@@ -41,7 +41,7 @@ export const createLiveFastifyAppConfig = (
     exitHandler:
       (req: Fa.FastifyRequest, reply: Fa.FastifyReply) =>
       (cause: Cause<never>) =>
-        exitHandler(req, reply)(cause).provideContext(ctx),
+        exitHandler(req, reply)(cause).provide(ctx),
   })).toLayer(tagFastifyAppConfig)
 
 export const stagFastifyAppTag = '@effect-app/fastify/App' as const
@@ -293,7 +293,7 @@ export function effectify<
     )
 
     const supervisor = yield* $(
-      Supervisor.track().acquireRelease((s) =>
+      Supervisor.track.acquireRelease((s) =>
         s.value().flatMap((_) => _.interruptAll),
       ),
     )
@@ -311,15 +311,9 @@ export function effectify<
         (r): RouteHandlerMethod<RouteGeneric, ContextConfig, SchemaCompiler> =>
           (req, reply) =>
             // TODO: restore trace from "handler"
-            Debug.untraced(
-              (restore) =>
                 r.runPromise(
                   open.get.flatMap((open) =>
-                    restore(() =>
-                      open
-                        ? handler.call(fastify, req, reply)
-                        : Effect.interrupt(),
-                    )()
+                    (open ? handler.call(fastify, req, reply) : Effect.interrupt)
                       .onError(
                         exitHandler(
                           req as Fa.FastifyRequest,
@@ -335,7 +329,6 @@ export function effectify<
                 > extends infer Return
                   ? Promise<Return | void>
                   : unknown,
-            ),
       )
 
     // function middieRuntime<
@@ -429,7 +422,7 @@ export function effectify<
 
   const accessFastify = tagFastifyApp.map((_) => _.fastify)
 
-  const listen = (tagFastifyAppConfig & accessFastify).flatMap(
+  const listen = Effect.zip(tagFastifyAppConfig, accessFastify, { concurrent: true }).flatMap(
     ([{ host, port }, fastify]) =>
       Effect.async<never, never, FastifyInstance>((cb) => {
         fastify.listen({ host, port }, (err, _address) => {
@@ -452,7 +445,7 @@ export function effectify<
     >(
       plugin:
         | FastifyPluginCallback<FastifyInstance, Options>
-        | FastifyPluginAsync<FastifyInstance, Options>
+        | FastifyPluginAsync<Fa.FastifyInstance, Options>
         | Promise<{
             default: FastifyPluginCallback<FastifyInstance, Options>
           }>
@@ -488,6 +481,7 @@ export function effectify<
       opts?: FastifyRegisterOptions<FastifyInstance, Options>,
     ): Effect<FastifyApp | R, never, void> =>
       accessFastify.flatMap((fastify) =>
+        // @ts-expect-error TBD why: Need async-await here or the whole program will exit with code 13
         Effect.async<FastifyApp, never, void>(async (cb) => {
           await fastify.register((instance, _opts, done) => {
             const fa = _effectify(
