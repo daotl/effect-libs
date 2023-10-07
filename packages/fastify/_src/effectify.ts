@@ -445,7 +445,7 @@ export function effectify<
     >(
       plugin:
         | FastifyPluginCallback<FastifyInstance, Options>
-        | FastifyPluginAsync<Fa.FastifyInstance, Options>
+        | FastifyPluginAsync<FastifyInstance, Options>
         | Promise<{
             default: FastifyPluginCallback<FastifyInstance, Options>
           }>
