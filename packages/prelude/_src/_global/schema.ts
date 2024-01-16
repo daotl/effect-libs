@@ -52,7 +52,6 @@ export const Schema = {
   ...S,
   /* Custom utils */
   getPropertySchemas: Ext.getPropertySchemas,
-  nullish: Ext.nullish,
   nullableProperties: Ext.nullableProperties,
   optionalProperties: Ext.optionalProperties,
   nullishProperties: Ext.nullishProperties,

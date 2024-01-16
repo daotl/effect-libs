@@ -1,11 +1,11 @@
 {
   "name": "@effect-app/pnpm-singleton",
-  "version": "0.21.0",
+  "version": "0.37.1",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "watch": "pnpm build:tsc -w",
-    "build:tsc": "pnpm clean-dist && node ../../scripts/package.js && NODE_OPTIONS=--max-old-space-size=6144 tsc --build",
+    "build:tsc": "pnpm clean-dist && effect-app-cli packagejson tsc --build",
     "build": "pnpm build:tsc && pnpm build2:cjs",
     "build2:cjs": "rm -rf _cjs && babel dist --config-file ../../.babel.cjs.json --out-dir _cjs --out-file-extension .cjs --source-maps",
     "watch2": "pnpm clean-dist && NODE_OPTIONS=--max-old-space-size=6144 tsc -w",
@@ -28,10 +28,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "~20.7.1",
-    "ts-node": "^10.9.1",
-    "typescript": "npm:@effect-app/typescript@5.3.0-tsplus.20230915",
-    "vitest": "^0.34.6"
+    "@types/node": "~20.10.5",
+    "ts-node": "^10.9.2",
+    "typescript": "npm:@effect-app/typescript@5.4.0-tsplus.202311222",
+    "vitest": "^1.1.0"
   },
   "typesVersions": {
     "*": {

@@ -2,6 +2,7 @@
   "importMap": {
     "^(.*)/packages/(.*)/_src/(.*)\\.[cm]?[tj]s$": "@daotl-effect/$2/$3",
     "^(.*)/node_modules/@daotl-effect/(.*)/_src/(.*)\\.[cm]?[tj]s$": "@daotl-effect/$2/$3",
-    "^(.*)/node_modules/@effect-app/(.*)/_src/(.*)\\.[cm]?[tj]s$": "@effect-app/$2/$3"
+    "^(.*)/node_modules/@effect-app/(.*)/_src/(.*)\\.[cm]?[tj]s$": "@effect-app/$2/$3",
+    ".pnpm/[^/]*/node_modules/(.*)": "$1"
   }
 }

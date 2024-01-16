@@ -1,17 +1,17 @@
-// From: https://github.com/effect-ts-app/boilerplate/blob/b0aab9557730e9734abc69ae1f1c943f334689a4/_project/messages/_src/basicRuntime.ts
+// From: https://github.com/effect-ts-app/boilerplate/blob/57319d420f53b97b5b6dfe82721849537b0cc96c/_project/messages/_src/basicRuntime.ts
 
-import { defaultTeardown } from '@effect-app/infra-adapters/runMain'
+import { reportError } from '@effect-app/infra/errorReporter'
+import { logJson } from '@effect-app/infra/logger/jsonLogger'
+import { logFmt } from '@effect-app/infra/logger/logFmtLogger'
+import { runMain as runMainPlatform } from '@effect/platform-node/Runtime'
+import { constantCase } from 'change-case'
 import * as ConfigProvider from 'effect/ConfigProvider'
 import * as Effect from 'effect/Effect'
-import * as Fiber from 'effect/Fiber'
 import * as Logger from 'effect/Logger'
-import * as LogLevel from 'effect/LogLevel'
+import * as Level from 'effect/LogLevel'
 import * as Scope from 'effect/Scope'
-import { toConstantCase } from 'typed-case'
-import type { Layer } from 'effect/Layer'
-import { pipe, Exit, Runtime } from 'effect'
 
-export const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
+const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
   Effect.gen(function* ($) {
     const scope = yield* $(Scope.make())
     const env = yield* $(layer.buildWithScope(scope))
@@ -25,20 +25,40 @@ export const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
     }
   })
 
-const provider = ConfigProvider.mapInputPath(
+const envProviderConstantCase = ConfigProvider.mapInputPath(
   ConfigProvider.fromEnv({
     pathDelim: '_', // i'd prefer "__"
     seqDelim: ',',
   }),
-  toConstantCase,
+  constantCase,
+)
+
+const levels = {
+  [Level.Trace.label]: Level.Trace,
+  [Level.Debug.label]: Level.Debug,
+  [Level.Info.label]: Level.Info,
+  [Level.Warning.label]: Level.Warning,
+  [Level.Error.label]: Level.Error,
+}
+
+const configuredLogLevel = process.env['LOG_LEVEL']
+const configuredEnv = process.env['ENV']
+
+const logLevel = configuredLogLevel
+  ? levels[configuredLogLevel]
+  : configuredEnv && configuredEnv === 'prod'
+  ? Level.Info
+  : Level.Debug
+if (!logLevel) throw new Error(`Invalid LOG_LEVEL: ${configuredLogLevel}`)
+
+export const basicLayer = Layer.mergeAll(
+  Logger.minimumLogLevel(logLevel),
+  configuredEnv && configuredEnv !== 'local-dev' ? logJson : logFmt,
+  Layer.setConfigProvider(envProviderConstantCase),
 )
 
 export const basicRuntime = Runtime.defaultRuntime.runSync(
-  makeBasicRuntime(
-    Logger.minimumLogLevel(LogLevel.Debug) >
-      Logger.logFmt >
-      Effect.setConfigProvider(provider),
-  ),
+  makeBasicRuntime(basicLayer),
 )
 
 /**
@@ -61,46 +81,10 @@ export const runPromiseExit = basicRuntime.runtime.runPromiseExit
  */
 export const runCallback = basicRuntime.runtime.runCallback
 
-/**
- * A dumbed down version of effect-ts/node's runtime, in preparation of new effect-ts
- * @tsplus fluent effect/io/Effect runMain$
- */
+const reportMainError = <E>(cause: Cause<E>) =>
+  Cause.isInterruptedOnly(cause) ? Effect.unit : reportError('Main')(cause)
+
+/** @tsplus getter effect/io/Effect runMain$ */
 export function runMain<E, A>(eff: Effect.Effect<never, E, A>) {
-  const onExit = (s: number) => {
-    process.exit(s)
-  }
-
-  runCallback(
-    Fiber.fromEffect(eff).map((context) => {
-      runCallback(
-        context.await().flatMap((exit) =>
-          Effect.gen(function* ($) {
-            if (exit.isFailure()) {
-              if (exit.cause.isInterruptedOnly()) {
-                yield* $(Effect.logWarning('Main process Interrupted'))
-                defaultTeardown(0, context.id(), onExit)
-                return
-              } else {
-                yield* $(
-                  Effect.logError(exit.cause, 'Main process Error'),
-                )
-                defaultTeardown(1, context.id(), onExit)
-                return
-              }
-            } else {
-              defaultTeardown(0, context.id(), onExit)
-            }
-          }),
-        ),
-      )
-
-      function handler() {
-        process.removeListener('SIGTERM', handler)
-        process.removeListener('SIGINT', handler)
-        context.interruptAsFork(context.id()).runCallback()
-      }
-      process.once('SIGTERM', handler)
-      process.once('SIGINT', handler)
-    }),
-  )
+  return runMainPlatform(eff.tapErrorCause(reportMainError).provide(basicLayer))
 }

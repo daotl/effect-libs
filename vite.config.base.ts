@@ -1,7 +1,7 @@
+import fs from 'fs'
+import path from 'path'
 /// <reference types="vitest" />
 import { effectPlugin } from '@effect-app/compiler/vitePlugin2'
-import path from 'path'
-import fs from 'fs'
 
 const useDist = process.env.TEST_USE_DIST === 'true'
 

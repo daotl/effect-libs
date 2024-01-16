@@ -1,5 +1,6 @@
 import * as S from '@effect/schema/Schema'
-import * as AST from '@effect/schema/AST'
+import type { AST, PropertySignature } from '@effect/schema/AST'
+import { R } from '../_global/remeda.js'
 
 /**
  * @tsplus type effect/schema/Schema
@@ -94,6 +95,21 @@ export type NullishProperties<
   [K in keyof A]: K extends Key ? Nullish<I[K], A[K]> : A[K]
 }>
 
+/**
+ * @since 1.0.0
+ */
+export const getPropertySignatures = (
+  ast: AST,
+): readonly PropertySignature[] => {
+  switch (ast._tag) {
+    case 'TypeLiteral':
+      return ast.propertySignatures
+    case 'Suspend':
+      return getPropertySignatures(ast.f())
+  }
+  throw new Error(`getPropertySignatures: unsupported schema (${ast._tag})`)
+}
+
 // From: https://github.com/Effect-TS/schema/releases/tag/v0.18.0
 // biome-ignore lint/suspicious/noExplicitAny: ignore
 export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
@@ -101,7 +117,7 @@ export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
 ): { [K in keyof A]: S.Schema<I[K], A[K]> } => {
   // biome-ignore lint/suspicious/noExplicitAny: ignore
   const out: Record<PropertyKey, S.Schema<any>> = {}
-  const propertySignatures = AST.getPropertySignatures(schema.ast)
+  const propertySignatures = getPropertySignatures(schema.ast)
   for (let i = 0; i < propertySignatures.length; i++) {
     const propertySignature = propertySignatures[i]
     // biome-ignore lint/style/noNonNullAssertion: ignore
@@ -116,16 +132,6 @@ export const getPropertySchemas = <I extends { [K in keyof A]: any }, A>(
  */
 export const optionalOrUndefined = (s: Any) =>
   S.optional(S.union(s, S.undefined))
-
-/**
- * @tsplus static effect/schema/Schema nullish
- */
-export const nullish = flow(S.nullable, S.optional)
-
-/**
- * @tsplus static effect/schema/Schema nullishOrUndefined
- */
-export const nullishOrUndefined = (s: Any) => nullish(S.union(s, S.undefined))
 
 // Make properties of the specified keys or all keys nullable
 // Ref: https://github.com/Effect-TS/schema/blob/9cdb0ea2227ac6efcad68587268c9ef80423c309/src/S.ts#L705
@@ -186,6 +192,6 @@ export const nullishProperties = <
 ) =>
   S.struct(
     R.mapValues(getPropertySchemas(schema), (v, k) =>
-      !keys || (keys as (keyof A)[]).includes(k) ? nullish(v) : v,
+      !keys || (keys as (keyof A)[]).includes(k) ? S.nullish(v) : v,
     ),
   ) as NullishProperties<I, A, Key>

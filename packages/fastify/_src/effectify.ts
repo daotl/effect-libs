@@ -294,7 +294,7 @@ export function effectify<
 
     const supervisor = yield* $(
       Supervisor.track.acquireRelease((s) =>
-        s.value().flatMap((_) => _.interruptAll),
+        s.value.flatMap((_) => _.interruptAll),
       ),
     )
 
@@ -311,24 +311,24 @@ export function effectify<
         (r): RouteHandlerMethod<RouteGeneric, ContextConfig, SchemaCompiler> =>
           (req, reply) =>
             // TODO: restore trace from "handler"
-                r.runPromise(
-                  open.get.flatMap((open) =>
-                    (open ? handler.call(fastify, req, reply) : Effect.interrupt)
-                      .onError(
-                        exitHandler(
-                          req as Fa.FastifyRequest,
-                          reply as Fa.FastifyReply,
-                        ),
-                      )
-                      .supervised(supervisor),
-                  ),
-                ) as ResolveFastifyReplyType<
-                  TypeProvider,
-                  SchemaCompiler,
-                  RouteGeneric
-                > extends infer Return
-                  ? Promise<Return | void>
-                  : unknown,
+            r.runPromise(
+              open.get.flatMap((open) =>
+                (open ? handler.call(fastify, req, reply) : Effect.interrupt)
+                  .onError(
+                    exitHandler(
+                      req as Fa.FastifyRequest,
+                      reply as Fa.FastifyReply,
+                    ),
+                  )
+                  .supervised(supervisor),
+              ),
+            ) as ResolveFastifyReplyType<
+              TypeProvider,
+              SchemaCompiler,
+              RouteGeneric
+            > extends infer Return
+              ? Promise<Return | void>
+              : unknown,
       )
 
     // function middieRuntime<
@@ -417,22 +417,23 @@ export function effectify<
       port,
       exitHandler,
     )
-    return _liveFastifyAppConfig > liveFastifyApp
+    return liveFastifyApp.provideMerge(_liveFastifyAppConfig)
   }
 
   const accessFastify = tagFastifyApp.map((_) => _.fastify)
 
-  const listen = Effect.zip(tagFastifyAppConfig, accessFastify, { concurrent: true }).flatMap(
-    ([{ host, port }, fastify]) =>
-      Effect.async<never, never, FastifyInstance>((cb) => {
-        fastify.listen({ host, port }, (err, _address) => {
-          if (err) {
-            cb(Effect.die(new NodeServerListenError(err)))
-          } else {
-            cb(Effect.succeed(fastify))
-          }
-        })
-      }),
+  const listen = Effect.zip(tagFastifyAppConfig, accessFastify, {
+    concurrent: true,
+  }).flatMap(([{ host, port }, fastify]) =>
+    Effect.async<never, never, FastifyInstance>((cb) => {
+      fastify.listen({ host, port }, (err, _address) => {
+        if (err) {
+          cb(Effect.die(new NodeServerListenError(err)))
+        } else {
+          cb(Effect.succeed(fastify))
+        }
+      })
+    }),
   )
 
   type _EffectFastifyRegister = EffectFastifyRegister<
