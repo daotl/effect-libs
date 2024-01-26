@@ -1,1 +1,1 @@
-export * as R from 'remeda'
+export * as $R from 'remeda'

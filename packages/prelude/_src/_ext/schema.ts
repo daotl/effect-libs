@@ -1,6 +1,6 @@
 import * as S from '@effect/schema/Schema'
 import type { AST, PropertySignature } from '@effect/schema/AST'
-import { R } from '../_global/remeda.js'
+import { $R } from '../_global/remeda.js'
 
 /**
  * @tsplus type effect/schema/Schema
@@ -149,7 +149,7 @@ export const nullableProperties = <
   keys?: Key[],
 ) =>
   S.struct(
-    R.mapValues(getPropertySchemas(schema), (v, k) =>
+    $R.mapValues(getPropertySchemas(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.nullable(v) : v,
     ),
   ) as NullableProperties<I, A, Key>
@@ -170,7 +170,7 @@ export const optionalProperties = <
   keys?: Key[],
 ) =>
   S.struct(
-    R.mapValues(getPropertySchemas(schema), (v, k) =>
+    $R.mapValues(getPropertySchemas(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.optional(v) : v,
     ),
   ) as OptionalProperties<I, A, Key>
@@ -191,7 +191,7 @@ export const nullishProperties = <
   keys?: Key[],
 ) =>
   S.struct(
-    R.mapValues(getPropertySchemas(schema), (v, k) =>
+    $R.mapValues(getPropertySchemas(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.nullish(v) : v,
     ),
   ) as NullishProperties<I, A, Key>
