@@ -1,4 +1,4 @@
-//https://github.com/sindresorhus/type-fest/blob/c43d48e45418dab47e69cd597710dcaad842e884/index.d.ts
+// https://github.com/sindresorhus/type-fest/blob/eccf1713046908b0311be9709a9af7ecceabbdd9/index.d.ts
 
 /**
  * @tsplus global
@@ -23,6 +23,8 @@ import type {
   Observer,
   ObservableLike,
   // Utilities
+  // keys-of-union
+  KeysOfUnion,
   // empty-object
   EmptyObject,
   IsEmptyObject,
@@ -30,6 +32,8 @@ import type {
   NonEmptyObject,
   // unknown-record
   UnknownRecord,
+  // unknown-array
+  UnknownArray,
   // except
   Except,
   // tagged-union
@@ -62,9 +66,13 @@ import type {
   PartialDeepOptions,
   // required-deep
   RequiredDeep,
+  // pick-deep
+  PickDeep,
   // partial-on-undefined-deep
   PartialOnUndefinedDeep,
   PartialOnUndefinedDeepOptions,
+  // undefined-on-partial-deep
+  UndefinedOnPartialDeep,
   // readonly-deep
   ReadonlyDeep,
   // literal-union
@@ -117,6 +125,8 @@ import type {
   Entries,
   // set-return-type
   SetReturnType,
+  // set-parameter-type
+  SetParameterType,
   // asyncify
   Asyncify,
   // simplify
@@ -171,6 +181,8 @@ import type {
   Spread,
   // tuple-to-union
   TupleToUnion,
+  // int-range
+  IntRange,
   // is-equal
   IsEqual,
   // is-literal
@@ -191,6 +203,16 @@ import type {
   IsUnknown,
   // if-unknown
   IfUnknown,
+  // array-indices
+  ArrayIndices,
+  // array-values
+  ArrayValues,
+  // set-field-type
+  SetFieldType,
+  // paths
+  Paths,
+  // shared-union-fields-deep
+  SharedUnionFieldsDeep,
   // Template literal types
   // camel-case
   CamelCase,

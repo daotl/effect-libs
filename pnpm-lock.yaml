@@ -273,8 +273,8 @@ importers:
         specifier: ^1.38.0
         version: 1.38.0
       type-fest:
-        specifier: ^4.4.0
-        version: 4.4.0
+        specifier: ^4.10.0
+        version: 4.10.1
     devDependencies:
       '@babel/cli':
         specifier: ^7.23.4
@@ -8867,6 +8867,11 @@ packages:
   /type-fest@3.13.1:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
+    dev: false
+
+  /type-fest@4.10.1:
+    resolution: {integrity: sha512-7ZnJYTp6uc04uYRISWtiX3DSKB/fxNQT0B5o1OUeCqiQiwF+JC9+rJiZIDrPrNCLLuTqyQmh4VdQqh/ZOkv9MQ==}
+    engines: {node: '>=16'}
     dev: false
 
   /type-fest@4.4.0:
