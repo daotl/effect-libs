@@ -4,28 +4,28 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@effect-app/core": "^0.99.0",
-    "@effect-app/infra": "^0.135.2",
-    "@effect-app/infra-adapters": "^0.87.0",
-    "@effect-app/prelude": "^0.109.0",
+    "@effect-app/core": "^0.115.0",
+    "@effect-app/infra": "^0.153.2",
+    "@effect-app/infra-adapters": "^0.104.2",
+    "@effect-app/prelude": "^0.127.2",
     "@effect/match": "^0.40.0",
-    "@effect/platform": "^0.42.1",
+    "@effect/platform": "^0.43.3",
     "@effect/platform-node": "^0.41.3",
-    "@effect/schema": "npm:@effect-app/schema-fork@0.0.0-20240110082553",
+    "@effect/schema": "npm:@effect-app/schema-fork@0.0.0-20240127162054",
     "@fp-ts/optic": "^0.22.0",
     "change-case": "^5.4.2",
-    "date-fns": "^3.2.0",
-    "effect": "^2.0.5",
+    "date-fns": "^3.3.1",
+    "effect": "^2.2.2",
     "remeda": "^1.38.0",
     "type-fest": "^4.10.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.4",
-    "@effect-app/compiler": "^0.49.0",
-    "@types/node": "~20.11.2",
+    "@babel/cli": "^7.23.9",
+    "@effect-app/compiler": "^0.55.0",
+    "@types/node": "~20.11.8",
     "ts-node": "^10.9.2",
-    "typescript": "npm:@effect-app/typescript@5.4.0-tsplus.202311222",
-    "vitest": "^1.2.0"
+    "typescript": "npm:@effect-app/typescript@5.4.0-tsplus.20240124",
+    "vitest": "^1.2.2"
   },
   "typesVersions": {
     "*": {

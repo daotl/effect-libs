@@ -1,15 +1,13 @@
-// From: https://github.com/effect-ts-app/boilerplate/blob/3a31f077b1dd748eb1d7c4cfcf6deb542bf61dfc/_project/message/_src/config.ts
-
-export type ConfigA<Cfg> = Cfg extends Config.Variance<infer A> ? A : never
+// From: https://github.com/effect-ts-app/boilerplate/blob/a848ec40542630fe4b62ead67596eb6c396a25a3/_project/messages/_src/config.ts
 
 const serviceName = '@daotl-effect/prelude'
 
 const envConfig = Config.string('env').withDefault('local-dev')
 
 export const BaseConfig = Config.all({
-  serviceName: Config(serviceName),
+  serviceName: Config.succeed(serviceName),
   env: envConfig,
   //  log: Config.string("LOG").
 })
-
+export type ConfigA<Cfg> = Cfg extends Config<infer A> ? A : never
 export type BaseConfig = ConfigA<typeof BaseConfig>
