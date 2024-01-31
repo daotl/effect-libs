@@ -34,21 +34,24 @@ export const createLiveFastifyAppConfig = (
   port: number,
   exitHandler: ExitHandler = defaultExitHandler,
 ) =>
-  Effect.contextWith((ctx: Context<never>) => ({
-    _tag: stagFastifyAppConfig,
-    host,
-    port,
-    exitHandler:
-      (req: Fa.FastifyRequest, reply: Fa.FastifyReply) =>
-      (cause: Cause<never>) =>
-        exitHandler(req, reply)(cause).provide(ctx),
-  })).toLayer(tagFastifyAppConfig)
+  Layer.succeed(
+    tagFastifyAppConfig,
+    tagFastifyAppConfig.of({
+      _tag: stagFastifyAppConfig,
+      host,
+      port,
+      exitHandler:
+        (req: Fa.FastifyRequest, reply: Fa.FastifyReply) =>
+        (cause: Cause<never>) =>
+          exitHandler(req, reply)(cause),
+    }),
+  )
 
 export const stagFastifyAppTag = '@effect-app/fastify/App' as const
 
 export const defaultExitHandler: ExitHandler =
   (_req: Fa.FastifyRequest, res: Fa.FastifyReply) => (cause) =>
-    Effect(() => {
+    Effect.sync(() => {
       if (cause.isDie()) {
         console.error(cause.pretty)
       }
@@ -264,7 +267,7 @@ export function effectify<
   const tFastifyApp = Effect.gen(function* ($) {
     // if scope closes, set open to false
     const open = yield* $(
-      Ref.make(true).acquireRelease((a) => Effect(a.set(false))),
+      Ref.make(true).acquireRelease((a) => Effect.succeed(a.set(false))),
     )
 
     const { exitHandler } = yield* $(tagFastifyAppConfig)
@@ -524,7 +527,7 @@ export function effectify<
   ) =>
     runFasitfyHandler(opts.handler).flatMap((handler) =>
       accessFastify.flatMap((fastify) =>
-        Effect(() => {
+        Effect.succeed(() => {
           // biome-ignore format: compact
           fastify.route({ ...opts, handler } as RouteOptions<RouteGeneric, ContextConfig, SchemaCompiler>)
         }),
@@ -586,7 +589,7 @@ export function effectify<
 
       return runFasitfyHandler(handler).flatMap((handler) =>
         accessFastify.flatMap((fastify) =>
-          Effect(() => {
+          Effect.succeed(() => {
             opts
               ? fastify[method](path, opts, handler)
               : fastify[method](path, handler)
