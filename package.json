@@ -7,10 +7,12 @@
     "patchedDependencies": {
       "eslint-plugin-codegen@0.17.0": "patches/eslint-plugin-codegen@0.17.0.patch",
       "@effect/language-service@0.0.19": "patches/@effect__language-service@0.0.19.patch",
-      "date-fns@2.29.3": "patches/date-fns@2.29.3.patch",
-      "@typescript-eslint/scope-manager@6.19.1": "patches/@typescript-eslint__scope-manager@6.19.1.patch",
-      "fast-check@3.15.0": "patches/fast-check@3.15.0.patch",
-      "@fp-ts/optic@0.22.0": "patches/@fp-ts__optic@0.22.0.patch"
+      "date-fns@2.30.0": "patches/date-fns@2.30.0.patch",
+      "@typescript-eslint/scope-manager@7.0.1": "patches/@typescript-eslint__scope-manager@7.0.1.patch",
+      "@fp-ts/optic@0.22.0": "patches/@fp-ts__optic@0.22.0.patch",
+      "@effect/schema@0.62.7": "patches/@effect__schema@0.62.7.patch",
+      "effect@2.3.6": "patches/effect@2.3.6.patch",
+      "@effect-app/cli@0.49.1": "patches/@effect-app__cli@0.49.1.patch"
     }
   },
   "scripts": {
@@ -37,6 +39,7 @@
     "ncu": "ncu",
     "eslint:watch": "ESLINT_TS=1 esw -w --changed --clear --ext ts,tsx",
     "packages": "pnpm -r --workspace-concurrency 1",
+    "postinstall": "manypkg check",
     "circular-packages": "pnpm packages circular",
     "lint-packages": "pnpm packages lint",
     "test-packages": "pnpm packages test:run",
@@ -48,12 +51,10 @@
     "nnm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && pnpm i"
   },
   "resolutions": {
-    "@effect/schema": "npm:@effect-app/schema-fork@0.0.0-20240127162054",
     "@trpc/server": "daotl/trpc#f40bc9dc6bc14827802f46cc377cf4fa164ccb05",
-    "date-fns": "2.29.3",
-    "http-proxy": "npm:http-proxy-node16@1.0.0"
+    "date-fns": "^2.30.0"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.23.9",
     "@babel/core": "^7.23.9",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
@@ -63,15 +64,17 @@
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@daotl/biome-config": "^0.0.1",
-    "@effect-app/cli": "^0.40.0",
-    "@effect-app/compiler": "^0.55.0",
+    "@dprint/typescript": "^0.89.0",
+    "@effect-app/cli": "^0.49.1",
+    "@effect-app/compiler": "^0.64.0",
     "@effect-app/pnpm-singleton": "workspace:*",
     "@effect/language-service": "0.0.19",
+    "@manypkg/cli": "npm:@daotl/manypkg-cli@^0.21.1",
     "@tsconfig/strictest": "^2.0.2",
-    "@types/node": "~20.11.9",
-    "@typescript-eslint/eslint-plugin": "6.19.1",
-    "@typescript-eslint/parser": "6.19.1",
-    "@typescript-eslint/scope-manager": "6.19.1",
+    "@types/node": "~20.11.17",
+    "@typescript-eslint/eslint-plugin": "7.0.1",
+    "@typescript-eslint/parser": "7.0.1",
+    "@typescript-eslint/scope-manager": "7.0.1",
     "babel-plugin-replace-import-extension": "^1.1.4",
     "commitlint-config-pnpm-workspace": "^0.2.2",
     "commitlint-plugin-scope-enhanced": "^0.1.0",
@@ -87,14 +90,15 @@
     "minimatch": "^9.0.3",
     "module-alias": "^2.2.3",
     "nodemon": "^3.0.3",
-    "npm-check-updates": "^16.14.14",
+    "npm-check-updates": "^16.14.15",
     "ts-transform-paths": "^3.0.0",
     "tsc-watch": "^6.0.4",
     "tsconfig-paths": "^4.2.0",
     "typescript": "npm:@effect-app/typescript@5.4.0-tsplus.20240124",
     "typescript-transform-paths": "^3.4.6",
-    "vite": "^5.0.12",
+    "vite": "^5.1.2",
     "vitest": "^1.2.2",
     "zx": "^7.2.3"
-  }
+  },
+  "exports": {}
 }

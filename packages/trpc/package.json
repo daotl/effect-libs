@@ -6,21 +6,21 @@
   "dependencies": {
     "@daotl-effect/prelude": "workspace:*",
     "@daotl/web-common": "^0.0.11",
-    "@effect-app/core": "^0.115.0",
-    "@effect-app/prelude": "^0.127.2",
+    "@effect-app/core": "^0.140.0",
+    "@effect-app/prelude": "^0.151.3",
     "@trpc/server": "daotl/trpc#f40bc9dc6bc14827802f46cc377cf4fa164ccb05",
     "change-case": "^5.4.2",
-    "date-fns": "^3.0.6",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "dotenv-expand": "^10.0.0",
-    "effect": "^2.2.2",
+    "effect": "^2.3.6",
     "remeda": "^1.38.0",
     "type-fest": "^4.10.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
-    "@effect-app/compiler": "^0.55.0",
-    "@types/node": "~20.11.10",
+    "@effect-app/compiler": "^0.64.0",
+    "@types/node": "~20.11.17",
     "ts-node": "^10.9.2",
     "typescript": "npm:@effect-app/typescript@5.4.0-tsplus.20240124",
     "vitest": "^1.2.2"

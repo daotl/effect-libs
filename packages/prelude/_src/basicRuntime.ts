@@ -3,7 +3,7 @@
 import { reportError } from '@effect-app/infra/errorReporter'
 import { logJson } from '@effect-app/infra/logger/jsonLogger'
 import { logFmt } from '@effect-app/infra/logger/logFmtLogger'
-import { runMain as runMainPlatform } from '@effect/platform-node/Runtime'
+import { runMain as runMainPlatform } from '@effect/platform-node/NodeRuntime'
 import { constantCase } from 'change-case'
 import * as ConfigProvider from 'effect/ConfigProvider'
 import * as Effect from 'effect/Effect'
@@ -11,7 +11,7 @@ import * as Logger from 'effect/Logger'
 import * as Level from 'effect/LogLevel'
 import * as Scope from 'effect/Scope'
 
-const makeBasicRuntime = <R, E, A>(layer: Layer<R, E, A>) =>
+const makeBasicRuntime = <A, E, R>(layer: Layer<A, E, R>) =>
   Effect.gen(function* ($) {
     const scope = yield* $(Scope.make())
     const env = yield* $(layer.buildWithScope(scope))
@@ -85,6 +85,6 @@ const reportMainError = <E>(cause: Cause<E>) =>
   Cause.isInterruptedOnly(cause) ? Effect.unit : reportError('Main')(cause)
 
 /** @tsplus getter effect/io/Effect runMain$ */
-export function runMain<E, A>(eff: Effect.Effect<never, E, A>) {
+export function runMain<A, E>(eff: Effect.Effect<A, E>) {
   return runMainPlatform(eff.tapErrorCause(reportMainError).provide(basicLayer))
 }

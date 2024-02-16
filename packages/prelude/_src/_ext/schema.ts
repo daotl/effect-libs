@@ -6,13 +6,13 @@ import { $R } from '../_global/remeda.js'
  * @tsplus type effect/schema/Schema
  */
 // biome-ignore lint/suspicious/noExplicitAny: ignore
-export type Any<R = never> = S.Schema<R, any>
+export type Any<R = never> = S.Schema<any, any, R>
 
 export type StructArgs<R = never> = Record<
   string,
   // any
   // biome-ignore lint/suspicious/noExplicitAny: ignore
-  Any<R> | S.PropertySignature<R, any, boolean, any, boolean>
+  Any<R> | S.PropertySignature<any, boolean, any, boolean, R>
 >
 
 /**
@@ -26,38 +26,34 @@ export type Struct<
 /**
  * @tsplus type effect/schema/Schema
  */
-export type Nullable<R, From, To = From> = ReturnType<
-  typeof S.nullable<R, From, To>
+export type Nullable<A, I, R> = ReturnType<typeof S.nullable<A, I, R>>
+
+/**
+ * @tsplus type effect/schema/Schema
+ */
+export type Optional<A, I, R> = ReturnType<typeof S.optional<A, I, R>>
+
+/**
+ * @tsplus type effect/schema/Schema
+ */
+export type OptionalOrUndefined<A, I, R> = Optional<
+  A | undefined,
+  I | undefined,
+  R
 >
 
 /**
  * @tsplus type effect/schema/Schema
  */
-export type Optional<R, From, To = From> = ReturnType<
-  typeof S.optional<R, From, To>
->
+export type Nullish<A, I, R> = Optional<Nullable<A, I, R>, Nullable<A, I, R>, R>
 
 /**
  * @tsplus type effect/schema/Schema
  */
-export type OptionalOrUndefined<R, From, To = From> = Optional<
-  R,
-  From | undefined,
-  To | undefined
->
-
-/**
- * @tsplus type effect/schema/Schema
- */
-export type Nullish<R, From, To = From> = Optional<R, Nullable<R, From, To>>
-
-/**
- * @tsplus type effect/schema/Schema
- */
-export type NullishOrUndefined<R, From, To = From> = Nullish<
-  R,
-  From | undefined,
-  To | undefined
+export type NullishOrUndefined<A, I, R> = Nullish<
+  A | undefined,
+  I | undefined,
+  R
 >
 
 // Make properties of the specified keys or all keys nullable
@@ -65,11 +61,11 @@ export type NullishOrUndefined<R, From, To = From> = Nullish<
  * @tsplus type effect/schema/Schema
  */
 export type NullableProperties<
-  R,
-  // biome-ignore lint/suspicious/noExplicitAny: ignore
-  I extends { [K in keyof A]: any },
   // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
+  I extends { [K in keyof A]: any },
+  R,
   Key extends keyof A = keyof A,
 > = Struct<
   R,
@@ -83,16 +79,16 @@ export type NullableProperties<
  * @tsplus type effect/schema/Schema
  */
 export type OptionalProperties<
-  R,
-  // biome-ignore lint/suspicious/noExplicitAny: ignore
-  I extends { [K in keyof A]: any },
   // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
+  I extends { [K in keyof A]: any },
+  R,
   Key extends keyof A = keyof A,
 > = Struct<
   R,
   {
-    [K in keyof A]: K extends Key ? Optional<I[K], A[K]> : A[K]
+    [K in keyof A]: K extends Key ? Optional<I[K], A[K], R> : A[K]
   }
 >
 
@@ -101,16 +97,16 @@ export type OptionalProperties<
  * @tsplus type effect/schema/Schema
  */
 export type NullishProperties<
-  R,
-  // biome-ignore lint/suspicious/noExplicitAny: ignore
-  I extends { [K in keyof A]: any },
   // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
+  I extends { [K in keyof A]: any },
+  R,
   Key extends keyof A = keyof A,
 > = Struct<
   R,
   {
-    [K in keyof A]: K extends Key ? Nullish<I[K], A[K]> : A[K]
+    [K in keyof A]: K extends Key ? Nullish<I[K], A[K], R> : A[K]
   }
 >
 
@@ -172,7 +168,7 @@ export const nullableProperties = <
     $R.mapValues(getPropertySchemas(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.nullable(v) : v,
     ),
-  ) as NullableProperties<R, I, A, Key>
+  ) as NullableProperties<A, I, R, Key>
 
 // Make properties of the specified keys or all keys optional
 // Ref: https://github.com/Effect-TS/schema/blob/9cdb0ea2227ac6efcad68587268c9ef80423c309/src/S.ts#L705
@@ -180,11 +176,11 @@ export const nullableProperties = <
  * @tsplus static effect/schema/Schema optionalProperties
  */
 export const optionalProperties = <
-  R,
-  // biome-ignore lint/suspicious/noExplicitAny: ignore
-  I extends { [K in keyof A]: any },
   // biome-ignore lint/suspicious/noExplicitAny: ignore
   A extends Record<string, any>,
+  // biome-ignore lint/suspicious/noExplicitAny: ignore
+  I extends { [K in keyof A]: any },
+  R,
   Key extends keyof A = keyof A,
 >(
   schema: S.Schema<R, I, A>,
@@ -194,7 +190,7 @@ export const optionalProperties = <
     $R.mapValues(getPropertySchemas(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.optional(v) : v,
     ),
-  ) as OptionalProperties<R, I, A, Key>
+  ) as OptionalProperties<A, I, R, Key>
 
 // Make properties of the specified keys or all keys nullish
 // Ref: https://github.com/Effect-TS/schema/blob/9cdb0ea2227ac6efcad68587268c9ef80423c309/src/S.ts#L705
@@ -216,4 +212,4 @@ export const nullishProperties = <
     $R.mapValues(getPropertySchemas(schema), (v, k) =>
       !keys || (keys as (keyof A)[]).includes(k) ? S.nullish(v) : v,
     ),
-  ) as NullishProperties<R, I, A, Key>
+  ) as NullishProperties<A, I, R, Key>

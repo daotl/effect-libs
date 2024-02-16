@@ -1,4 +1,4 @@
-export type MaybeEffect<A, R = never, E = never> = A | Effect<R, E, A>
+export type MaybeEffect<A, R = never, E = never> = A | Effect<A, E, R>
 
 export const runIfEffect =
   <R = never>(r: Runtime<R>) =>

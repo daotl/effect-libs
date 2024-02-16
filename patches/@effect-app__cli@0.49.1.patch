@@ -1,0 +1,15 @@
+diff --git a/_src/index.ts b/_src/index.ts
+index 5bbb96d648ba3f68c0a8dc936a7a594f05336ce4..6abc0c2995bd6a53bd7ed90d9efa7094a31ae225 100644
+--- a/_src/index.ts
++++ b/_src/index.ts
+@@ -80,8 +80,9 @@ function packagejson(p: string, levels = 0) {
+   let r = ""
+   // TODO: no chdir!
+   try {
++    const rootPath = path.resolve(startDir, '../../')
+     process.chdir(path.resolve(startDir, p))
+-    r = cp.execSync(`sh ${startDir}/scripts/extract.sh`, { encoding: "utf-8" })
++    r = cp.execSync(`sh ${rootPath}/scripts/extract.sh`, { encoding: "utf-8" })
+   } finally {
+     process.chdir(curDir)
+   }

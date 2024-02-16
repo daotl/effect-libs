@@ -16,7 +16,7 @@ export class NodeServerListenError {
 type ExitHandler = (
   req: Fa.FastifyRequest,
   reply: Fa.FastifyReply,
-) => (cause: Cause<never>) => Effect<never, never, void>
+) => (cause: Cause<never>) => Effect<void, never, never>
 
 export const stagFastifyAppConfig = '@effect-app/fastify/AppConfig' as const
 
@@ -27,7 +27,10 @@ export interface FastifyAppConfig {
   readonly exitHandler: ExitHandler
 }
 
-export const tagFastifyAppConfig = Tag<FastifyAppConfig>()
+export const tagFastifyAppConfig = Tag('FastifyAppConfig')<
+  FastifyAppConfig,
+  FastifyAppConfig
+>()
 
 export const createLiveFastifyAppConfig = (
   host: string,
@@ -93,7 +96,7 @@ type RegisterPluginPartialFn<
   Options extends Fa.FastifyPluginOptions = Record<never, never>,
 > = (
   opts?: FastifyRegisterOptions<FastifyInstance, Options>,
-) => Effect<FastifyApp | R, never, void>
+) => Effect<void, never, FastifyApp | R>
 
 /**
  * FastifyRegister
@@ -133,11 +136,11 @@ export interface EffectRouteShorthandMethod<
     path: string,
     opts: RouteShorthandOptions,
     handler: EffectRouteHandlerMethod,
-  ): Effect<R, never, void>
+  ): Effect<void, never, R>
   // biome-ignore format: compact
-  (path: string, handler: EffectRouteHandlerMethod): Effect<R, never, void>
+  (path: string, handler: EffectRouteHandlerMethod): Effect<void, never, R>
   // biome-ignore format: compact
-  (path: string, opts: EffectRouteShorthandOptionsWithHandler): Effect<R, never, void>
+  (path: string, opts: EffectRouteShorthandOptionsWithHandler): Effect<void, never, R>
 }
 
 const _type = <T>(): T => undefined as T
@@ -160,7 +163,7 @@ export function effectify<
     TypeProvider
   >,
   // Used to pass liveFastifyAppConfig to effectified Fastify sub instances which will be passed to plugins
-  liveFastifyAppConfig?: Layer<never, never, FastifyAppConfig>,
+  liveFastifyAppConfig?: Layer<FastifyAppConfig, never, never>,
 ) {
   type FastifyInstance = typeof fastify
 
@@ -171,7 +174,7 @@ export function effectify<
     FastifyInstance extends Fa.FastifyInstance<RawServer, RawRequest, RawReply, Logger, TypeProvider>,
   >(
     fastify: FastifyInstance,
-    liveFastifyAppConfig?: Layer<never, never, FastifyAppConfig>,
+    liveFastifyAppConfig?: Layer<FastifyAppConfig, never, never>,
   ) =>
     // biome-ignore format: compact
     effectify<BaseContextConfig, TypeProvider, BaseSchemaCompiler, Logger, RawServer, RawRequest, RawReply, BaseRouteGeneric>(fastify, liveFastifyAppConfig)
@@ -209,15 +212,15 @@ export function effectify<
     req: FastifyRequest<RouteGeneric, ContextConfig, SchemaCompiler>,
     reply: FastifyReply<RouteGeneric, ContextConfig, SchemaCompiler>,
   ) => Effect<
-    R,
-    never,
     ResolveFastifyReplyType<
       TypeProvider,
       SchemaCompiler,
       RouteGeneric
     > extends infer Return
       ? Return | void
-      : unknown
+      : unknown,
+    never,
+    R
   >
 
   // biome-ignore format: compact
@@ -274,7 +277,7 @@ export function effectify<
 
     // if scope opens, create server, on scope close, close connections and server.
     yield* $(
-      Effect.async<never, never, FastifyInstance>((cb) => {
+      Effect.async<FastifyInstance, never, never>((cb) => {
         fastify.addHook('onError', (_req, _reply, err, done) => {
           done()
           cb(Effect.die(new NodeServerListenError(err)))
@@ -339,7 +342,7 @@ export function effectify<
     // >(handler: Handler) {
     //   type Env = _R<
     //     Handler extends EffectMiddieHandler<infer R>
-    //       ? Effect<R, never, void>
+    //       ? Effect<void, never, R>
     //       : never
     //   >
     //   return Effect.runtime<Env>().map(
@@ -361,7 +364,7 @@ export function effectify<
     //   Handler extends EffectMiddieSimpleHandler<any>
     // >(handler: Handler) {
     //   type Env = _R<
-    //     Handler extends EffectMiddieSimpleHandler<infer R> ? Effect<R, never, void>
+    //     Handler extends EffectMiddieSimpleHandler<infer R> ? Effect<void, never, R>
     //       : never
     //   >
     //   return Effect.runtime<Env>().map((r): Middie.SimpleHandleFunction => (req, res) => {
@@ -378,7 +381,7 @@ export function effectify<
     //   Handler extends EffectMiddieNextHandler<any>
     // >(handler: Handler) {
     //   type Env = _R<
-    //     Handler extends EffectMiddieNextHandler<infer R> ? Effect<R, never, void>
+    //     Handler extends EffectMiddieNextHandler<infer R> ? Effect<void, never, R>
     //       : never
     //   >
     //   return Effect.runtime<Env>().map((r): Middie.NextHandleFunction => (req, res, next) => {
@@ -405,16 +408,16 @@ export function effectify<
   type FastifyApp = Effect.Success<typeof tFastifyApp>
   type FastifyCtx = FastifyAppConfig | FastifyApp
 
-  const tagFastifyApp = Tag<FastifyApp>()
+  const tagFastifyApp = Tag('FastifyApp')<FastifyApp, FastifyApp>()
 
-  const liveFastifyApp: Layer<FastifyAppConfig, never, FastifyApp> =
+  const liveFastifyApp: Layer<FastifyApp, never, FastifyAppConfig> =
     tFastifyApp.toLayerScoped(tagFastifyApp)
 
   function createLiveFastify<R = never>(
     host: string,
     port: number,
     exitHandler: ExitHandler = defaultExitHandler,
-  ): Layer<R, never, FastifyCtx> {
+  ): Layer<FastifyCtx, never, R> {
     _liveFastifyAppConfig ??= createLiveFastifyAppConfig(
       host,
       port,
@@ -428,7 +431,7 @@ export function effectify<
   const listen = Effect.zip(tagFastifyAppConfig, accessFastify, {
     concurrent: true,
   }).flatMap(([{ host, port }, fastify]) =>
-    Effect.async<never, never, FastifyInstance>((cb) => {
+    Effect.async<FastifyInstance, never, never>((cb) => {
       fastify.listen({ host, port }, (err, _address) => {
         if (err) {
           cb(Effect.die(new NodeServerListenError(err)))
@@ -473,7 +476,7 @@ export function effectify<
     Fastify,
     R = never,
     Options extends Fa.FastifyPluginOptions = Record<never, never>,
-  > = (fa: Fastify, opts: Options) => Effect<FastifyApp | R, never, void>
+  > = (fa: Fastify, opts: Options) => Effect<void, never, FastifyApp | R>
 
   function register<
     // Using the non-exported type `Fastify` will become `any`, must be passed with generic
@@ -483,10 +486,10 @@ export function effectify<
   >(this: Fastify, plugin: EffectFastifyPlugin<Fastify, R, Options>) {
     return (
       opts?: FastifyRegisterOptions<FastifyInstance, Options>,
-    ): Effect<FastifyApp | R, never, void> =>
+    ): Effect<void, never, FastifyApp | R> =>
       accessFastify.flatMap((fastify) =>
         // @ts-expect-error TBD why: Need async-await here or the whole program will exit with code 13
-        Effect.async<FastifyApp, never, void>(async (cb) => {
+        Effect.async<void, never, FastifyApp>(async (cb) => {
           await fastify.register((instance, _opts, done) => {
             const fa = _effectify(
               instance as unknown as FastifyInstance,
@@ -499,7 +502,7 @@ export function effectify<
               .scoped.tap(() => {
                 done()
                 return Effect.unit
-              }) as unknown as Effect<FastifyApp, never, void>
+              }) as unknown as Effect<void, never, FastifyApp>
 
             cb(tPlugin)
           }, opts as Fa.FastifyRegisterOptions<Options>)
