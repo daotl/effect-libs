@@ -1,7 +1,7 @@
 import * as S from '@effect/schema/Schema'
 import * as Ext from '../_ext/schema.js'
 
-export type Schema<out R, in out From, in out To = From> = S.Schema<R, From, To>
+export type Schema<in out A, in out I, out R> = S.Schema<A, I, R>
 
 export namespace Schema {
   /* Custom types */
@@ -20,19 +20,19 @@ export namespace Schema {
   >,*/,
   > = Ext.Struct<Fields>
 
-  export type Nullable<R, From, To = From> = Ext.Nullable<R, From, To>
+  export type Nullable<A, I, R> = Ext.Nullable<A, I, R>
 
-  export type Optional<R, From, To = From> = Ext.Optional<R, From, To>
+  export type Optional<A, I, R> = Ext.Optional<A, I, R>
 
-  export type Nullish<R, From, To = From> = Ext.Nullish<R, From, To>
+  export type Nullish<A, I, R> = Ext.Nullish<A, I, R>
 
   export type NullableProperties<
-    R,
+    A extends Ext.StructArgs,
     // biome-ignore lint/suspicious/noExplicitAny: ignore
     I extends { [K in keyof A]: any },
-    A extends Ext.StructArgs,
+    R,
     Key extends keyof A = keyof A,
-  > = Ext.NullableProperties<R, I, A, Key>
+  > = Ext.NullableProperties<A, I, R, Key>
 
   export type OptionalProperties<
     R,
@@ -40,7 +40,7 @@ export namespace Schema {
     I extends { [K in keyof A]: any },
     A extends Ext.StructArgs,
     Key extends keyof A = keyof A,
-  > = Ext.OptionalProperties<R, I, A, Key>
+  > = Ext.OptionalProperties<A, I, R, Key>
 
   export type NullishProperties<
     R,
@@ -48,7 +48,7 @@ export namespace Schema {
     I extends { [K in keyof A]: any },
     A extends Ext.StructArgs,
     Key extends keyof A = keyof A,
-  > = Ext.NullishProperties<R, I, A, Key>
+  > = Ext.NullishProperties<A, I, R, Key>
 }
 
 export const Schema = {
