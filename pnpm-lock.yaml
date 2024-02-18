@@ -174,8 +174,8 @@ importers:
   packages/fastify:
     dependencies:
       '@daotl-effect/prelude':
-        specifier: workspace:*
-        version: link:../prelude
+        specifier: file:../prelude
+        version: file:packages/prelude(@effect/typeclass@0.22.5)(express@4.18.2)(fast-check@3.15.1)
       '@daotl/web-common':
         specifier: ^0.0.11
         version: 0.0.11
@@ -270,6 +270,9 @@ importers:
       '@fp-ts/optic':
         specifier: ^0.22.0
         version: 0.22.0(patch_hash=s5osqxfgvcfisipdsoa52kl6le)(@effect/typeclass@0.22.5)(effect@2.3.6)
+      '@sentry/node':
+        specifier: ^7.101.1
+        version: 7.101.1
       change-case:
         specifier: ^5.4.2
         version: 5.4.2
@@ -308,8 +311,8 @@ importers:
   packages/trpc:
     dependencies:
       '@daotl-effect/prelude':
-        specifier: workspace:*
-        version: link:../prelude
+        specifier: file:../prelude
+        version: file:packages/prelude(@effect/typeclass@0.22.5)(express@4.18.2)(fast-check@3.15.1)
       '@daotl/web-common':
         specifier: ^0.0.11
         version: 0.0.11
@@ -2247,6 +2250,45 @@ packages:
       '@sendgrid/helpers': 8.0.0
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@sentry-internal/tracing@7.101.1:
+    resolution: {integrity: sha512-ihjWG8x4x0ozx6t+EHoXLKbsPrgzYLCpeBLWyS+M6n3hn6cmHM76c8nZw3ldhUQi5UYL3LFC/JZ50b4oSxtlrg==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/core': 7.101.1
+      '@sentry/types': 7.101.1
+      '@sentry/utils': 7.101.1
+    dev: false
+
+  /@sentry/core@7.101.1:
+    resolution: {integrity: sha512-XSmXXeYT1d4O14eDF3OXPJFUgaN2qYEeIGUztqPX9nBs9/ij8y/kZOayFqlIMnfGvjOUM+63sy/2xDBOpFn6ug==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.101.1
+      '@sentry/utils': 7.101.1
+    dev: false
+
+  /@sentry/node@7.101.1:
+    resolution: {integrity: sha512-iXSxUT6Zbt/KUY0+fRcW5II6Tgp2zdTfhBW+fQuDt/UUZt7Ypvb+6n4U2oom3LJfttmD7mdjQuT4+vsNImDjTQ==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry-internal/tracing': 7.101.1
+      '@sentry/core': 7.101.1
+      '@sentry/types': 7.101.1
+      '@sentry/utils': 7.101.1
+    dev: false
+
+  /@sentry/types@7.101.1:
+    resolution: {integrity: sha512-bwtkQvrCZ6JGc7vqX7TEAKBgkbQFORt84FFS3JQQb8G3efTt9fZd2ReY4buteKQdlALl8h1QWVngTLmI+kyUuw==}
+    engines: {node: '>=8'}
+    dev: false
+
+  /@sentry/utils@7.101.1:
+    resolution: {integrity: sha512-Nrg0nrEI3nrOCd9SLJ/WGzxS5KMQE4cryLOvrDcHJRWpsSyGBF1hLLerk84Nsw/0myMsn7zTYU+xoq7idNsX5A==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.101.1
     dev: false
 
   /@sigstore/bundle@1.1.0:
@@ -9136,6 +9178,34 @@ packages:
       webpod: 0.0.2
       which: 3.0.1
       yaml: 2.3.2
+    dev: false
+
+  file:packages/prelude(@effect/typeclass@0.22.5)(express@4.18.2)(fast-check@3.15.1):
+    resolution: {directory: packages/prelude, type: directory}
+    id: file:packages/prelude
+    name: '@daotl-effect/prelude'
+    dependencies:
+      '@effect-app/core': 0.140.0(@effect/schema@0.62.7)(@effect/typeclass@0.22.5)
+      '@effect-app/infra': 0.186.0(@effect/typeclass@0.22.5)(express@4.18.2)
+      '@effect-app/infra-adapters': 0.127.0(@effect/typeclass@0.22.5)(express@4.18.2)(fast-check@3.15.1)
+      '@effect-app/prelude': 0.151.3(@effect/typeclass@0.22.5)(fast-check@3.15.1)
+      '@effect/match': 0.40.0(effect@2.3.6)
+      '@effect/platform': 0.45.3(@effect/schema@0.62.7)(effect@2.3.6)
+      '@effect/platform-node': 0.44.4(@effect/platform@0.45.3)(effect@2.3.6)
+      '@effect/schema': 0.62.7(patch_hash=r42u35x235tybpirnw2itjl7um)(effect@2.3.6)(fast-check@3.15.1)
+      '@fp-ts/optic': 0.22.0(patch_hash=s5osqxfgvcfisipdsoa52kl6le)(@effect/typeclass@0.22.5)(effect@2.3.6)
+      change-case: 5.4.3
+      date-fns: 2.30.0(patch_hash=g5hqt5bhnjezqo5vnkpprfkba4)
+      effect: 2.3.6(patch_hash=pid2sjgt4bfijyssyazavrzxsy)
+      remeda: 1.38.0
+      type-fest: 4.10.1
+    transitivePeerDependencies:
+      - '@effect/typeclass'
+      - debug
+      - encoding
+      - express
+      - fast-check
+      - supports-color
     dev: false
 
   git@github.com+daotl/trpc/f40bc9dc6bc14827802f46cc377cf4fa164ccb05:

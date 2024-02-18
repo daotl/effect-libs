@@ -11,7 +11,7 @@ import * as Logger from 'effect/Logger'
 import * as Level from 'effect/LogLevel'
 import * as Scope from 'effect/Scope'
 
-const makeBasicRuntime = <A, E, R>(layer: Layer<A, E, R>) =>
+export const makeBasicRuntime = <A, E, R>(layer: Layer<A, E, R>) =>
   Effect.gen(function* ($) {
     const scope = yield* $(Scope.make())
     const env = yield* $(layer.buildWithScope(scope))

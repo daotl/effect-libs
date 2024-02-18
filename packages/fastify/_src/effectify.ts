@@ -529,11 +529,12 @@ export function effectify<
     opts: EffectRouteOptions<R, RouteGeneric, ContextConfig, SchemaCompiler>,
   ) =>
     runFasitfyHandler(opts.handler).flatMap((handler) =>
-      accessFastify.flatMap((fastify) =>
-        Effect.succeed(() => {
-          // biome-ignore format: compact
-          fastify.route({ ...opts, handler } as RouteOptions<RouteGeneric, ContextConfig, SchemaCompiler>)
-        }),
+      accessFastify.tap((fastify) =>
+        fastify.route({ ...opts, handler } as RouteOptions<
+          RouteGeneric,
+          ContextConfig,
+          SchemaCompiler
+        >),
       ),
     )
 
@@ -591,13 +592,11 @@ export function effectify<
           ]
 
       return runFasitfyHandler(handler).flatMap((handler) =>
-        accessFastify.flatMap((fastify) =>
-          Effect.succeed(() => {
-            opts
-              ? fastify[method](path, opts, handler)
-              : fastify[method](path, handler)
-          }),
-        ),
+        accessFastify.tap((fastify) => {
+          return opts
+            ? fastify[method](path, opts, handler)
+            : fastify[method](path, handler)
+        }),
       )
     }
 
