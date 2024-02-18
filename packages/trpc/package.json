@@ -4,7 +4,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@daotl-effect/prelude": "file:../prelude",
+    "@daotl-effect/prelude": "workspace:*",
     "@daotl/web-common": "^0.0.11",
     "@effect-app/core": "^0.140.0",
     "@effect-app/prelude": "^0.151.3",
